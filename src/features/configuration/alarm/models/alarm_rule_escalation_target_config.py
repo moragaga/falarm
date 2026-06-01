@@ -6,6 +6,7 @@ from dataclasses import dataclass
 @dataclass(frozen=True, slots=True)
 class AlarmRuleEscalationTargetConfig:
     rule_key: str
+    step_order: int
     target_tool_key: str
     is_enabled: bool
-    show_after_active_minutes: int | None
+    wait_minutes_from_previous_stage: int | None

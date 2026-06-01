@@ -15,7 +15,6 @@ class AlarmFamilyRowFactoryService:
         return {
             'family_key': f'alarm_family_{uuid4().hex[:8]}',
             'family_name': '',
-            'dashboard_group_name': '',
             'description': '',
             'display_order': AlarmFamilyRowFactoryService._resolve_next_order(rows=rows),
             'is_available': True,

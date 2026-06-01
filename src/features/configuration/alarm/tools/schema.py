@@ -21,15 +21,16 @@ ALARM_TOOLS_ADMIN_SCHEMA = AdminSchema(
         ),
         FieldDefinition(
             name='tool_level',
-            label='Nivel',
+            label='Nivel herramienta',
             field_type='select',
             required=True,
             options=(
-                FieldOption(label='ADA N1', value='n1'),
-                FieldOption(label='Ejecutivo', value='executive'),
-                FieldOption(label='Nivel 0', value='n0'),
+                FieldOption(label='Nivel 1 · Nivel 0 / Sala', value='1'),
+                FieldOption(label='Nivel 2 · Ejecutiva', value='2'),
+                FieldOption(label='Nivel 3 · ADA N1', value='3'),
             ),
-            default_value='n1',
+            default_value='3',
+            help_text='Define la jerarquía de escalamiento. Nivel 1 es el destino crítico final; debe existir una sola herramienta activa nivel 1.',
         ),
         FieldDefinition(
             name='visualization_mode',

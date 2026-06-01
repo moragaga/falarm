@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Literal
 
-AlarmToolLevel = Literal['n1', 'executive', 'n0']
+AlarmToolLevel = Literal['1', '2', '3']
 AlarmVisualizationMode = Literal['generic', 'distributed', 'queue_for_queue']
 
 

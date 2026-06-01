@@ -25,10 +25,11 @@ ALARM_COMPONENTS_N0_ADMIN_SCHEMA = AdminSchema(
             field_type='select',
             required=True,
             options=(
-                FieldOption(label='Componente', value='component'),
+                FieldOption(label='Componente padre', value='component'),
                 FieldOption(label='Subcomponente', value='subcomponent'),
             ),
             default_value='component',
+            help_text='Los componentes padre definen posiciones de Nivel 0. Los subcomponentes cuelgan de un componente padre.',
         ),
         FieldDefinition(
             name='parent_component_key',
@@ -36,6 +37,21 @@ ALARM_COMPONENTS_N0_ADMIN_SCHEMA = AdminSchema(
             field_type='text',
             required=False,
             help_text='Solo aplica para subcomponentes. Ejemplo: flotacion_selectiva.',
+        ),
+        FieldDefinition(
+            name='position_index',
+            label='Posición Nivel 0',
+            field_type='number',
+            required=False,
+            default_value=None,
+            help_text='Solo aplica a componentes padre. Define la posición principal en Nivel 0.',
+        ),
+        FieldDefinition(
+            name='additional_position_keys',
+            label='Posiciones adicionales afectadas',
+            field_type='semicolon_list',
+            required=False,
+            help_text='Solo aplica a componentes padre. IDs de otros componentes/posiciones afectados, separados por ;.',
         ),
         FieldDefinition(
             name='tool_level',

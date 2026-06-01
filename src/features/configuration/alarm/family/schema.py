@@ -19,20 +19,14 @@ ALARM_FAMILY_ADMIN_SCHEMA = AdminSchema(
             label='Familia',
             field_type='text',
             required=True,
-            help_text='Nombre visible usado para filtrar reglas.',
-        ),
-        FieldDefinition(
-            name='dashboard_group_name',
-            label='Grupo dashboard',
-            field_type='text',
-            required=False,
-            help_text='Agrupación visual general para dashboards/reportes.',
+            help_text='Nombre visible usado solo para agrupar y filtrar reglas.',
         ),
         FieldDefinition(
             name='description',
             label='Descripción',
             field_type='text',
             required=False,
+            help_text='Texto breve de apoyo para el configurador.',
         ),
         FieldDefinition(
             name='display_order',
@@ -47,7 +41,7 @@ ALARM_FAMILY_ADMIN_SCHEMA = AdminSchema(
             field_type='boolean',
             required=True,
             default_value=True,
-            help_text='Permite usar la familia al crear o editar reglas.',
+            help_text='Permite usar la familia al crear o editar reglas. No define comportamiento operativo.',
         ),
     ),
 )

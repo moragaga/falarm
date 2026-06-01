@@ -13,6 +13,8 @@ class AlarmProcessComponentConfig:
     component_name: str
     component_type: AlarmProcessComponentType
     parent_component_key: str
+    position_index: int | None
+    additional_position_keys: list[str]
     tool_level: AlarmProcessComponentToolLevel
     display_order: int
     is_active: bool

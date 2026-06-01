@@ -17,6 +17,8 @@ class AlarmComponentN0RowFactoryService:
             'component_name': '',
             'component_type': 'component',
             'parent_component_key': '',
+            'position_index': None,
+            'additional_position_keys': [],
             'tool_level': 'n0',
             'display_order': AlarmComponentN0RowFactoryService._resolve_next_order(rows=rows),
             'is_active': True,

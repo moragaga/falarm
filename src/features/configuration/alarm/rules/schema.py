@@ -47,16 +47,11 @@ ALARM_RULES_ADMIN_SCHEMA = AdminSchema(
         ),
         FieldDefinition(
             name='content_key',
-            label='ID mensajes/imágenes',
+            label='ID contenido',
             field_type='text',
-            required=False,
-            help_text='Clave para conectar esta regla con mensajes e imágenes existentes.',
-        ),
-        FieldDefinition(
-            name='dashboard_group_name',
-            label='Grupo dashboard',
-            field_type='text',
-            required=False,
+            required=True,
+            editable=False,
+            help_text='ID automático para conectar esta regla con mensajes e imágenes.',
         ),
         FieldDefinition(
             name='kind',
@@ -82,10 +77,11 @@ ALARM_RULES_ADMIN_SCHEMA = AdminSchema(
             default_value='3',
         ),
         FieldDefinition(
-            name='priority_scope_key',
-            label='Scope prioridad',
+            name='scope_key',
+            label='Grupo prioridad/gestión',
             field_type='text',
             required=True,
+            help_text='Grupo donde esta regla compite por prioridad y donde aplica gestión/desactivación.',
         ),
         FieldDefinition(
             name='priority_order',
@@ -93,13 +89,7 @@ ALARM_RULES_ADMIN_SCHEMA = AdminSchema(
             field_type='number',
             required=True,
             default_value=100,
-            help_text='Menor número = mayor prioridad dentro del scope.',
-        ),
-        FieldDefinition(
-            name='management_scope_key',
-            label='Scope gestión',
-            field_type='text',
-            required=True,
+            help_text='Menor número = mayor prioridad dentro del scope operativo.',
         ),
         FieldDefinition(
             name='origin_tool_key',
@@ -117,9 +107,13 @@ ALARM_RULES_ADMIN_SCHEMA = AdminSchema(
         FieldDefinition(
             name='color',
             label='Color',
-            field_type='text',
-            required=False,
-            help_text='Token o color hex. Ejemplo: danger, warning, #dc3545.',
+            field_type='select',
+            required=True,
+            options=(
+                FieldOption(label='Rojo', value='red'),
+                FieldOption(label='Amarillo', value='yellow'),
+            ),
+            default_value='yellow',
         ),
         FieldDefinition(
             name='hide_all_tools_when_managed',
@@ -143,42 +137,11 @@ ALARM_RULES_ADMIN_SCHEMA = AdminSchema(
             default_value=60,
         ),
         FieldDefinition(
-            name='reappear_tool_policy',
-            label='Reaparece en',
-            field_type='select',
-            required=True,
-            options=(
-                FieldOption(label='Herramienta inicial', value='origin_tool'),
-                FieldOption(label='Última herramienta visible', value='last_visible_tool'),
-                FieldOption(label='Herramienta fija', value='fixed_tool'),
-            ),
-            default_value='origin_tool',
-        ),
-        FieldDefinition(
-            name='reappear_tool_key',
-            label='Herramienta fija reaparición',
-            field_type='text',
-            required=False,
-        ),
-        FieldDefinition(
             name='continue_escalation_clock_when_hidden',
             label='Continuar reloj oculta',
             field_type='boolean',
             required=True,
             default_value=True,
-        ),
-        FieldDefinition(
-            name='reappear_if_unmanaged_enabled',
-            label='Reaparece si nadie gestiona',
-            field_type='boolean',
-            required=True,
-            default_value=False,
-        ),
-        FieldDefinition(
-            name='reappear_after_unmanaged_minutes',
-            label='Reaparecer sin gestión después de',
-            field_type='number',
-            required=False,
         ),
         FieldDefinition(
             name='use_message_management_override',

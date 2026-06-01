@@ -15,7 +15,7 @@ class AlarmToolRowFactoryService:
         return {
             'tool_key': f'alarm_tool_{uuid4().hex[:8]}',
             'tool_name': '',
-            'tool_level': 'n1',
+            'tool_level': '3',
             'visualization_mode': 'generic',
             'display_order': AlarmToolRowFactoryService._resolve_next_order(rows=rows),
             'is_active': True,

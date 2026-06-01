@@ -26,6 +26,12 @@ from src.features.configuration.alarm.components_n0.definition import (
 )
 from src.features.configuration.alarm.family.definition import ALARM_FAMILY_ADMIN_DEFINITION
 from src.features.configuration.alarm.rules.definition import ALARM_RULES_ADMIN_DEFINITION
+from src.features.configuration.alarm.rules.editor.escalation.definition import (
+    ALARM_RULE_ESCALATION_TARGETS_ADMIN_DEFINITION,
+)
+from src.features.configuration.alarm.rules.editor.visualization.definition import (
+    ALARM_RULE_VISUAL_TARGETS_ADMIN_DEFINITION,
+)
 from src.features.configuration.alarm.tools.definition import ALARM_TOOLS_ADMIN_DEFINITION
 
 from ..admin_panels.navigation.groups.definition import NAVIGATION_GROUPS_ADMIN_DEFINITION
@@ -51,5 +57,7 @@ def build_config_artifact_registry() -> ConfigArtifactRegistry:
             ALARM_TOOLS_ADMIN_DEFINITION,
             ALARM_COMPONENTS_N0_ADMIN_DEFINITION,
             ALARM_RULES_ADMIN_DEFINITION,
+            ALARM_RULE_ESCALATION_TARGETS_ADMIN_DEFINITION,
+            ALARM_RULE_VISUAL_TARGETS_ADMIN_DEFINITION,
         )
     )
