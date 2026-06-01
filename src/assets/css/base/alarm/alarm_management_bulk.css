@@ -1,0 +1,135 @@
+.alarm-bulk-management-button {
+    left: 3% !important;
+    top: -15% !important;
+}
+
+.alarm-bulk-management-button {
+    transition:
+        transform 120ms ease,
+        opacity 120ms ease,
+        filter 120ms ease;
+}
+
+.alarm-bulk-management-button:hover {
+    transform: scale(1.05);
+    filter: brightness(1.08);
+}
+
+.alarm-bulk-management-button:active {
+    transform: scale(0.94);
+    opacity: 0.7;
+}
+
+.alarm-bulk-management-button:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.75);
+    outline-offset: 3px;
+}
+
+
+@media only screen and (min-width: 350px) {
+    .bulk-alarm-management-list-title {
+        font-size: .55rem;
+    }
+    .bulk-alarm-management-list-priority {
+        font-size: .4rem;
+    }
+    .bulk-alarm-management-list-cause {
+        font-size: .45rem;
+    }
+    .bulk-alarm-list-wrapper {
+        max-height: 7.5rem;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+}
+
+@media only screen and (min-width: 480px) {
+    .bulk-alarm-management-list-title {
+        font-size: .75rem;
+    }
+    .bulk-alarm-management-list-priority {
+        font-size: .5rem;
+    }
+    .bulk-alarm-management-list-cause {
+        font-size: .5rem;
+    }
+    .bulk-alarm-list-wrapper {
+        max-height: 8.5rem;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+}
+
+/*@media only screen and (min-width: 768px) {}*/
+
+/*@media only screen and (min-width: 1024px) {*/
+/*}*/
+
+/* Desktop */
+@media only screen and (min-width: 1280px) {
+    .bulk-alarm-management-list-title {
+        font-size: .75rem;
+    }
+    .bulk-alarm-management-list-priority {
+        font-size: .5rem;
+    }
+    .bulk-alarm-management-list-cause {
+        font-size: .5rem;
+    }
+    .bulk-alarm-list-wrapper {
+        max-height: 5.5rem;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+}
+
+@media only screen and (min-width: 1366px) {
+    .bulk-alarm-management-list-title {
+        font-size: .8rem;
+    }
+    .bulk-alarm-management-list-priority {
+        font-size: .55rem;
+    }
+    .bulk-alarm-management-list-cause {
+        font-size: .55rem;
+    }
+    .bulk-alarm-list-wrapper {
+        max-height: 6rem;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+}
+
+@media only screen and (min-width: 1536px) {
+    .bulk-alarm-management-list-title {
+        font-size: .75rem;
+    }
+    .bulk-alarm-management-list-priority {
+        font-size: .5rem;
+    }
+    .bulk-alarm-management-list-cause {
+        font-size: .5rem;
+    }
+    .bulk-alarm-list-wrapper {
+        max-height: 9rem;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+}
+
+@media only screen and (min-width: 1920px) {
+    .bulk-alarm-management-list-title {
+        font-size: .8rem;
+    }
+    .bulk-alarm-management-list-priority {
+        font-size: .55rem;
+    }
+    .bulk-alarm-management-list-cause {
+        font-size: .55rem;
+    }
+    .bulk-alarm-list-wrapper {
+        max-height: 11.5rem;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+}

@@ -1,0 +1,132 @@
+:root {
+    --background: #858585;
+
+    --primary-background: #EBEBEB;
+    --secondary-background: #C7C7C7;
+    --tertiary-background: #E1E1E1;
+
+    --custom-text-color: #4D4D4D;
+
+    --primary-border-color: #BDBDBD;
+    --secondary-border-color: #313131;
+
+    --loader-color: #2E2E2E;
+    --loader-background: #939292;
+    --dark-color: #313131;
+
+    --red: #DC3545;
+    --yellow: #E0A800;
+    --blue: #4782B4;
+}
+
+._dash-loading {
+    display: none;
+}
+
+html,
+body {
+    width: 100%;
+    min-width: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    background: var(--tertiary-background);
+}
+
+body {
+    overflow-x: hidden;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', Helvetica, Arial, sans-serif !important;
+    user-select: none;
+}
+
+#react-entry-point,
+#_dash-app-content,
+#page-content {
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100svh;
+    min-height: 100dvh;
+}
+
+#page-content {
+    overflow: hidden;
+}
+
+p {
+    margin: 0 !important;
+    color: var(--custom-text-color);
+}
+
+.background {
+    background: var(--background);
+}
+
+.background-primary {
+    background: var(--primary-background);
+}
+
+.background-secondary {
+    background: var(--secondary-background);
+}
+
+.background-tertiary {
+    background: var(--tertiary-background);
+}
+
+.font-custom-text-color {
+    color: var(--custom-text-color);
+}
+
+.text-color-red {
+    color: var(--red) !important;
+}
+
+.text-color-yellow {
+    color: var(--yellow) !important;
+}
+
+.text-color-blue {
+    color: var(--blue) !important;
+}
+
+.background-color-red {
+    background-color: var(--red) !important;
+}
+
+.background-color-yellow {
+    background-color: var(--yellow) !important;
+}
+
+.background-color-blue {
+    background-color: var(--blue) !important;
+}
+
+.border-color-red {
+    border-color: var(--red) !important;
+}
+
+.border-color-yellow {
+    border-color: var(--yellow) !important;
+}
+
+.border-color-blue {
+    border-color: var(--blue) !important;
+}
+
+.app-border-bottom {
+    border-bottom: 1px solid var(--primary-border-color);
+}
+
+.app-border-top {
+    border-top: 1px solid var(--primary-border-color);
+}
+
+.active-cursor {
+    cursor: pointer;
+}

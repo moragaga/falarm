@@ -1,0 +1,506 @@
+.header-admin-title {
+    color: var(--tertiary-background);
+    font-weight: 600;
+}
+
+.app-header-admin-shell {
+    background: var(--dark-color) !important;
+}
+
+.publication-status-published {
+    background-color: rgba(25, 135, 84, 0.18) !important;
+    color: #146c43 !important;
+    font-weight: 700;
+    border-radius: 6px;
+}
+
+.publication-status-pending {
+    background-color: rgba(220, 53, 69, 0.18) !important;
+    color: #b02a37 !important;
+    font-weight: 700;
+    border-radius: 6px;
+}
+
+.publication-status-unpublished {
+    background-color: rgba(255, 193, 7, 0.20) !important;
+    color: #997404 !important;
+    font-weight: 700;
+    border-radius: 6px;
+}
+
+.admin-toolbar-buttons-wrapper .btn:has(
+    .app-running-button-content
+) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .5rem;
+}
+
+@media only screen and (min-width: 350px) {
+    .header-admin-title {
+        font-size: 1.1rem;
+    }
+    .header-admin-title-wrapper {
+        padding: .5rem;
+    }
+
+    .loading-component-alarm-management-messages-admin,
+    .app-grid-shell:is(.alarm-management-messages-configuration) {
+        height: 35rem !important;
+    }
+
+    .loading-component-publication-manager-admin,
+    .app-grid-shell:is(.publication-manager-configuration) {
+        height: 35rem !important;
+    }
+
+    .loading-component-admin,
+    .app-grid-shell:not(
+        .alarm-management-messages-configuration,
+        .publication-manager-configuration
+    ) {
+        height: 35rem !important;
+    }
+
+    .admin-toolbar-buttons-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        align-items: center;
+        gap: .5rem;
+    }
+    .admin-toolbar-buttons-wrapper.btn-group {
+        gap: .5rem;
+        border-radius: 5px;
+        width: 100%;
+    }
+
+    .admin-toolbar-buttons-wrapper.btn-group > .btn {
+        border-radius: 5px;
+        width: 100%;
+    }
+
+    .admin-toolbar-buttons-wrapper.btn-group > .btn:not(:last-child):not(.dropdown-toggle),
+    .admin-toolbar-buttons-wrapper.btn-group > .btn.dropdown-toggle-split:first-child {
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        width: 100%;
+    }
+
+    .admin-toolbar-buttons-wrapper.btn-group > .btn:nth-child(n + 3),
+    .admin-toolbar-buttons-wrapper.btn-group > :not(.btn-check) + .btn {
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        width: 100%;
+    }
+
+    .header-admin-information-title {
+        font-size: .9rem;
+    }
+    .header-admin-information-text-primary {
+        font-size: .75rem;
+    }
+    .header-admin-information-text-secondary {
+        font-size: .65rem;
+    }
+
+    .alarm-management-configuration-label {
+        font-size: .8rem;
+    }
+}
+
+@media only screen and (min-width: 480px) {
+    .header-admin-title {
+        font-size: 1.3rem;
+    }
+    .header-admin-title-wrapper {
+        padding: .5rem;
+    }
+
+    .loading-component-alarm-management-messages-admin,
+    .app-grid-shell:is(.alarm-management-messages-configuration) {
+        height: 35rem !important;
+    }
+
+    .loading-component-publication-manager-admin,
+    .app-grid-shell:is(.publication-manager-configuration) {
+        height: 35rem !important;
+    }
+
+    .loading-component-admin,
+    .app-grid-shell:not(
+        .alarm-management-messages-configuration,
+        .publication-manager-configuration
+    ) {
+        height: 35rem !important;
+    }
+
+    .admin-toolbar-buttons-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        align-items: center;
+        gap: .5rem;
+    }
+    .admin-toolbar-buttons-wrapper.btn-group {
+        border-radius: 0;
+    }
+    .admin-toolbar-buttons-wrapper.btn-group .btn {
+        border-radius: 5px;
+    }
+
+    .admin-toolbar-buttons-wrapper.btn-group {
+        gap: .5rem;
+        border-radius: 5px;
+        width: 100%;
+    }
+
+    .admin-toolbar-buttons-wrapper.btn-group > .btn {
+        border-radius: 5px;
+        width: 100%;
+    }
+
+    .admin-toolbar-buttons-wrapper.btn-group > .btn:not(:last-child):not(.dropdown-toggle),
+    .admin-toolbar-buttons-wrapper.btn-group > .btn.dropdown-toggle-split:first-child {
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        width: 100%;
+    }
+
+    .admin-toolbar-buttons-wrapper.btn-group > .btn:nth-child(n + 3),
+    .admin-toolbar-buttons-wrapper.btn-group > :not(.btn-check) + .btn {
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        width: 100%;
+    }
+
+    .header-admin-information-title {
+        font-size: 1rem;
+    }
+    .header-admin-information-text-primary {
+        font-size: .85rem;
+    }
+    .header-admin-information-text-secondary {
+        font-size: .75rem;
+    }
+
+    .alarm-management-configuration-label {
+        font-size: .8rem;
+    }
+}
+
+/*@media only screen and (min-width: 768px) {}*/
+
+/*@media only screen and (min-width: 1024px) {*/
+/*}*/
+
+@media only screen and (min-width: 1280px) {
+    .header-admin-title {
+        font-size: 1rem;
+    }
+    .header-admin-title-wrapper {
+        padding: 0;
+    }
+
+    .loading-component-alarm-management-messages-admin,
+    .app-grid-shell:is(.alarm-management-messages-configuration) {
+        height: 34rem !important;
+    }
+
+    .loading-component-publication-manager-admin,
+    .app-grid-shell:is(.publication-manager-configuration) {
+        height: 34.5rem !important;
+    }
+
+    .loading-component-admin,
+    .app-grid-shell:not(
+        .alarm-management-messages-configuration,
+        .publication-manager-configuration
+    ) {
+        height: 35.5rem !important;
+    }
+
+    .admin-toolbar-buttons-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+        align-items: center;
+        gap: 0;
+    }
+    .admin-toolbar-buttons-wrapper.btn-group {
+        border-radius: inherit;
+    }
+    .admin-toolbar-buttons-wrapper.btn-group .btn {
+        border-radius: inherit;
+    }
+
+    .admin-toolbar-buttons-wrapper.btn-group {
+        gap: 0;
+        border-radius: var(--bs-border-radius);
+        width: auto;
+    }
+
+    .admin-toolbar-buttons-wrapper.btn-group > .btn {
+        border-radius: var(--bs-btn-border-radius);
+        width: auto;
+    }
+
+    .admin-toolbar-buttons-wrapper.btn-group > .btn:not(:last-child):not(.dropdown-toggle),
+    .admin-toolbar-buttons-wrapper.btn-group > .btn.dropdown-toggle-split:first-child {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        width: auto;
+    }
+
+    .admin-toolbar-buttons-wrapper.btn-group > .btn:nth-child(n + 3),
+    .admin-toolbar-buttons-wrapper.btn-group > :not(.btn-check) + .btn {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        width: auto;
+    }
+
+    .header-admin-information-title {
+        font-size: .75rem;
+    }
+    .header-admin-information-text-primary {
+        font-size: .65rem;
+    }
+    .header-admin-information-text-secondary {
+        font-size: .55rem;
+    }
+
+    .alarm-management-configuration-label {
+        font-size: .8rem;
+    }
+}
+
+@media only screen and (min-width: 1366px) {
+    .header-admin-title {
+        font-size: 1rem;
+    }
+    .header-admin-title-wrapper {
+        padding: 0;
+    }
+
+    .loading-component-alarm-management-messages-admin,
+    .app-grid-shell:is(.alarm-management-messages-configuration) {
+        height: 33rem !important;
+    }
+
+    .loading-component-publication-manager-admin,
+    .app-grid-shell:is(.publication-manager-configuration) {
+        height: 33.5rem !important;
+    }
+
+    .loading-component-admin,
+    .app-grid-shell:not(
+        .alarm-management-messages-configuration,
+        .publication-manager-configuration
+    ) {
+        height: 34.5rem !important;
+    }
+    .admin-toolbar-buttons-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+        align-items: center;
+        gap: 0;
+    }
+    .admin-toolbar-buttons-wrapper.btn-group {
+        border-radius: inherit;
+    }
+    .admin-toolbar-buttons-wrapper.btn-group .btn {
+        border-radius: inherit;
+    }
+
+    .admin-toolbar-buttons-wrapper.btn-group {
+        gap: 0;
+        border-radius: var(--bs-border-radius);
+        width: auto;
+    }
+
+    .admin-toolbar-buttons-wrapper.btn-group > .btn {
+        border-radius: var(--bs-btn-border-radius);
+        width: auto;
+    }
+
+    .admin-toolbar-buttons-wrapper.btn-group > .btn:not(:last-child):not(.dropdown-toggle),
+    .admin-toolbar-buttons-wrapper.btn-group > .btn.dropdown-toggle-split:first-child {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        width: auto;
+    }
+
+    .admin-toolbar-buttons-wrapper.btn-group > .btn:nth-child(n + 3),
+    .admin-toolbar-buttons-wrapper.btn-group > :not(.btn-check) + .btn {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        width: auto;
+    }
+
+    .header-admin-information-title {
+        font-size: .75rem;
+    }
+    .header-admin-information-text-primary {
+        font-size: .65rem;
+    }
+    .header-admin-information-text-secondary {
+        font-size: .55rem;
+    }
+
+    .alarm-management-configuration-label {
+        font-size: .85rem;
+    }
+}
+
+@media only screen and (min-width: 1536px) {
+    .header-admin-title {
+        font-size: 1.1rem;
+    }
+    .header-admin-title-wrapper {
+        padding: 0;
+    }
+
+    .loading-component-alarm-management-messages-admin,
+    .app-grid-shell:is(.alarm-management-messages-configuration) {
+        height: 38.5rem !important;
+    }
+
+    .loading-component-publication-manager-admin,
+    .app-grid-shell:is(.publication-manager-configuration) {
+        height: 39rem !important;
+    }
+
+    .loading-component-admin,
+    .app-grid-shell:not(
+        .alarm-management-messages-configuration,
+        .publication-manager-configuration
+    ) {
+        height: 40rem !important;
+    }
+    .admin-toolbar-buttons-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+        align-items: center;
+        gap: 0;
+    }
+    .admin-toolbar-buttons-wrapper.btn-group {
+        border-radius: inherit;
+    }
+    .admin-toolbar-buttons-wrapper.btn-group .btn {
+        border-radius: inherit;
+    }
+
+    .admin-toolbar-buttons-wrapper.btn-group {
+        gap: 0;
+        border-radius: var(--bs-border-radius);
+        width: auto;
+    }
+
+    .admin-toolbar-buttons-wrapper.btn-group > .btn {
+        border-radius: var(--bs-btn-border-radius);
+        width: auto;
+    }
+
+    .admin-toolbar-buttons-wrapper.btn-group > .btn:not(:last-child):not(.dropdown-toggle),
+    .admin-toolbar-buttons-wrapper.btn-group > .btn.dropdown-toggle-split:first-child {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        width: auto;
+    }
+
+    .admin-toolbar-buttons-wrapper.btn-group > .btn:nth-child(n + 3),
+    .admin-toolbar-buttons-wrapper.btn-group > :not(.btn-check) + .btn {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        width: auto;
+    }
+
+    .header-admin-information-title {
+        font-size: .9rem;
+    }
+    .header-admin-information-text-primary {
+        font-size: .75rem;
+    }
+    .header-admin-information-text-secondary {
+        font-size: .65rem;
+    }
+
+    .alarm-management-configuration-label {
+        font-size: .9rem;
+    }
+}
+
+@media only screen and (min-width: 1920px) {
+    .header-admin-title {
+        font-size: 1.3rem;
+    }
+    .header-admin-title-wrapper {
+        padding: 0;
+    }
+
+    .loading-component-alarm-management-messages-admin,
+    .app-grid-shell:is(.alarm-management-messages-configuration) {
+        height: 51rem !important;
+    }
+
+    .loading-component-publication-manager-admin,
+    .app-grid-shell:is(.publication-manager-configuration) {
+        height: 51.5rem !important;
+    }
+
+    .loading-component-admin,
+    .app-grid-shell:not(
+        .alarm-management-messages-configuration,
+        .publication-manager-configuration
+    ) {
+        height: 52.5rem !important;
+    }
+    .admin-toolbar-buttons-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+        align-items: center;
+        gap: 0;
+    }
+    .admin-toolbar-buttons-wrapper.btn-group {
+        gap: 0;
+        border-radius: var(--bs-border-radius);
+        width: auto;
+    }
+
+    .admin-toolbar-buttons-wrapper.btn-group > .btn {
+        border-radius: var(--bs-btn-border-radius);
+        width: auto;
+    }
+
+    .admin-toolbar-buttons-wrapper.btn-group > .btn:not(:last-child):not(.dropdown-toggle),
+    .admin-toolbar-buttons-wrapper.btn-group > .btn.dropdown-toggle-split:first-child {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        width: auto;
+    }
+
+    .admin-toolbar-buttons-wrapper.btn-group > .btn:nth-child(n + 3),
+    .admin-toolbar-buttons-wrapper.btn-group > :not(.btn-check) + .btn {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        width: auto;
+    }
+
+    .header-admin-information-title {
+        font-size: 1rem;
+    }
+    .header-admin-information-text-primary {
+        font-size: .85rem;
+    }
+    .header-admin-information-text-secondary {
+        font-size: .75rem;
+    }
+
+    .alarm-management-configuration-label {
+        font-size: 1rem;
+    }
+}

@@ -1,0 +1,571 @@
+.h2s-icon {
+    border-radius: 50%;
+    border: 1px solid #000000;
+}
+.h2s-normal {
+    background-color: var(--secondary-background);
+}
+.h2s-warning {
+    background-color: var(--yellow);
+    animation: pulse-warning 2s ease-in-out infinite;
+}
+.h2s-danger {
+    background-color: var(--red);
+    animation: pulse-danger 2s ease-in-out infinite;
+}
+
+@keyframes pulse-warning {
+    0% {
+        background-color: var(--yellow);
+        opacity: 1;
+    }
+    25%{
+        background-color: var(--yellow);
+        opacity: 5;
+    }
+    50% {
+        background-color: var(--yellow);
+        opacity: 0.2;
+    }
+    75%{
+        background-color: var(--yellow);
+        opacity: 5;
+    }
+    100% {
+        background-color: var(--yellow);
+        opacity: 1;
+    }
+}
+
+@keyframes pulse-danger {
+    0% {
+        background-color: var(--red);
+        opacity: 1;
+    }
+    25% {
+        background-color: var(--red);
+        opacity: 0.5;
+    }
+    50% {
+        background-color: var(--red);
+        opacity: 0.2;
+    }
+    75% {
+        background-color: var(--red);
+        opacity: 0.5;
+    }
+    100% {
+        background-color: #DC3545;
+        opacity: 1;
+    }
+}
+
+@media only screen and (min-width: 350px) {
+    .circuit-img {
+        width: 6rem;
+    }
+    .circuit-img-position-2 {
+        padding-top: .7rem;
+    }
+    .circuit-img-position-3 {
+        padding-top: 1.2rem;
+    }
+    .circuit-special-img-position-2 {
+        padding-top: 1.2rem;
+    }
+    .isolated-circuit-special-img {
+        margin-top: .8rem;
+    }
+    .isolated-circuit-special-img.unexpected-icon {
+        width: .8rem;
+        margin-top: 1.5rem;
+    }
+
+    .h2s-icon {
+        width: .7rem;
+        height: .7rem;
+        right: .7rem;
+    }
+    .h2s-icon-wrong {
+        width: .8rem;
+        height: .8rem;
+        right: .6rem;
+    }
+    .h2s-icon-wrong:has(> img) > img {
+        width: .8rem;
+    }
+
+    .h2s-icon-position-1 {
+        top: .25rem
+    }
+    .h2s-icon-position-2 {
+        top: .95rem;
+    }
+    .h2s-icon-position-3 {
+        top: 1.5rem;
+    }
+
+    .h2s-special-icon-position-1 {
+        top: 1rem
+    }
+
+    .h2s-icon-wrong.h2s-special-icon-position-1:has(> img){
+        top: 1.2rem;
+    }
+    .h2s-special-icon-position-2 {
+        top: 2.35rem;
+    }
+
+    .isolated-circuit-img {
+        width: .9rem;
+        height: .9rem;
+    }
+
+    .arrow-direction-process-img {
+        width: .9rem;
+    }
+
+    .planta-molibdeno-top-row-spacing {
+        padding-top: 0;
+    }
+    .planta-molibdeno-middle-row-spacing {
+        padding: 0;
+    }
+    .planta-molibdeno-bottom-row-spacing {
+        padding-bottom: 0;
+    }
+
+    .wemco-circuit-container {
+        padding-left: 0;
+        justify-content: center;
+    }
+
+    .planta-molibdeno-wrapper {
+        padding-top: .8rem;
+        padding-bottom: .8rem;
+    }
+}
+
+@media only screen and (min-width: 480px) {
+    .circuit-img {
+        width: 7rem;
+    }
+    .circuit-img-position-2 {
+        padding-top: .7rem;
+    }
+    .circuit-img-position-3 {
+        padding-top: 1.2rem;
+    }
+    .circuit-special-img-position-2 {
+        padding-top: 1.2rem;
+    }
+    .isolated-circuit-special-img {
+        margin-top: .8rem;
+    }
+    .isolated-circuit-special-img.unexpected-icon {
+        width: .8rem;
+        margin-top: 1.5rem;
+    }
+
+    .h2s-icon {
+        width: .7rem;
+        height: .7rem;
+        right: .7rem;
+    }
+    .h2s-icon-wrong {
+        width: .8rem;
+        height: .8rem;
+        right: .6rem;
+    }
+    .h2s-icon-wrong:has(> img) > img {
+        width: .8rem;
+    }
+
+    .h2s-icon-position-1 {
+        top: .25rem
+    }
+    .h2s-icon-position-2 {
+        top: .95rem;
+    }
+    .h2s-icon-position-3 {
+        top: 1.5rem;
+    }
+
+    .h2s-special-icon-position-1 {
+        top: 1rem
+    }
+
+    .h2s-icon-wrong.h2s-special-icon-position-1:has(> img){
+        top: 1.2rem;
+    }
+    .h2s-special-icon-position-2 {
+        top: 2.35rem;
+    }
+
+    .isolated-circuit-img {
+        width: .9rem;
+        height: .9rem;
+    }
+
+    .arrow-direction-process-img {
+        width: 1.1rem;
+    }
+
+    .planta-molibdeno-top-row-spacing {
+        padding-top: 0;
+    }
+    .planta-molibdeno-middle-row-spacing {
+        padding: 0;
+    }
+    .planta-molibdeno-bottom-row-spacing {
+        padding-bottom: 0;
+    }
+
+    .wemco-circuit-container {
+        padding-left: 0;
+        justify-content: center;
+    }
+
+    .planta-molibdeno-wrapper {
+        padding-top: .8rem;
+        padding-bottom: .8rem;
+    }
+
+}
+@media only screen and (min-width: 1280px) {
+    .circuit-img {
+        width: 4rem;
+    }
+    .circuit-img-position-2 {
+        padding-top: .7rem;
+    }
+    .circuit-img-position-3 {
+        padding-top: 1.2rem;
+    }
+    .circuit-special-img-position-2 {
+        padding-top: 1.2rem;
+    }
+    .isolated-circuit-special-img {
+        margin-top: .8rem;
+    }
+    .isolated-circuit-special-img.unexpected-icon {
+        width: .65rem;
+        margin-top: 1.5rem;
+    }
+
+    .h2s-icon {
+        width: .4rem;
+        height: .4rem;
+        right: .55rem;
+    }
+    .h2s-icon-wrong {
+        width: .5rem;
+        height: .5rem;
+        right: .65rem;
+    }
+    .h2s-icon-wrong:has(> img) > img {
+        width: .6rem;
+    }
+
+    .h2s-icon-position-1 {
+        top: .2rem
+    }
+    .h2s-icon-position-2 {
+        top: 1rem;
+    }
+    .h2s-icon-position-3 {
+        top: 1.45rem;
+    }
+
+    .h2s-special-icon-position-1 {
+        top: 1rem
+    }
+
+    .h2s-icon-wrong.h2s-special-icon-position-1:has(> img){
+        top: .8rem;
+    }
+    .h2s-special-icon-position-2 {
+        top: 2rem;
+    }
+
+    .isolated-circuit-img {
+        width: .75rem;
+        height: .75rem;
+    }
+
+    .arrow-direction-process-img {
+        width: 1rem;
+    }
+
+    .planta-molibdeno-top-row-spacing {
+        padding-top: .85rem;
+    }
+    .planta-molibdeno-middle-row-spacing {
+        padding: .85rem 0;
+    }
+    .planta-molibdeno-bottom-row-spacing {
+        padding-bottom: .85rem;
+    }
+
+    .wemco-circuit-container {
+        padding-left: 0;
+        justify-content: center;
+    }
+
+    .planta-molibdeno-wrapper {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+}
+@media only screen and (min-width: 1366px) {
+    .circuit-img {
+        width: 4.1rem;
+    }
+    .circuit-img-position-2 {
+        padding-top: .7rem;
+    }
+    .circuit-img-position-3 {
+        padding-top: 1.2rem;
+    }
+    .circuit-special-img-position-2 {
+        padding-top: 1.2rem;
+    }
+    .isolated-circuit-special-img {
+        margin-top: .8rem;
+    }
+    .isolated-circuit-special-img.unexpected-icon {
+        width: .65rem;
+        margin-top: 1.5rem;
+    }
+
+    .h2s-icon {
+        width: .5rem;
+        height: .5rem;
+        right: .55rem;
+    }
+    .h2s-icon-wrong {
+        width: .5rem;
+        height: .5rem;
+        right: .65rem;
+    }
+    .h2s-icon-wrong:has(> img) > img {
+        width: .6rem;
+    }
+
+    .h2s-icon-position-1 {
+        top: .2rem
+    }
+    .h2s-icon-position-2 {
+        top: .9rem;
+    }
+    .h2s-icon-position-3 {
+        top: 1.35rem;
+    }
+
+    .h2s-special-icon-position-1 {
+        top: 1rem
+    }
+
+    .h2s-icon-wrong.h2s-special-icon-position-1:has(> img){
+        top: .8rem;
+    }
+    .h2s-special-icon-position-2 {
+        top: 2rem;
+    }
+
+    .isolated-circuit-img {
+        width: .75rem;
+        height: .75rem;
+    }
+
+    .arrow-direction-process-img {
+        width: 1rem;
+    }
+
+    .planta-molibdeno-top-row-spacing {
+        padding-top: .45rem;
+    }
+    .planta-molibdeno-middle-row-spacing {
+        padding: 0;
+    }
+    .planta-molibdeno-bottom-row-spacing {
+        padding-bottom: .45rem;
+    }
+
+    .wemco-circuit-container {
+        padding-left: 0;
+        justify-content: center;
+    }
+
+    .planta-molibdeno-wrapper {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+}
+@media only screen and (min-width: 1536px) {
+    .circuit-img {
+        width: 4.5rem;
+    }
+    .circuit-img-position-2 {
+        padding-top: .7rem;
+    }
+    .circuit-img-position-3 {
+        padding-top: 1.2rem;
+    }
+    .circuit-special-img-position-2 {
+        padding-top: 1.2rem;
+    }
+    .isolated-circuit-special-img {
+        margin-top: .8rem;
+    }
+    .isolated-circuit-special-img.unexpected-icon {
+        width: .7rem;
+        margin-top: 1.5rem;
+    }
+
+    .h2s-icon {
+        width: .5rem;
+        height: .5rem;
+        right: .55rem;
+    }
+    .h2s-icon-wrong {
+        width: .5rem;
+        height: .5rem;
+        right: .65rem;
+    }
+    .h2s-icon-wrong:has(> img) > img {
+        width: .7rem;
+    }
+
+    .h2s-icon-position-1 {
+        top: .25rem
+    }
+    .h2s-icon-position-2 {
+        top: .95rem;
+    }
+    .h2s-icon-position-3 {
+        top: 1.45rem;
+    }
+
+    .h2s-special-icon-position-1 {
+        top: 1rem
+    }
+
+    .h2s-icon-wrong.h2s-special-icon-position-1:has(> img){
+        top: .9rem;
+    }
+    .h2s-special-icon-position-2 {
+        top: 2.2rem;
+    }
+
+    .isolated-circuit-img {
+        width: .8rem;
+        height: .8rem;
+    }
+
+    .arrow-direction-process-img {
+        width: 1.2rem;
+    }
+
+    .planta-molibdeno-top-row-spacing {
+        padding-top: .5rem;
+    }
+    .planta-molibdeno-middle-row-spacing {
+        padding: 0;
+    }
+    .planta-molibdeno-bottom-row-spacing {
+        padding-bottom: .5rem;
+    }
+
+    .wemco-circuit-container {
+        padding-left: 0;
+        justify-content: center;
+    }
+
+    .planta-molibdeno-wrapper {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+}
+
+@media only screen and (min-width: 1920px) {
+    .circuit-img {
+        width: 6rem;
+    }
+    .circuit-img-position-2 {
+        padding-top: .7rem;
+    }
+    .circuit-img-position-3 {
+        padding-top: 1.2rem;
+    }
+    .circuit-special-img-position-2 {
+        padding-top: 1.2rem;
+    }
+    .isolated-circuit-special-img {
+        margin-top: 1.2rem;
+    }
+
+    .h2s-icon {
+        width: .7rem;
+        height: .7rem;
+        right: .7rem;
+    }
+    .h2s-icon-wrong {
+        width: .7rem;
+        height: .7rem;
+        right: .8rem;
+    }
+    .h2s-icon-wrong:has(> img) > img {
+        width: .8rem;
+    }
+
+    .h2s-icon-position-1 {
+        top: .3rem
+    }
+    .h2s-icon-position-2 {
+        top: 1rem;
+    }
+    .h2s-icon-position-3 {
+        top: 1.5rem;
+    }
+
+    .h2s-special-icon-position-1 {
+        top: 1.2rem
+    }
+    .h2s-icon-wrong.h2s-special-icon-position-1:has(> img){
+        top: 1.2rem;
+    }
+    .h2s-special-icon-position-2 {
+        top: 2.5rem;
+    }
+
+    .isolated-circuit-img {
+        width: 1rem;
+        height: 1rem;
+    }
+
+    .arrow-direction-process-img {
+        width: 1.5rem;
+    }
+
+    .planta-molibdeno-top-row-spacing {
+        padding-top: 1.05rem;
+    }
+    .planta-molibdeno-middle-row-spacing {
+        padding: 0;
+    }
+    .planta-molibdeno-bottom-row-spacing {
+        padding-bottom: 1.05rem;
+    }
+
+    .wemco-circuit-container {
+        padding-left: 0;
+        justify-content: center;
+    }
+
+    .planta-molibdeno-wrapper {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+}

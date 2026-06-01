@@ -1,0 +1,360 @@
+.alarm-definition-action-button {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media only screen and (min-width: 350px) {
+    .alarm-panel-content {
+        min-height: 0;
+        padding: 0 .5rem;
+    }
+
+    .alarm-panel-slots {
+        display: flex;
+        flex-direction: column;
+        gap: .8rem;
+        margin: .5rem 0;
+    }
+
+    .alarm-panel-card :is(
+        .card-header,
+        .card-header span
+    ) {
+        font-size: .6rem;
+    }
+    .alarm-panel-card :is(
+        .card-header
+    ) {
+        min-height: calc(1.418rem + .1rem + .1rem);
+        padding-top: .1rem;
+        padding-bottom: .1rem;
+    }
+    .alarm-panel-card :is(
+        .card-body .title
+    ) {
+        font-size: .55rem;
+        font-weight: 600;
+        padding: .1rem .5rem 0 .5rem;
+    }
+    .alarm-panel-card :is(
+        .card-body .description
+    ) {
+        padding: 0 .5rem .1rem .5rem;
+        min-height: 2.349rem;
+    }
+    .alarm-panel-card :is(
+        .card-body .cause
+    ) {
+        font-size: .5rem;
+        font-weight: 400;
+    }
+    .alarm-panel-card :is(
+        .card-footer
+    ) {
+        font-size: .4rem;
+    }
+    .alarm-panel-slot {
+        width: 100%;
+    }
+    .alarm-panel-slot:is(.alarm-panel-slot-empty) {
+        display: none;
+    }
+
+}
+
+@media only screen and (min-width: 480px) {
+    .alarm-panel-content {
+        min-height: 0;
+        padding: 0 .5rem;
+    }
+
+    .alarm-panel-slots {
+        display: flex;
+        flex-direction: column;
+        gap: .8rem;
+        margin: .5rem 0;
+    }
+
+    .alarm-panel-card :is(
+        .card-header,
+        .card-header span
+    ) {
+        font-size: .7rem;
+    }
+    .alarm-panel-card :is(
+        .card-header
+    ) {
+        min-height: calc(1.351 + .1rem + .1rem);
+        padding-top: .1rem;
+        padding-bottom: .1rem;
+    }
+    .alarm-panel-card :is(
+        .card-body .title
+    ) {
+        font-size: .7rem;
+        font-weight: 600;
+        padding: .1rem .5rem 0 .5rem;
+    }
+    .alarm-panel-card :is(
+        .card-body .description
+    ) {
+        padding: 0 .5rem .1rem .5rem;
+        min-height: 2.573rem;
+    }
+    .alarm-panel-card :is(
+        .card-body .cause
+    ) {
+        font-size: .6rem;
+        font-weight: 400;
+    }
+    .alarm-panel-card :is(
+        .card-footer
+    ) {
+        font-size: .45rem;
+    }
+    .alarm-panel-slot {
+        width: 100%;
+    }
+    .alarm-panel-slot:is(.alarm-panel-slot-empty) {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 1280px) {
+    .alarm-panel-content {
+        min-height: 5.675rem;
+        padding: 0 .5rem;
+    }
+
+    .alarm-panel-slots {
+        display: flex;
+        flex-direction: row;
+        gap: .8rem;
+        margin: 0;
+    }
+    .alarm-panel-card :is(
+        .card-header,
+        .card-header span
+    ) {
+        font-size: .45rem;
+    }
+    .alarm-panel-card :is(
+        .card-header
+    ) {
+        min-height: calc(.9rem + .1rem + .1rem);
+        padding-top: .1rem;
+        padding-bottom: .1rem;
+    }
+    .alarm-panel-card :is(
+        .card-body .title
+    ) {
+        font-size: .5rem;
+        font-weight: 600;
+        padding: .1rem .5rem 0 .5rem;
+    }
+    .alarm-panel-card :is(
+        .card-body .description
+    ) {
+        padding: 0 .5rem .1rem .5rem;
+        min-height: 2rem;
+    }
+    .alarm-panel-card :is(
+        .card-body .cause
+    ) {
+        font-size: .42rem;
+        font-weight: 400;
+    }
+    .alarm-panel-card :is(
+        .card-footer
+    ) {
+        font-size: .4rem;
+    }
+    .alarm-panel-slot {
+        width: calc(100% / 6);
+    }
+
+    .alarm-panel-slot:is(.alarm-panel-slot-empty) {
+        display: inherit;
+    }
+}
+
+@media only screen and (min-width: 1366px) {
+    .alarm-panel-content {
+        min-height: 5.675rem;
+        padding: 0 .5rem;
+    }
+
+    .alarm-panel-slots {
+        display: flex;
+        flex-direction: row;
+        gap: .8rem;
+        margin: 0;
+    }
+    .alarm-panel-card :is(
+        .card-header,
+        .card-header span
+    ) {
+        font-size: .45rem;
+    }
+    .alarm-panel-card :is(
+        .card-header
+    ) {
+        min-height: calc(.9rem + .1rem + .1rem);
+        padding-top: .1rem;
+        padding-bottom: .1rem;
+    }
+    .alarm-panel-card :is(
+        .card-body .title
+    ) {
+        font-size: .5rem;
+        font-weight: 600;
+        padding: .1rem .5rem 0 .5rem;
+    }
+    .alarm-panel-card :is(
+        .card-body .description
+    ) {
+        padding: 0 .5rem .1rem .5rem;
+        min-height: 2rem;
+    }
+    .alarm-panel-card :is(
+        .card-body .cause
+    ) {
+        font-size: .42rem;
+        font-weight: 400;
+    }
+    .alarm-panel-card :is(
+        .card-footer
+    ) {
+        font-size: .4rem;
+    }
+    .alarm-panel-slot {
+        width: calc(100% / 6);
+    }
+
+    .alarm-panel-slot:is(.alarm-panel-slot-empty) {
+        display: inherit;
+    }
+}
+
+@media only screen and (min-width: 1536px) {
+    .alarm-panel-content {
+        min-height: 6.702rem;
+        padding: 0 .5rem;
+    }
+
+    .alarm-panel-slots {
+        display: flex;
+        flex-direction: row;
+        gap: .8rem;
+        margin: 0;
+    }
+
+    .alarm-panel-card :is(
+        .card-header,
+        .card-header span
+    ) {
+        font-size: .6rem;
+    }
+    .alarm-panel-card :is(
+        .card-header
+    ) {
+        min-height: calc(1.155rem + .2rem + .2rem);
+        padding-top: .2rem;
+        padding-bottom: .2rem;
+    }
+
+    .alarm-panel-card :is(
+        .card-body .title
+    ) {
+        font-size: .6rem;
+        font-weight: 600;
+        padding: .1rem .5rem 0 .5rem;
+    }
+    .alarm-panel-card :is(
+        .card-body .description
+    ) {
+        padding: 0 .5rem .1rem .5rem;
+        min-height: 2.349rem;
+    }
+    .alarm-panel-card :is(
+        .card-body .cause
+    ) {
+        font-size: .5rem;
+        font-weight: 400;
+    }
+    .alarm-panel-card :is(
+        .card-footer
+    ) {
+        font-size: .45rem;
+    }
+    .alarm-panel-slot {
+        width: calc(100% / 6);
+    }
+    .alarm-panel-slot:is(.alarm-panel-slot-empty) {
+        display: inherit;
+    }
+}
+
+@media only screen and (min-width: 1920px) {
+    .alarm-panel-content {
+        min-height: 7.4rem;
+        padding: 0 .5rem;
+    }
+
+    .alarm-panel-slots {
+        display: flex;
+        flex-direction: row;
+        gap: .8rem;
+        margin: 0;
+    }
+    .alarm-panel-card :is(
+        .card-header,
+        .card-header span
+    ) {
+        font-size: .7rem;
+    }
+    .alarm-panel-card :is(
+        .card-header
+    ) {
+        min-height: calc(1.35rem + .2rem + .2rem);
+        padding-top: .2rem;
+        padding-bottom: .2rem;
+    }
+
+    .alarm-panel-card :is(
+        .card-body .title
+    ) {
+        font-size: .65rem;
+        font-weight: 600;
+        padding: .1rem .5rem 0 .5rem;
+    }
+    .alarm-panel-card :is(
+        .card-body .description
+    ) {
+        padding: 0 .5rem .1rem .5rem;
+        min-height: 2.573rem;
+    }
+    .alarm-panel-card :is(
+        .card-body .cause
+    ) {
+        font-size: .55rem;
+        font-weight: 400;
+    }
+    .alarm-panel-card :is(
+        .card-footer
+    ) {
+        font-size: .5rem;
+    }
+    .alarm-panel-slot {
+        width: calc(100% / 6);
+    }
+    .alarm-panel-slot:is(.alarm-panel-slot-empty) {
+        display: inherit;
+    }
+}

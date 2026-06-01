@@ -1,0 +1,28 @@
+from __future__ import annotations
+
+ALARM_CONFIGURATION_CATEGORY = 'alarm_configuration'
+ALARM_CONFIGURATION_RELATIVE_PATH = 'alarm'
+ALARM_CONFIGURATION_CONTAINER_NAME = 'alarm_configuration'
+
+KIND_RISK = 'risk'
+KIND_IMPACT = 'impact'
+
+RISK_LEVEL_1 = '1'
+RISK_LEVEL_2 = '2'
+RISK_LEVEL_3 = '3'
+
+TOOL_LEVEL_N1 = 'n1'
+TOOL_LEVEL_EXECUTIVE = 'executive'
+TOOL_LEVEL_N0 = 'n0'
+
+VISUALIZATION_GENERIC = 'generic'
+VISUALIZATION_DISTRIBUTED = 'distributed'
+VISUALIZATION_QUEUE_FOR_QUEUE = 'queue_for_queue'
+
+REAPPEAR_ORIGIN_TOOL = 'origin_tool'
+REAPPEAR_LAST_VISIBLE_TOOL = 'last_visible_tool'
+REAPPEAR_FIXED_TOOL = 'fixed_tool'
+
+DIAGNOSTIC_ERROR = 'error'
+DIAGNOSTIC_WARNING = 'warning'
+DIAGNOSTIC_INFO = 'info'

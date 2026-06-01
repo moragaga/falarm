@@ -1,0 +1,43 @@
+name: ada-cosmosdb-local-runtime
+
+services:
+  cosmosdb-local-runtime:
+    image: mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:vnext-preview
+    container_name: cosmosdb-local-runtime
+    hostname: cosmosdb-local-runtime
+    ports:
+      - "8081:8081"  # Cosmos DB endpoint
+      - "8080:8080"  # Health probe
+      - "1234:1234"  # Data Explorer
+    command:
+      - --protocol
+      - http
+      - --gateway-endpoint
+      - cosmosdb-local-runtime
+      - --enable-explorer
+      - "true"
+      - --log-level
+      - info
+      - --data-path
+      - /data
+    environment:
+      ENABLE_TELEMETRY: "false"
+    volumes:
+      - cosmosdb-data:/data
+    restart: "no"
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1430m
+    networks:
+      cosmosdb_local_runtime_network:
+        aliases:
+          - cosmosdb-local-runtime
+
+volumes:
+  cosmosdb-data:
+
+networks:
+  cosmosdb_local_runtime_network:
+    name: cosmosdb-local-runtime-network

@@ -1,0 +1,46 @@
+line-length = 100
+indent-width = 4
+target-version = "py314"
+
+extend-exclude = [
+    "docker_files",
+    ".git",
+    ".venv",
+    "venv",
+    "__pycache__",
+    ".mypy_cache",
+    ".ruff_cache",
+    "build",
+    "dist",
+    "src/assets",
+    ".gitignore",
+    "azure-pipelines.yml",
+    "dev.mapping-env.csv",
+    "uat.mapping-env.csv",
+    "Dockerfile",
+    "env.local",
+    ".env",
+]
+
+[format]
+quote-style = "single"
+indent-style = "space"
+line-ending = "auto"
+docstring-code-format = false
+skip-magic-trailing-comma = false
+
+[lint]
+select = [
+    "E",
+    "W",
+    "F",
+    "I",
+    "B",
+]
+ignore = [
+    "E501",
+]
+
+[lint.isort]
+known-first-party = ["src"]
+combine-as-imports = true

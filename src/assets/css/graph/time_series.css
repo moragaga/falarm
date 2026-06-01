@@ -1,0 +1,137 @@
+@media only screen and (min-width: 350px) {
+    .graph.time-series-graph:not(.modal-graph) {
+        height: 5.5rem !important;
+    }
+
+    .graph.time-series-graph:not(.modal-graph) .xtick text,
+    .graph.time-series-graph:not(.modal-graph) .ytick text {
+        font-size: .5rem !important;
+    }
+    .graph.time-series-graph:is(.modal-graph) .xtick text,
+    .graph.time-series-graph:is(.modal-graph) .ytick text,
+    .graph.time-series-graph:is(.modal-graph) .legend text,
+    .graph.time-series-graph:is(.modal-graph) .g-ytitle text,
+    .graph.time-series-graph:is(.modal-graph) .g-xtitle text,
+    .graph.time-series-graph:is(.modal-graph) .g-y2title text,
+    .graph.time-series-graph:is(.modal-graph) .g-y3title text,
+    .graph.time-series-graph:is(.modal-graph) .y2tick text,
+    .graph.time-series-graph:is(.modal-graph) .y3tick text {
+        font-size: .6rem !important;
+    }
+}
+
+@media only screen and (min-width: 480px) {
+    .graph.time-series-graph:not(.modal-graph) {
+        height: 5.5rem !important;
+    }
+
+    .graph.time-series-graph:not(.modal-graph) .xtick text,
+    .graph.time-series-graph:not(.modal-graph) .ytick text {
+        font-size: .5rem !important;
+    }
+    .graph.time-series-graph:is(.modal-graph) .xtick text,
+    .graph.time-series-graph:is(.modal-graph) .ytick text,
+    .graph.time-series-graph:is(.modal-graph) .legend text,
+    .graph.time-series-graph:is(.modal-graph) .g-ytitle text,
+    .graph.time-series-graph:is(.modal-graph) .g-xtitle text,
+    .graph.time-series-graph:is(.modal-graph) .g-y2title text,
+    .graph.time-series-graph:is(.modal-graph) .g-y3title text,
+    .graph.time-series-graph:is(.modal-graph) .y2tick text,
+    .graph.time-series-graph:is(.modal-graph) .y3tick text {
+        font-size: .6rem !important;
+    }
+}
+
+/*@media only screen and (min-width: 768px) {}*/
+
+/*@media only screen and (min-width: 1024px) {*/
+/*}*/
+
+@media only screen and (min-width: 1280px) {
+    .graph.time-series-graph:not(.modal-graph) {
+        height: 4rem !important;
+    }
+
+    .graph.time-series-graph:not(.modal-graph) .xtick text,
+    .graph.time-series-graph:not(.modal-graph) .ytick text {
+        font-size: .45rem !important;
+    }
+    .graph.time-series-graph:is(.modal-graph) .xtick text,
+    .graph.time-series-graph:is(.modal-graph) .ytick text,
+    .graph.time-series-graph:is(.modal-graph) .legend text,
+    .graph.time-series-graph:is(.modal-graph) .g-ytitle text,
+    .graph.time-series-graph:is(.modal-graph) .g-xtitle text,
+    .graph.time-series-graph:is(.modal-graph) .g-y2title text,
+    .graph.time-series-graph:is(.modal-graph) .g-y3title text,
+    .graph.time-series-graph:is(.modal-graph) .y2tick text,
+    .graph.time-series-graph:is(.modal-graph) .y3tick text {
+        font-size: .55rem !important;
+    }
+}
+
+@media only screen and (min-width: 1366px) {
+    .graph.time-series-graph:not(.modal-graph) {
+        height: 4rem !important;
+    }
+
+    .graph.time-series-graph:not(.modal-graph) .xtick text,
+    .graph.time-series-graph:not(.modal-graph) .ytick text {
+        font-size: .45rem !important;
+    }
+    .graph.time-series-graph:is(.modal-graph) .xtick text,
+    .graph.time-series-graph:is(.modal-graph) .ytick text,
+    .graph.time-series-graph:is(.modal-graph) .legend text,
+    .graph.time-series-graph:is(.modal-graph) .g-ytitle text,
+    .graph.time-series-graph:is(.modal-graph) .g-xtitle text,
+    .graph.time-series-graph:is(.modal-graph) .g-y2title text,
+    .graph.time-series-graph:is(.modal-graph) .g-y3title text,
+    .graph.time-series-graph:is(.modal-graph) .y2tick text,
+    .graph.time-series-graph:is(.modal-graph) .y3tick text {
+        font-size: .65rem !important;
+    }
+}
+
+@media only screen and (min-width: 1536px) {
+    .graph.time-series-graph:not(.modal-graph) {
+        height: 4.625rem !important;
+    }
+
+    .graph.time-series-graph:not(.modal-graph) .xtick text,
+    .graph.time-series-graph:not(.modal-graph) .ytick text {
+        font-size: .55rem !important;
+    }
+    .graph.time-series-graph:is(.modal-graph) .xtick text,
+    .graph.time-series-graph:is(.modal-graph) .ytick text,
+    .graph.time-series-graph:is(.modal-graph) .legend text,
+    .graph.time-series-graph:is(.modal-graph) .g-ytitle text,
+    .graph.time-series-graph:is(.modal-graph) .g-xtitle text,
+    .graph.time-series-graph:is(.modal-graph) .g-y2title text,
+    .graph.time-series-graph:is(.modal-graph) .g-y3title text,
+    .graph.time-series-graph:is(.modal-graph) .y2tick text,
+    .graph.time-series-graph:is(.modal-graph) .y3tick text {
+        font-size: .7rem !important;
+    }
+}
+
+@media only screen and (min-width: 1920px) {
+    .graph.time-series-graph:not(.modal-graph) {
+        height: 5.625rem !important;
+    }
+
+    .graph.time-series-graph:not(.modal-graph) .xtick text,
+    .graph.time-series-graph:not(.modal-graph) .ytick text {
+        font-size: .7rem !important;
+    }
+
+    .graph.time-series-graph:is(.modal-graph) .xtick text,
+    .graph.time-series-graph:is(.modal-graph) .ytick text,
+    .graph.time-series-graph:is(.modal-graph) .legend text,
+    .graph.time-series-graph:is(.modal-graph) .g-ytitle text,
+    .graph.time-series-graph:is(.modal-graph) .g-xtitle text,
+    .graph.time-series-graph:is(.modal-graph) .g-y2title text,
+    .graph.time-series-graph:is(.modal-graph) .g-y3title text,
+    .graph.time-series-graph:is(.modal-graph) .y2tick text,
+    .graph.time-series-graph:is(.modal-graph) .y3tick text {
+        font-size: .8rem !important;
+    }
+}

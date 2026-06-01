@@ -1,0 +1,27 @@
+.graph.alarm-connectors-graph {
+    display: none;
+}
+
+@media only screen and (min-width: 1280px) {
+    .graph.alarm-connectors-graph {
+        display: block;
+        height: 22px !important;
+        margin-top: -7px !important;
+    }
+}
+
+@media only screen and (min-width: 1536px) {
+    .graph.alarm-connectors-graph {
+        display: block;
+        height: 24px !important;
+        margin-top: -9px !important;
+    }
+}
+
+@media only screen and (min-width: 1920px) {
+    .graph.alarm-connectors-graph {
+        display: block;
+        height: 26px !important;
+        margin-top: -10px !important;
+    }
+}

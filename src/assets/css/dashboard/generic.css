@@ -1,0 +1,132 @@
+.espesador-content-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: fit-content;
+}
+
+@media only screen and (min-width: 350px) {
+    .espesador-img {
+        width: 6rem;
+    }
+    .bomba-img {
+        width: 2rem;
+    }
+
+    .espesador-container:last-child,
+    .st-metrics-wrapper {
+        padding-left: .75rem;
+        padding-right: .75rem;
+    }
+
+    .espesador-standard-row-wrapper {
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
+
+@media only screen and (min-width: 480px) {
+    .espesador-img {
+        width: 7rem;
+    }
+    .bomba-img {
+        width: 2.5rem;
+    }
+
+    .espesador-container:last-child,
+    .st-metrics-wrapper {
+        padding-left: .75rem;
+        padding-right: .75rem;
+    }
+
+    .espesador-standard-row-wrapper {
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
+
+/*@media only screen and (min-width: 768px) {}*/
+
+/*@media only screen and (min-width: 1024px) {*/
+/*}*/
+
+@media only screen and (min-width: 1280px) {
+    .espesador-img {
+        width: 3.9rem;
+    }
+    .bomba-img {
+        width: 1.1rem;
+    }
+
+    .espesador-container:last-child,
+    .st-metrics-wrapper {
+        padding-left: 0;
+        padding-right: .75rem;
+    }
+
+    .espesador-standard-row-wrapper {
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
+
+@media only screen and (min-width: 1366px) {
+    .espesador-img {
+        width: 4rem;
+    }
+    .bomba-img {
+        width: 1.2rem;
+    }
+
+    .espesador-container:last-child,
+    .st-metrics-wrapper {
+        padding-left: 0;
+        padding-right: .75rem;
+    }
+
+    .espesador-standard-row-wrapper {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+@media only screen and (min-width: 1536px) {
+    .espesador-img {
+        width: 4.5rem;
+    }
+    .bomba-img {
+        width: 1.4rem;
+    }
+
+    .espesador-container:last-child,
+    .st-metrics-wrapper {
+        padding-left: 0;
+        padding-right: .75rem;
+    }
+
+    .espesador-standard-row-wrapper {
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
+
+@media only screen and (min-width: 1920px) {
+    .espesador-img {
+        width: 6.5rem;
+    }
+    .bomba-img {
+        width: 1.9rem;
+    }
+
+    .espesador-container:last-child,
+    .st-metrics-wrapper {
+        padding-left: 0;
+        padding-right: .75rem;
+    }
+
+    .espesador-standard-row-wrapper {
+        padding-right: 0;
+        padding-left: 0;
+    }
+}

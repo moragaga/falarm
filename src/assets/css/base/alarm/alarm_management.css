@@ -1,0 +1,211 @@
+.alarm-management-icon-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+        transform 120ms ease,
+        opacity 120ms ease,
+        filter 120ms ease;
+}
+
+.alarm-management-icon-button:hover {
+    transform: scale(1.08);
+    filter: brightness(1.15);
+}
+
+.alarm-management-icon-button:active {
+    transform: scale(0.92);
+    opacity: 0.65;
+}
+
+.alarm-management-icon-button:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.75);
+    outline-offset: 3px;
+    border-radius: 999px;
+}
+
+.alarm-management-icon-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+    transform: none;
+    filter: none;
+}
+
+@media only screen and (min-width: 350px) {
+    :root {
+        --font-size-alarm-management-validation-error: .5rem;
+        --font-size-alarm-management-info-text: .55rem;
+        --modal-alarm-management-width: 40%;
+    }
+
+    .font-alarm-management-summary-name {
+        font-size: .65rem;
+    }
+    .font-alarm-management-summary-cause {
+        font-size: .6rem;
+    }
+    .font-alarm-management-silence-information {
+        font-size: .55rem;
+    }
+    .font-alarm-management-section {
+        font-size: .65rem;
+    }
+    .font-alarm-management-header {
+        font-size: .7rem;
+    }
+    .app-running-button-host,
+    .app-close-button-host {
+        font-size: .8rem;
+    }
+}
+
+@media only screen and (min-width: 480px) {
+    :root {
+        --font-size-alarm-management-validation-error: .6rem;
+        --font-size-alarm-management-info-text: .65rem;
+        --modal-alarm-management-width: 40%;
+    }
+
+    .font-alarm-management-summary-name {
+        font-size: .8rem;
+    }
+    .font-alarm-management-summary-cause {
+        font-size: .7rem;
+    }
+    .font-alarm-management-silence-information {
+        font-size: .65rem;
+    }
+    .font-alarm-management-section {
+        font-size: .8rem;
+    }
+    .font-alarm-management-header {
+        font-size: .85rem;
+    }
+    .app-running-button-host,
+    .app-close-button-host {
+        font-size: .8rem;
+    }
+}
+
+/*@media only screen and (min-width: 768px) {}*/
+
+/*@media only screen and (min-width: 1024px) {*/
+/*}*/
+
+@media only screen and (min-width: 1280px) {
+    :root {
+        --font-size-alarm-management-validation-error: .55rem;
+        --font-size-alarm-management-info-text: .6rem;
+        --modal-alarm-management-width: 50%;
+    }
+
+    .font-alarm-management-summary-name {
+        font-size: .75rem;
+    }
+    .font-alarm-management-summary-cause {
+        font-size: .65rem;
+    }
+    .font-alarm-management-silence-information {
+        font-size: .6rem;
+    }
+    .font-alarm-management-section {
+        font-size: .75rem;
+    }
+    .font-alarm-management-header {
+        font-size: .8rem;
+    }
+    .app-running-button-host,
+    .app-close-button-host {
+        font-size: .8rem;
+    }
+}
+
+@media (min-width: 1366px) {
+    :root {
+        --font-size-alarm-management-validation-error: .55rem;
+        --font-size-alarm-management-info-text: .6rem;
+        --modal-alarm-management-width: 50%;
+    }
+
+    .font-alarm-management-summary-name {
+        font-size: .8rem;
+    }
+    .font-alarm-management-summary-cause {
+        font-size: .7rem;
+    }
+    .font-alarm-management-silence-information {
+        font-size: .65rem;
+    }
+    .font-alarm-management-section {
+        font-size: .8rem;
+    }
+    .font-alarm-management-header {
+        font-size: .85rem;
+    }
+    .app-running-button-host,
+    .app-close-button-host {
+        font-size: .8rem;
+    }
+}
+
+@media (min-width: 1536px) {
+    :root {
+        --font-size-alarm-management-validation-error: .6rem;
+        --font-size-alarm-management-info-text: .65rem;
+        --modal-alarm-management-width: 45%;
+    }
+
+    .font-alarm-management-summary-name {
+        font-size: .8rem;
+    }
+    .font-alarm-management-summary-cause {
+        font-size: .7rem;
+    }
+    .font-alarm-management-silence-information {
+        font-size: .65rem;
+    }
+    .font-alarm-management-section {
+        font-size: .8rem;
+    }
+    .font-alarm-management-header {
+        font-size: .85rem;
+    }
+    .app-running-button-host,
+    .app-close-button-host {
+        font-size: .8rem;
+    }
+}
+
+@media (min-width: 1920px) {
+    :root {
+        --font-size-alarm-management-validation-error: .7rem;
+        --font-size-alarm-management-info-text: .75rem;
+        --modal-alarm-management-width: 35%;
+    }
+
+    .font-alarm-management-summary-name {
+        font-size: .85rem;
+    }
+    .font-alarm-management-summary-cause {
+        font-size: .75rem;
+    }
+    .font-alarm-management-silence-information {
+        font-size: .7rem;
+    }
+    .font-alarm-management-section {
+        font-size: .85rem;
+    }
+    .font-alarm-management-header {
+        font-size: .9rem;
+    }
+    .app-running-button-host,
+    .app-close-button-host {
+        font-size: .8rem;
+    }
+}

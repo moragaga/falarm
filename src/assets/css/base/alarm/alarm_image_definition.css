@@ -1,0 +1,1271 @@
+.alarm-image-definition-root {
+    width: 100%;
+    min-height: 100%;
+    padding: 0;
+    background: #f3f4f6;
+}
+
+.alarm-image-definition-page-main {
+    padding: .7rem;
+}
+
+.alarm-image-definition-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: .75rem;
+    padding: 1rem;
+    background: #FFFFFF;
+    border-radius: 10px;
+}
+
+.alarm-image-definition-title {
+    margin: 0;
+    /*font-size: 1.35rem;*/
+    font-weight: 800;
+    color: #212529;
+}
+
+.alarm-image-definition-description {
+    margin-top: .2rem;
+    color: #6c757d;
+    /*font-size: .9rem;*/
+}
+
+.alarm-image-definition-header-actions {
+    display: flex;
+    gap: .5rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.alarm-image-definition-header-button {
+    /*border-radius: .75rem;*/
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.alarm-image-definition-header-button[disabled] {
+    color: rgba(0, 0, 0, .3);
+}
+
+
+.alarm-image-definition-shell {
+    display: grid;
+    /*grid-template-columns: minmax(20rem, 26rem) minmax(0, 1fr);*/
+    gap: 1rem;
+    align-items: start;
+}
+.alarm-image-definition-shell.lock,
+.alarm-image-definition-group-list-wrapper.lock {
+    pointer-events: none;
+    opacity: .5;
+}
+
+.alarm-image-definition-nav-card,
+.alarm-image-definition-images-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 1rem;
+    box-shadow: 0 .35rem 1.1rem rgba(15, 23, 42, .05);
+    overflow: hidden;
+}
+
+.alarm-image-definition-card-header {
+    padding: .95rem 1rem .75rem;
+    border-bottom: 1px solid #edf0f3;
+}
+
+.alarm-image-definition-card-title {
+    /*font-size: .95rem;*/
+    font-weight: 800;
+    color: #212529;
+}
+
+.alarm-image-definition-card-subtitle {
+    margin-top: .15rem;
+    color: #6c757d;
+    /*font-size: .78rem;*/
+    line-height: 1.25;
+}
+
+.alarm-image-definition-search-wrapper {
+    padding: .85rem 1rem;
+    border-bottom: 1px solid #edf0f3;
+}
+
+.alarm-image-definition-search {
+    height: 2.25rem;
+    border-radius: .75rem;
+    /*font-size: .85rem;*/
+}
+
+.alarm-image-definition-group-list-wrapper {
+    padding: .75rem 1rem;
+    /*height: 100%;*/
+}
+
+.alarm-image-definition-group-list {
+    display: flex;
+    flex-direction: column;
+    gap: .55rem;
+}
+
+.alarm-image-definition-group-card {
+    width: 100%;
+    /*min-height: 4.65rem;*/
+    /*padding: .75rem .85rem;*/
+    border: 1px solid #edf0f3;
+    border-radius: .9rem;
+    text-align: left;
+    background: #f8fafc;
+    color: #212529;
+    display: block;
+    cursor: pointer;
+    transition:
+        background-color 160ms ease,
+        border-color 160ms ease,
+        box-shadow 160ms ease,
+        transform 160ms ease;
+}
+
+.alarm-image-definition-group-card:hover {
+    background: #ffffff;
+    border-color: #cfd8e3;
+    box-shadow: 0 .25rem .8rem rgba(15, 23, 42, .06);
+    transform: translateY(-1px);
+}
+
+.alarm-image-definition-group-card.is-selected {
+    background: var(--dark-color);
+    border-color: var(--tertiary-background);
+    box-shadow: 0 0 0 .16rem rgba(255, 255, 255, .12);
+}
+
+.alarm-image-definition-group-card.is-selected .alarm-image-definition-group-title {
+    color: #FFFFFF;
+}
+
+.alarm-image-definition-group-card.is-filler {
+    /*min-height: 4.65rem;*/
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.alarm-image-definition-group-card-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: .65rem;
+}
+
+.alarm-image-definition-group-title {
+    color: #212529;
+    /*font-size: .86rem;*/
+    font-weight: 800;
+    line-height: 1.18;
+    word-break: break-word;
+}
+
+.alarm-image-definition-group-meta {
+    margin-top: .4rem;
+    color: #6c757d;
+    /*font-size: .78rem;*/
+    line-height: 1.2;
+}
+
+/*.alarm-image-definition-group-alarm-icon {*/
+/*    width: 1.35rem;*/
+/*    height: 1.35rem;*/
+/*    border-radius: 999px;*/
+/*    background: #e8f1ff;*/
+/*    color: #0d6efd;*/
+/*    display: inline-flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    font-size: .78rem;*/
+/*    font-weight: 800;*/
+/*    flex: 0 0 auto;*/
+/*}*/
+
+/*.alarm-image-definition-group-alarm-icon.is-empty {*/
+/*    background: #edf0f3;*/
+/*    color: #adb5bd;*/
+/*}*/
+
+.alarm-image-definition-group-empty {
+    /*min-height: 16rem;*/
+    height: 100%;
+    border: 1px dashed #d7dce2;
+    border-radius: .95rem;
+    background: #fafafa;
+    color: #6c757d;
+    display: flex;
+    flex-direction: column;
+    gap: .55rem;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1rem;
+    /*font-size: .85rem;*/
+}
+
+.alarm-image-definition-pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: .75rem;
+    padding: .8rem 1rem;
+    border-top: 1px solid #edf0f3;
+    background: #f8fafc;
+}
+
+.alarm-image-definition-pagination-button {
+    width: 2.1rem;
+    height: 2.1rem;
+    padding: 0;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.alarm-image-definition-page-label {
+    color: #495057;
+    /*font-size: .82rem;*/
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.alarm-image-definition-images-card-body {
+    /*min-height: 33rem;*/
+    padding: 0;
+    /*background: #f8fafc;*/
+    /*border-radius: 10px;*/
+    /*border: 1px solid #edf0f3;*/
+
+}
+
+.alarm-image-definition-panel {
+    display: flex;
+    flex-direction: column;
+    /*min-height: 33rem;*/
+}
+
+.alarm-image-definition-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem 1.1rem;
+    border-bottom: 1px solid #edf0f3;
+    background: #ffffff;
+}
+
+.alarm-image-definition-panel-title-block {
+    min-width: 0;
+}
+
+.alarm-image-definition-panel-title {
+    /*font-size: .98rem;*/
+    font-weight: 800;
+    color: #212529;
+    line-height: 1.2;
+    word-break: break-word;
+}
+
+.alarm-image-definition-panel-subtitle {
+    margin-top: .25rem;
+    color: #6c757d;
+    /*font-size: .82rem;*/
+}
+
+.alarm-image-definition-upload,
+.alarm-image-definition-replace-upload {
+    display: inline-flex;
+    flex: 0 0 auto;
+}
+
+
+
+.alarm-image-definition-add-button {
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.alarm-image-definition-image-grid {
+    display: grid;
+    /*grid-template-columns: repeat(3, minmax(0, 1fr));*/
+    grid-template-rows: .5fr;
+    gap: .85rem;
+    padding: 1rem;
+    overflow-y: auto;
+    height: 100%;
+}
+
+.alarm-image-definition-image-grid:has(
+    .alarm-image-definition-empty-images
+) {
+    grid-template-rows: 1fr;
+}
+
+.alarm-image-definition-image-card {
+    min-width: 0;
+    border: 1px solid #edf0f3;
+    border-radius: 1rem;
+    background: #ffffff;
+    padding: .75rem;
+    box-shadow: 0 .25rem .75rem rgba(15, 23, 42, .04);
+}
+
+.alarm-image-definition-image-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: .5rem;
+    margin-bottom: .65rem;
+}
+
+.alarm-image-definition-image-label {
+    color: #6c757d;
+    /*font-size: .88rem;*/
+    font-weight: 700;
+}
+
+.alarm-image-definition-thumb-frame {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    border-radius: .8rem;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .5rem;
+}
+
+.alarm-image-definition-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.alarm-image-definition-thumb-placeholder {
+    color: #adb5bd;
+    /*font-size: .8rem;*/
+}
+
+.alarm-image-definition-image-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .45rem;
+    margin-top: .75rem;
+    align-items: center;
+}
+
+.alarm-image-definition-icon-button {
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    border-radius: .65rem;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.alarm-image-definition-action-button {
+    /*font-size: .78rem;*/
+    font-weight: 700;
+}
+
+.alarm-image-definition-action-button.is-danger {
+    color: #dc3545;
+}
+
+.alarm-image-definition-empty-panel,
+.alarm-image-definition-empty-images {
+    border: 1px dashed #d7dce2;
+    border-radius: 1rem;
+    color: #6c757d;
+    background: #fafafa;
+    display: flex;
+    flex-direction: column;
+    gap: .55rem;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1rem;
+}
+
+.alarm-image-definition-empty-images {
+    grid-column: 1 / -1;
+    /*min-height: 18rem;*/
+    height: 100%;
+}
+
+.alarm-image-definition-panel-empty-icon {
+    color: #adb5bd;
+    /*font-size: 1.35rem;*/
+}
+
+.alarm-image-definition-panel-empty-help {
+    color: #adb5bd;
+    /*font-size: .82rem;*/
+}
+
+.alarm-image-definition-group-card-wrapper {
+    width: 100%;
+}
+
+.alarm-image-definition-group-card-wrapper.is-filler {
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.alarm-image-definition-monitor {
+    display: grid;
+    /*grid-template-columns: repeat(5, minmax(0, 1fr));*/
+    gap: .5rem;
+    margin-bottom: .75rem;
+}
+
+.alarm-image-definition-monitor-card {
+    min-height: 5.4rem;
+    min-width: calc(100% / 5);
+    padding: .85rem .95rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 1rem;
+    background: #ffffff;
+    box-shadow: 0 .25rem .8rem rgba(15, 23, 42, .04);
+}
+
+.alarm-image-definition-monitor-title-badge {
+    display: inline-flex;
+    /*width: .7rem;*/
+    /*height: .7rem;*/
+    border-radius: 999px;
+    /*margin-top: .15rem;*/
+}
+
+.alarm-image-definition-monitor-title-badge.is-info {
+    background: #b0f1e7;
+    border-color: #82f8e2;
+}
+
+.alarm-image-definition-monitor-title-badge.is-danger {
+    background: #f1b0b7;
+    border-color: #fd99a3;
+}
+
+.alarm-image-definition-monitor-title-badge.is-success {
+    background: #b9f1b0;
+    border-color: #92f181;
+}
+
+.alarm-image-definition-monitor-title-badge.is-warning {
+    background: #f1e8b0;
+    border-color: #efc155;
+}
+
+.alarm-image-definition-monitor-title {
+    display: flex;
+    align-items: center;
+    color: #6c757d;
+    /*font-size: .76rem;*/
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .02em;
+    gap: .3rem;
+}
+
+.alarm-image-definition-monitor-value {
+    margin-top: .35rem;
+    color: #212529;
+    /*font-size: .95rem;*/
+    font-weight: 800;
+    line-height: 1.2;
+    word-break: break-word;
+}
+
+.alarm-image-definition-monitor-subtitle {
+    margin-top: .25rem;
+    color: #6c757d;
+    /*font-size: .78rem;*/
+    line-height: 1.2;
+    word-break: break-word;
+}
+
+@media only screen and (min-width: 350px) {
+        .alarm-image-definition-loader {
+        min-height: auto;
+    }
+    .alarm-image-definition-group-list-wrapper {
+        min-height: 28.95rem;
+    }
+    .alarm-image-definition-panel {
+        min-height: auto;
+    }
+
+    .alarm-image-definition-title {
+        font-size: 1rem;
+    }
+    .alarm-image-definition-description {
+        font-size: .7rem;
+    }
+
+    .alarm-image-definition-monitor-title-badge {
+        width: .6rem;
+        height: .6rem;
+        margin-top: .1rem;
+    }
+
+    .alarm-image-definition-monitor-title {
+        font-size: .55rem;
+    }
+
+    .alarm-image-definition-monitor-value {
+        font-size: .7rem;
+    }
+
+    .alarm-image-definition-monitor-subtitle {
+        font-size: .55rem;
+    }
+
+    .alarm-image-definition-card-title {
+        font-size: .7rem;
+    }
+
+    .alarm-image-definition-card-subtitle {
+        font-size: .55rem;
+    }
+
+    .alarm-image-definition-group-title {
+        font-size: .65rem;
+    }
+
+    .alarm-image-definition-group-meta {
+        font-size: .55rem;
+    }
+
+    .alarm-image-definition-panel-title {
+        font-size: .7rem;
+    }
+
+    .alarm-image-definition-panel-subtitle {
+        font-size: .55rem;
+    }
+    .alarm-image-definition-panel-empty-icon {
+        font-size: 1.4rem;
+    }
+    .alarm-image-definition-panel-empty-text {
+        font-size: .7rem;
+    }
+    .alarm-image-definition-panel-empty-help {
+        font-size: .64rem;
+    }
+    .alarm-image-definition-image-label,
+    .alarm-image-definition-image-badge {
+        font-size: .6rem;
+    }
+    .alarm-image-definition-search {
+        height: 2.25rem;
+        border-radius: .75rem;
+        font-size: .75rem;
+    }
+    .alarm-image-definition-action-button {
+        font-size: .65rem;
+    }
+    .alarm-image-definition-group-empty {
+        font-size: .85rem;
+    }
+    .alarm-image-definition-page-label {
+        font-size: .65rem;
+    }
+
+    .alarm-image-definition-thumb-placeholder {
+        font-size: .7rem;
+    }
+
+    .alarm-image-definition-add-button,
+    .alarm-image-definition-header-button {
+        font-size: .7rem;
+    }
+
+    .alarm-image-definition-group-card,
+    .alarm-image-definition-group-card.is-filler {
+        min-height: 2.95rem;
+        padding: .5rem .85rem;
+    }
+
+    .alarm-image-definition-page-header  {
+        flex-direction: column;
+    }
+    .alarm-image-definition-header-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+    .alarm-image-definition-monitor {
+        grid-template-columns: 1fr;
+    }
+    .alarm-image-definition-shell {
+        grid-template-columns: 1fr;
+    }
+    .alarm-image-definition-image-grid {
+        grid-template-columns: 1fr;
+    }
+    .alarm-image-definition-panel-header {
+        flex-direction: column;
+    }
+
+    .alarm-image-definition-upload-wrapper,
+    .alarm-image-definition-upload,
+    .alarm-image-definition-upload .btn{
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 480px) {
+    .alarm-image-definition-loader {
+        min-height: auto;
+    }
+    .alarm-image-definition-group-list-wrapper {
+        min-height: 28.95rem;
+    }
+    .alarm-image-definition-panel {
+        min-height: auto;
+    }
+
+    .alarm-image-definition-title {
+        font-size: 1rem;
+    }
+    .alarm-image-definition-description {
+        font-size: .7rem;
+    }
+
+    .alarm-image-definition-monitor-title-badge {
+        width: .6rem;
+        height: .6rem;
+        margin-top: .1rem;
+    }
+
+    .alarm-image-definition-monitor-title {
+        font-size: .55rem;
+    }
+
+    .alarm-image-definition-monitor-value {
+        font-size: .7rem;
+    }
+
+    .alarm-image-definition-monitor-subtitle {
+        font-size: .55rem;
+    }
+
+    .alarm-image-definition-card-title {
+        font-size: .7rem;
+    }
+
+    .alarm-image-definition-card-subtitle {
+        font-size: .55rem;
+    }
+
+    .alarm-image-definition-group-title {
+        font-size: .65rem;
+    }
+
+    .alarm-image-definition-group-meta {
+        font-size: .55rem;
+    }
+
+    .alarm-image-definition-panel-title {
+        font-size: .7rem;
+    }
+
+    .alarm-image-definition-panel-subtitle {
+        font-size: .55rem;
+    }
+    .alarm-image-definition-panel-empty-icon {
+        font-size: 1.4rem;
+    }
+    .alarm-image-definition-panel-empty-text {
+        font-size: .7rem;
+    }
+    .alarm-image-definition-panel-empty-help {
+        font-size: .64rem;
+    }
+    .alarm-image-definition-image-label,
+    .alarm-image-definition-image-badge {
+        font-size: .6rem;
+    }
+    .alarm-image-definition-search {
+        height: 2.25rem;
+        border-radius: .75rem;
+        font-size: .75rem;
+    }
+    .alarm-image-definition-action-button {
+        font-size: .65rem;
+    }
+    .alarm-image-definition-group-empty {
+        font-size: .85rem;
+    }
+    .alarm-image-definition-page-label {
+        font-size: .65rem;
+    }
+
+    .alarm-image-definition-thumb-placeholder {
+        font-size: .7rem;
+    }
+
+    .alarm-image-definition-add-button,
+    .alarm-image-definition-header-button {
+        font-size: .7rem;
+    }
+
+    .alarm-image-definition-group-card,
+    .alarm-image-definition-group-card.is-filler {
+        min-height: 2.95rem;
+        padding: .5rem .85rem;
+    }
+
+    .alarm-image-definition-page-header  {
+        flex-direction: column;
+    }
+    .alarm-image-definition-header-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+    .alarm-image-definition-monitor {
+        grid-template-columns: 1fr;
+    }
+    .alarm-image-definition-shell {
+        grid-template-columns: 1fr;
+    }
+    .alarm-image-definition-image-grid {
+        grid-template-columns: 1fr;
+    }
+    .alarm-image-definition-panel-header {
+        flex-direction: column;
+    }
+
+    .alarm-image-definition-upload-wrapper,
+    .alarm-image-definition-upload,
+    .alarm-image-definition-upload .btn{
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 1280px) {
+    .alarm-image-definition-loader {
+        min-height: 46.646rem;
+    }
+    .alarm-image-definition-group-list-wrapper {
+        min-height: 28.95rem;
+    }
+    .alarm-image-definition-panel {
+        min-height: 40.371rem;
+    }
+
+    .alarm-image-definition-title {
+        font-size: 1rem;
+    }
+    .alarm-image-definition-description {
+        font-size: .7rem;
+    }
+
+    .alarm-image-definition-monitor-title-badge {
+        width: .6rem;
+        height: .6rem;
+        margin-top: .1rem;
+    }
+
+    .alarm-image-definition-monitor-title {
+        font-size: .55rem;
+    }
+
+    .alarm-image-definition-monitor-value {
+        font-size: .7rem;
+    }
+
+    .alarm-image-definition-monitor-subtitle {
+        font-size: .55rem;
+    }
+
+    .alarm-image-definition-card-title {
+        font-size: .7rem;
+    }
+
+    .alarm-image-definition-card-subtitle {
+        font-size: .55rem;
+    }
+
+    .alarm-image-definition-group-title {
+        font-size: .65rem;
+    }
+
+    .alarm-image-definition-group-meta {
+        font-size: .55rem;
+    }
+
+    .alarm-image-definition-panel-title {
+        font-size: .7rem;
+    }
+
+    .alarm-image-definition-panel-subtitle {
+        font-size: .55rem;
+    }
+    .alarm-image-definition-panel-empty-icon {
+        font-size: 1.4rem;
+    }
+    .alarm-image-definition-panel-empty-text {
+        font-size: .7rem;
+    }
+    .alarm-image-definition-panel-empty-help {
+        font-size: .64rem;
+    }
+    .alarm-image-definition-image-label,
+    .alarm-image-definition-image-badge {
+        font-size: .6rem;
+    }
+    .alarm-image-definition-search {
+        height: 2.25rem;
+        border-radius: .75rem;
+        font-size: .75rem;
+    }
+    .alarm-image-definition-action-button {
+        font-size: .65rem;
+    }
+    .alarm-image-definition-group-empty {
+        font-size: .85rem;
+    }
+    .alarm-image-definition-page-label {
+        font-size: .65rem;
+    }
+
+    .alarm-image-definition-thumb-placeholder {
+        font-size: .7rem;
+    }
+
+    .alarm-image-definition-add-button,
+    .alarm-image-definition-header-button {
+        font-size: .7rem;
+    }
+
+    .alarm-image-definition-group-card,
+    .alarm-image-definition-group-card.is-filler {
+        min-height: 2.95rem;
+        padding: .5rem .85rem;
+    }
+
+    .alarm-image-definition-page-header  {
+        flex-direction: row;
+    }
+    .alarm-image-definition-header-actions {
+        flex-direction: row;
+        width: auto;
+    }
+    .alarm-image-definition-monitor {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+    .alarm-image-definition-shell {
+        grid-template-columns: minmax(20rem, 26rem) minmax(0, 1fr);
+    }
+    .alarm-image-definition-image-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .alarm-image-definition-panel-header {
+        flex-direction: row;
+    }
+
+    .alarm-image-definition-upload-wrapper,
+    .alarm-image-definition-upload,
+    .alarm-image-definition-upload .btn{
+        width: auto;
+    }
+}
+
+@media only screen and (min-width: 1366px) {
+    .alarm-image-definition-loader {
+        min-height: 50.291rem;
+    }
+    .alarm-image-definition-group-list-wrapper {
+        min-height: 32.458rem;
+    }
+    .alarm-image-definition-panel {
+        min-height: 44.017rem;
+    }
+
+    .alarm-image-definition-title {
+        font-size: .95rem;
+    }
+    .alarm-image-definition-description {
+        font-size: .65rem;
+    }
+
+    .alarm-image-definition-monitor-title-badge {
+        width: .6rem;
+        height: .6rem;
+        margin-top: .1rem;
+    }
+
+    .alarm-image-definition-monitor-title {
+        font-size: .6rem;
+    }
+
+    .alarm-image-definition-monitor-value {
+        font-size: .75rem;
+    }
+
+    .alarm-image-definition-monitor-subtitle {
+        font-size: .6rem;
+    }
+
+    .alarm-image-definition-card-title {
+        font-size: .75rem;
+    }
+
+    .alarm-image-definition-card-subtitle {
+        font-size: .6rem;
+    }
+
+    .alarm-image-definition-group-title {
+        font-size: .7rem;
+    }
+
+    .alarm-image-definition-group-meta {
+        font-size: .6rem;
+    }
+
+    .alarm-image-definition-panel-title {
+        font-size: .75rem;
+    }
+
+    .alarm-image-definition-panel-subtitle {
+        font-size: .6rem;
+    }
+    .alarm-image-definition-panel-empty-icon {
+        font-size: 1.4rem;
+    }
+    .alarm-image-definition-panel-empty-text {
+        font-size: .7rem;
+    }
+    .alarm-image-definition-panel-empty-help {
+        font-size: .64rem;
+    }
+    .alarm-image-definition-image-label,
+    .alarm-image-definition-image-badge {
+        font-size: .65rem;
+    }
+    .alarm-image-definition-search {
+        height: 2.25rem;
+        border-radius: .75rem;
+        font-size: .85rem;
+    }
+    .alarm-image-definition-action-button {
+        font-size: .7rem;
+    }
+    .alarm-image-definition-group-empty {
+        font-size: .85rem;
+    }
+    .alarm-image-definition-page-label {
+        font-size: .7rem;
+    }
+
+    .alarm-image-definition-thumb-placeholder {
+        font-size: .7rem;
+    }
+
+    .alarm-image-definition-add-button,
+    .alarm-image-definition-header-button {
+        font-size: .75rem;
+    }
+
+    .alarm-image-definition-group-card,
+    .alarm-image-definition-group-card.is-filler {
+        min-height: 3.389rem;
+        padding: .6rem .85rem;
+    }
+
+    .alarm-image-definition-page-header  {
+        flex-direction: row;
+    }
+    .alarm-image-definition-header-actions {
+        flex-direction: row;
+        width: auto;
+    }
+    .alarm-image-definition-monitor {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+    .alarm-image-definition-shell {
+        grid-template-columns: minmax(20rem, 26rem) minmax(0, 1fr);
+    }
+    .alarm-image-definition-image-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .alarm-image-definition-panel-header {
+        flex-direction: row;
+    }
+
+    .alarm-image-definition-upload-wrapper,
+    .alarm-image-definition-upload,
+    .alarm-image-definition-upload .btn{
+        width: auto;
+    }
+}
+
+@media only screen and (min-width: 1536px) {
+    .alarm-image-definition-loader {
+        min-height: 52.835rem;
+    }
+    .alarm-image-definition-group-list-wrapper {
+        min-height: 34.864rem;
+    }
+    .alarm-image-definition-panel {
+        min-height: 46.561rem;
+    }
+
+    .alarm-image-definition-title {
+        font-size: 1.1rem;
+    }
+    .alarm-image-definition-description {
+        font-size: .8rem;
+    }
+
+    .alarm-image-definition-monitor-title-badge {
+        width: .7rem;
+        height: .7rem;
+        margin-top: .1rem;
+    }
+
+    .alarm-image-definition-monitor-title {
+        font-size: .65rem;
+    }
+
+    .alarm-image-definition-monitor-value {
+        font-size: .8rem;
+    }
+
+    .alarm-image-definition-monitor-subtitle {
+        font-size: .65rem;
+    }
+
+    .alarm-image-definition-card-title {
+        font-size: .8rem;
+    }
+
+    .alarm-image-definition-card-subtitle {
+        font-size: .65rem;
+    }
+
+    .alarm-image-definition-group-title {
+        font-size: .75rem;
+    }
+
+    .alarm-image-definition-group-meta {
+        font-size: .65rem;
+    }
+
+    .alarm-image-definition-panel-title {
+        font-size: .85rem;
+    }
+
+    .alarm-image-definition-panel-subtitle {
+        font-size: .7rem;
+    }
+    .alarm-image-definition-panel-empty-icon {
+        font-size: 1.5rem;
+    }
+    .alarm-image-definition-panel-empty-text {
+        font-size: .8rem;
+    }
+    .alarm-image-definition-panel-empty-help {
+        font-size: .72rem;
+    }
+    .alarm-image-definition-image-label,
+    .alarm-image-definition-image-badge {
+        font-size: .75rem;
+    }
+    .alarm-image-definition-search {
+        height: 2.25rem;
+        border-radius: .75rem;
+        font-size: .75rem;
+    }
+    .alarm-image-definition-action-button {
+        font-size: .78rem;
+    }
+    .alarm-image-definition-group-empty {
+        font-size: .85rem;
+    }
+    .alarm-image-definition-page-label {
+        font-size: .75rem;
+    }
+
+    .alarm-image-definition-thumb-placeholder {
+        font-size: .7rem;
+    }
+
+    .alarm-image-definition-add-button,
+    .alarm-image-definition-header-button {
+        font-size: .85rem;
+    }
+
+    .alarm-image-definition-group-card,
+    .alarm-image-definition-group-card.is-filler {
+        min-height: 3.689rem;
+        padding: .75rem .85rem;
+    }
+
+    .alarm-image-definition-page-header  {
+        flex-direction: row;
+    }
+    .alarm-image-definition-header-actions {
+        flex-direction: row;
+        width: auto;
+    }
+    .alarm-image-definition-monitor {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+    .alarm-image-definition-shell {
+        grid-template-columns: minmax(20rem, 26rem) minmax(0, 1fr);
+    }
+    .alarm-image-definition-image-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .alarm-image-definition-panel-header {
+        flex-direction: row;
+    }
+
+    .alarm-image-definition-upload-wrapper,
+    .alarm-image-definition-upload,
+    .alarm-image-definition-upload .btn{
+        width: auto;
+    }
+}
+
+@media only screen and (min-width: 1920px) {
+    .alarm-image-definition-loader {
+        min-height: 61.142rem;
+    }
+    .alarm-image-definition-group-list-wrapper {
+        min-height: 42.544rem;
+    }
+    .alarm-image-definition-panel {
+        min-height: 54.628rem;
+    }
+
+    .alarm-image-definition-title {
+        font-size: 1.35rem;
+    }
+    .alarm-image-definition-description {
+        font-size: .9rem;
+    }
+
+    .alarm-image-definition-monitor-title-badge {
+        width: .7rem;
+        height: .7rem;
+        margin-top: .2rem;
+    }
+
+    .alarm-image-definition-monitor-title {
+        font-size: .76rem;
+    }
+
+    .alarm-image-definition-monitor-value {
+        font-size: .95rem;
+    }
+
+    .alarm-image-definition-monitor-subtitle {
+        font-size: .78rem;
+    }
+
+    .alarm-image-definition-card-title {
+        font-size: .95rem;
+    }
+
+    .alarm-image-definition-card-subtitle {
+        font-size: .78rem;
+    }
+
+    .alarm-image-definition-group-title {
+        font-size: .86rem;
+    }
+
+    .alarm-image-definition-group-meta {
+        font-size: .78rem;
+    }
+
+    .alarm-image-definition-panel-title {
+        font-size: .98rem;
+    }
+
+    .alarm-image-definition-panel-subtitle {
+        font-size: .82rem;
+    }
+    .alarm-image-definition-panel-empty-icon {
+        font-size: 1.6rem;
+    }
+    .alarm-image-definition-panel-empty-text {
+        font-size: 1rem;
+    }
+    .alarm-image-definition-panel-empty-help {
+        font-size: .82rem;
+    }
+    .alarm-image-definition-image-label,
+    .alarm-image-definition-image-badge {
+        font-size: .88rem;
+    }
+    .alarm-image-definition-search {
+        height: 2.25rem;
+        border-radius: .75rem;
+        font-size: .85rem;
+    }
+    .alarm-image-definition-action-button {
+        font-size: .78rem;
+    }
+    .alarm-image-definition-group-empty {
+        font-size: .85rem;
+    }
+    .alarm-image-definition-page-label {
+        font-size: .82rem;
+    }
+
+    .alarm-image-definition-thumb-placeholder {
+        font-size: .8rem;
+    }
+
+    .alarm-image-definition-add-button,
+    .alarm-image-definition-header-button {
+        font-size: 1rem;
+    }
+
+    .alarm-image-definition-group-card,
+    .alarm-image-definition-group-card.is-filler {
+        min-height: 4.65rem;
+        padding: .75rem .85rem;
+    }
+
+    .alarm-image-definition-page-header  {
+        flex-direction: row;
+    }
+    .alarm-image-definition-header-actions {
+        flex-direction: row;
+        width: auto;
+    }
+    .alarm-image-definition-monitor {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+    .alarm-image-definition-shell {
+        grid-template-columns: minmax(20rem, 26rem) minmax(0, 1fr);
+    }
+    .alarm-image-definition-image-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .alarm-image-definition-panel-header {
+        flex-direction: row;
+    }
+
+    .alarm-image-definition-upload-wrapper,
+    .alarm-image-definition-upload,
+    .alarm-image-definition-upload .btn{
+        width: auto;
+    }
+}

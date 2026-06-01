@@ -1,0 +1,129 @@
+.loading-component-spinner .dash-spinner div {
+    background-color: var(--background) !important;
+}
+
+.modal-background {
+    background: linear-gradient(
+        180deg,
+        rgba(5, 4, 4, .44) 0%,
+        rgba(5, 4, 4, .34) 100%
+    );
+}
+
+.app-running-button-host {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    --bs-btn-bg: transparent;
+    --bs-btn-color: var(--dark-color);
+    --bs-btn-border-color: var(--secondary-background);
+
+    --bs-btn-hover-bg: var(--dark-color);
+    --bs-btn-hover-color: var(--secondary-background);
+    --bs-btn-hover-border-color: var(--dark-color);
+
+    --bs-btn-active-bg: var(--dark-color);
+    --bs-btn-active-color: var(--secondary-background);
+    --bs-btn-active-border-color: var(--dark-color);
+
+    --bs-btn-focus-shadow-rgb: 0, 0, 0;
+
+    margin: .25rem 0;
+    border-radius: .5rem;
+    background-color: var(--dark-color);
+    color: var(--secondary-background);
+    outline: none;
+    border: 1px solid var(--dark-color);
+    box-shadow: none;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.app-running-button-host:focus,
+.app-running-button-host:focus-visible,
+.app-running-button-host:hover,
+.app-running-button-host:active,
+.app-running-button-host:checked,
+.app-running-button-host:target,
+.btn.app-running-button-host:first-child:active {
+    background-color: var(--dark-color);
+    color: #FFFFFF;
+    border-color: var(--secondary-background);
+    outline: none;
+    box-shadow: none;
+}
+
+.app-running-button-host .app-running-button-content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.app-running-button-content {
+    display: inline-grid;
+    grid-template-columns: 1rem auto;
+    align-items: center;
+    justify-content: center;
+    column-gap: 0.35rem;
+    width: 100%;
+    min-height: 1.25rem;
+    line-height: 1.25rem;
+    vertical-align: middle;
+}
+
+.app-running-button-spinner {
+    width: 0.85rem;
+    height: 0.85rem;
+    border-width: 0.12em;
+    justify-self: end;
+    align-self: center;
+}
+
+.app-running-button-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+    align-self: center;
+    height: 1.25rem;
+    line-height: 1.25rem;
+    white-space: nowrap;
+}
+
+@media only screen and (min-width: 350px) {
+    .invalid-value-icon {
+        width: .7rem;
+    }
+}
+
+@media only screen and (min-width: 480px) {
+    .invalid-value-icon {
+        width: .7rem;
+    }
+}
+
+@media only screen and (min-width: 1280px) {
+    .invalid-value-icon {
+        width: .7rem;
+    }
+}
+
+@media only screen and (min-width: 1366px) {
+    .invalid-value-icon {
+        width: .7rem;
+    }
+}
+
+@media only screen and (min-width: 1536px) {
+    .invalid-value-icon {
+        width: .75rem;
+    }
+}
+
+@media only screen and (min-width: 1920px) {
+    .invalid-value-icon {
+        width: .95rem;
+    }
+}

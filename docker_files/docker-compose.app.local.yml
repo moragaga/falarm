@@ -1,0 +1,26 @@
+name: ada-flotacion-selectiva-web
+
+services:
+  ada-flotacion-selectiva-web:
+    container_name: ada-flotacion-selectiva-app
+    build:
+      context: ..
+    image: ada-flotacion-selectiva-web:latest
+    environment:
+      # COMMENT TO USE REMOTE COSMOS DB
+      COSMOS_ACCOUNT_URI: http://cosmosdb-local-runtime:8081/
+    ports:
+      - "8000:8000"
+    restart: "no"
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1430m
+    networks:
+      - ada_n1_flotacion_selectiva_network
+
+networks:
+  ada_n1_flotacion_selectiva_network:
+    external: true
+    name: cosmosdb-local-runtime-network

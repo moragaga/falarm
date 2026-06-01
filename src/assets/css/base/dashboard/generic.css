@@ -1,0 +1,229 @@
+.unexpected-icon {
+    width: 1rem;
+    height: 1rem;
+}
+
+.app-popover-shell {
+    max-width: 500px;
+}
+
+.app-popover-shell {
+    border-radius: 12px;
+}
+
+.app-popover-shell .popover-body {
+    background: var(--secondary-background);
+    border-radius: 12px;
+    padding: .5rem 1rem;
+    /*border: 1px solid var(--background);*/
+}
+
+.app-popover-shell .popover-arrow::after,
+.app-popover-shell .popover-arrow::before {
+    border-left-color: var(--secondary-background);
+    border-right-color: var(--secondary-background);
+}
+
+@media only screen and (min-width: 350px) {
+    .font-size-100 {
+        font-size: .75rem;
+    }
+    .font-size-200 {
+        font-size: .65rem;
+    }
+    .font-size-300 {
+        font-size: .6rem;
+    }
+    .font-size-400 {
+        font-size: .5rem;
+    }
+
+    .display-card-content-wrapper
+    .card-body {
+        padding-top: 0.75rem;
+        padding-bottom: 0.45rem;
+    }
+    .display-card-content-wrapper
+    .display-card-footer {
+        font-size: .7rem;
+    }
+    .component-master-title {
+        font-size: .8rem;
+    }
+
+    .invalid-value-icon.graph {
+        height: 1rem;
+        margin-top: -.3rem
+    }
+}
+
+
+@media only screen and (min-width: 480px) {
+    .font-size-100 {
+        font-size: .75rem;
+    }
+    .font-size-200 {
+        font-size: .65rem;
+    }
+    .font-size-300 {
+        font-size: .6rem;
+    }
+    .font-size-400 {
+        font-size: .5rem;
+    }
+
+    .display-card-content-wrapper
+    .card-body {
+        padding-top: 0.75rem;
+        padding-bottom: 0.45rem;
+    }
+    .display-card-content-wrapper
+    .display-card-footer {
+        font-size: .8rem;
+    }
+    .component-master-title {
+        font-size: .8rem;
+    }
+
+    .invalid-value-icon.graph {
+        height: 1rem;
+        margin-top: -.3rem
+    }
+
+}
+
+/*@media only screen and (min-width: 768px) {}*/
+/*@media only screen and (min-width: 1024px) {*/
+/*}*/
+
+@media only screen and (min-width: 1280px) {
+    .font-size-100 {
+        font-size: .49rem;
+    }
+    .font-size-200 {
+        font-size: .44rem;
+    }
+    .font-size-300 {
+        font-size: .41rem;
+    }
+    .font-size-400 {
+        font-size: .34rem;
+    }
+
+    .display-card-content-wrapper
+    .card-body {
+        padding-top: 0.5rem;
+        padding-bottom: 0.4rem;
+    }
+    .display-card-content-wrapper
+    .display-card-footer {
+        font-size: .45rem;
+    }
+    .component-master-title {
+        font-size: .55rem;
+    }
+
+    .invalid-value-icon.graph {
+        height: 1rem;
+        margin-top: -.3rem
+    }
+}
+
+@media only screen and (min-width: 1366px) {
+    .font-size-100 {
+        font-size: .5rem;
+    }
+    .font-size-200 {
+        font-size: .45rem;
+    }
+    .font-size-300 {
+        font-size: .4rem;
+    }
+    .font-size-400 {
+        font-size: .35rem;
+    }
+
+    .display-card-content-wrapper
+    .card-body {
+        padding-top: 0.4rem;
+        padding-bottom: 0.15rem;
+    }
+    .display-card-content-wrapper
+    .display-card-footer {
+        font-size: .45rem;
+    }
+    .component-master-title {
+        font-size: .6rem;
+    }
+
+    .invalid-value-icon.graph {
+        height: 1rem;
+        margin-top: -.3rem
+    }
+}
+
+@media only screen and (min-width: 1536px) {
+    .font-size-100 {
+        font-size: .58rem;
+    }
+    .font-size-200 {
+        font-size: .53rem;
+    }
+    .font-size-300 {
+        font-size: .48rem;
+    }
+    .font-size-400 {
+        font-size: .4rem;
+    }
+
+    .display-card-content-wrapper
+    .card-body {
+        padding-top: 0.4rem;
+        padding-bottom: 0.15rem;
+    }
+    .display-card-content-wrapper
+    .display-card-footer {
+        font-size: .55rem;
+    }
+    .component-master-title {
+        font-size: .65rem;
+    }
+
+    .invalid-value-icon.graph {
+        height: 1rem;
+        margin-top: -.3rem
+    }
+}
+
+@media only screen and (min-width: 1920px) {
+    .font-size-100 {
+        font-size: .8rem;
+    }
+    .font-size-200 {
+        font-size: .7rem;
+    }
+    .font-size-300 {
+        font-size: .65rem;
+    }
+    .font-size-400 {
+        font-size: .55rem;
+    }
+
+    .display-card-content-wrapper
+    .card-body {
+        padding-top: 0.6rem;
+        padding-bottom: 0.25rem;
+    }
+    .display-card-content-wrapper
+    .display-card-footer {
+        font-size: .7rem;
+    }
+    .component-master-title {
+        font-size: .8rem;
+    }
+
+    .invalid-value-icon.graph {
+        height: 1rem;
+        margin-top: -.3rem
+    }
+}

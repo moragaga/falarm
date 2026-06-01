@@ -1,0 +1,1419 @@
+:root {
+    --active-content-height: calc(5rem + 2.219rem + 4rem + (4.75rem * 10) + .5rem);
+}
+
+.active-alarms-modal-body {
+    padding: 1rem .5rem;
+    background: #f3f3f3;
+}
+
+.active-alarms-modal-title {
+    margin: 0;
+    font-weight: 800;
+    color: var(--dark-color, #111827);
+}
+
+.active-alarms-modal-subtitle {
+    margin-top: 0.25rem;
+    font-weight: 500;
+    color: rgba(23, 33, 58, 0.72);
+}
+
+.active-alarms-modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    background: #FFFFFF;
+    border: 1px solid var(--tertiary-background);
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.active-alarms-modal-updated-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-top: 1rem;
+    color: rgba(23, 33, 58, 0.72);
+}
+
+.active-alarms-modal-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.active-alarms-refresh-button {
+    min-height: 42px;
+    padding-inline: 1rem;
+    border: 1px solid rgba(15, 23, 42, 0.16);
+    border-radius: 0.5rem;
+    font-weight: 700;
+    color: var(--dark-color, #111827);
+    background: #ffffff;
+}
+
+.active-alarms-modal-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: #FFFFFF;
+    border: 1px solid var(--tertiary-background);
+    border-radius: 10px;
+}
+
+.active-alarms-modal .active-alarms-control select > option[hidden] {
+    height: 0 !important;
+    width: 0 !important;
+    display: none !important;
+}
+
+.active-alarms-control {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.active-alarms-control:has(
+    .active-alarms-modal-sort,
+    .active-alarms-modal-filter
+) {
+    font-weight: 700;
+}
+
+.active-alarms-control-label {
+    margin: 0;
+    color: var(--dark-color);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding-left: .2rem;
+}
+
+.active-alarms-modal-search .form-control,
+.active-alarms-modal-search .input-group-text,
+.active-alarms-modal-filter,
+.active-alarms-modal-sort {
+    min-height: 35px;
+    border-color: rgba(15, 23, 42, 0.16);
+    background: #ffffff;
+    color: var(--dark-color, #111827);
+    box-shadow: none;
+}
+
+.active-alarms-close-button {
+    min-width: 42px;
+    min-height: 42px;
+    padding: 0;
+    border: 0;
+    color: var(--dark-color, #111827);
+    text-decoration: none;
+}
+
+.active-alarms-close-button:hover,
+.active-alarms-close-button:focus {
+    color: var(--dark-color, #111827);
+    background: rgba(15, 23, 42, 0.06);
+}
+
+.active-alarms-panel-card {
+    overflow: hidden;
+    border: 1px solid rgba(15, 23, 42, 0.14);
+    border-radius: 0.85rem;
+    background: #ffffff;
+}
+
+.active-alarms-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.1rem 1.15rem;
+    background: #ffffff;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.12);
+}
+
+.active-alarms-panel-title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    min-width: 0;
+    width: 100%;
+}
+
+.active-alarms-panel-icon {
+    color: var(--dark-color);
+}
+
+.active-alarms-panel-title {
+    font-weight: 800;
+    color: var(--dark-color, #111827);
+}
+
+.active-alarms-panel-subtitle {
+    color: rgba(23, 33, 58, 0.64);
+}
+
+.active-alarms-panel-count {
+    flex: 0 0 auto;
+    padding: 0.4rem 0.65rem;
+    border-radius: 999px;
+    background: rgba(255, 0, 42, 0.08);
+    color: #ef002a;
+    font-weight: 800;
+}
+
+
+.active-alarms-table-scroll {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    flex: 1 1 auto;
+    overflow: hidden;
+    background: #ffffff;
+}
+
+.active-alarms-table-header {
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.1);
+    font-size: 0.78rem;
+    font-weight: 800;
+    color: rgba(23, 33, 58, 0.72);
+    background: rgba(248, 250, 252, 0.9);
+    flex: 0 0 auto;
+}
+
+.active-alarms-internal-loader:has(
+    .active-alarms-empty-state
+) {
+    margin: auto;
+}
+
+.active-alarms-internal-loader {
+    position: relative;
+}
+
+.active-alarms-list-shell {
+    display: flex;
+    flex: 1 1 auto;
+    overflow: hidden;
+    background: #ffffff;
+    min-height: 0;
+}
+
+.active-alarms-list {
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.active-alarms-internal-loader {
+    display: flex;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.active-alarm-row {
+    min-height: 68px;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.1);
+}
+
+.active-alarm-row-filler {
+    min-height: 4.75rem;
+    pointer-events: none;
+    background: #ffffff;
+}
+
+.active-alarm-row.active-alarm-row-riesgo[open] {
+    background: rgba(255, 250, 138, 0.05);
+}
+.active-alarm-row.active-alarm-row-impacto[open] {
+    background: rgba(245, 39, 39, 0.05)
+}
+
+.active-alarm-row-summary {
+    min-height: 68px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    list-style: none;
+}
+
+.active-alarm-row-summary::-webkit-details-marker {
+    display: none;
+}
+
+.active-alarm-title {
+    color: var(--dark-color, #111827);
+    font-weight: 800;
+    line-height: 1.2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.active-alarm-kind {
+    margin-top: 0.25rem;
+    color: rgba(23, 33, 58, 0.72);
+    font-weight: 500;
+}
+
+.active-alarm-kind-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.active-alarm-start {
+    color: var(--dark-color, #111827);
+    font-weight: 800;
+}
+
+.active-alarm-duration {
+    display: inline-flex;
+    width: fit-content;
+    margin-top: 0.25rem;
+    padding: 0.18rem 0.45rem;
+    border-radius: 0.4rem;
+    background: rgba(255, 0, 42, 0.08);
+    color: #ef002a;
+    font-size: 0.8rem;
+    font-weight: 800;
+    border: 1px solid var(--red);
+    transition: all 0.5s ease;
+}
+
+.active-alarm-chevron-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.active-alarm-chevron {
+    transition: transform 0.2s ease;
+}
+
+.active-alarm-row[open] .active-alarm-chevron {
+    transform: rotate(180deg);
+}
+
+.active-alarm-severity {
+    display: inline-flex;
+    align-items: center;
+    justify-content: start;
+    gap: 0.35rem;
+    padding: 0.3rem 0.55rem;
+    border-radius: 0.45rem;
+    font-weight: 800;
+}
+
+.active-alarm-severity::before {
+    content: '';
+    width: 0.62rem;
+    height: 0.62rem;
+    border-radius: 999px;
+}
+
+.active-alarm-row[open] .active-alarm-severity-impacto,
+.active-alarm-row[open] .active-alarm-severity-impacto-inactiva,
+.active-alarm-row[open] .active-alarm-duration {
+    color: var(--red);
+    background: #FFFFFF;
+}
+
+.active-alarm-row[open] .active-alarm-severity-riesgo,
+.active-alarm-row[open] .active-alarm-severity-riesgo-inactiva {
+    color: var(--yellow);
+    background: #FFFFFF;
+}
+
+.active-alarm-severity-impacto {
+    color: var(--dark-color);
+    background: rgba(245, 39, 39, 0.07);
+    transition: all 0.5s ease;
+    border: 1px solid var(--red);
+}
+
+.active-alarm-severity-impacto::before {
+    background: var(--red);
+}
+
+.active-alarm-severity-riesgo {
+    color: var(--dark-color);
+    background: rgba(255, 250, 138, 0.2);
+    transition: all 0.5s ease;
+    border: 1px solid var(--yellow);
+}
+
+.active-alarm-severity-riesgo::before {
+    background: var(--yellow);
+}
+
+.active-alarm-severity-impacto-inactiva {
+    color: var(--dark-color);
+    background: rgba(248, 248, 248, 0.9);
+    transition: all 0.5s ease;
+    border: 1px solid var(--red);
+}
+.active-alarm-severity-impacto-inactiva::before {
+    background: rgba(164, 107, 107, 1)
+}
+.active-alarm-severity-riesgo-inactiva {
+    color: var(--dark-color);
+    background: rgba(248, 248, 248, 0.9);
+    transition: all 0.5s ease;
+    border: 1px solid var(--yellow);
+}
+.active-alarm-severity-riesgo-inactiva::before {
+    background: rgba(191, 182, 84, 1)
+}
+
+
+.active-alarm-detail {
+    margin: 0 1rem 1rem;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    background: rgba(255, 255, 255, 0.68);
+}
+
+.active-alarm-detail.active-alarm-detail-riesgo {
+    border: 1px solid rgba(235, 240, 0, 0.7);
+}
+.active-alarm-detail.active-alarm-detail-impacto {
+    border: 1px solid rgba(239, 0, 42, 0.22);
+}
+
+.active-alarm-detail-title {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.85rem;
+    color: var(--dark-color, #111827);
+    font-weight: 800;
+}
+
+.active-alarm-detail-label {
+    margin-bottom: 0.18rem;
+    color: var(--dark-color, #111827);
+    font-weight: 800;
+}
+
+.active-alarm-detail-value {
+    color: rgba(23, 33, 58, 0.78);
+    line-height: 1.35;
+}
+
+.active-alarm-detail-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+
+.active-alarm-manage-button {
+    min-height: 42px;
+    border-radius: 0.5rem;
+    font-weight: 800;
+    background: #ef002a;
+    border-color: #ef002a;
+}
+
+.active-alarm-secondary-button {
+    min-height: 42px;
+    border-radius: 0.5rem;
+    font-weight: 800;
+    border: 1px solid rgba(15, 23, 42, 0.16);
+    background: #ffffff;
+    color: var(--dark-color, #111827);
+}
+
+.active-alarm-detail-hint {
+    color: rgba(23, 33, 58, 0.62);
+}
+
+.active-alarms-empty-state {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.75rem;
+    color: rgba(23, 33, 58, 0.54);
+    font-weight: 700;
+    text-align: center;
+}
+
+.active-alarms-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    min-height: 64px;
+    padding: 0.75rem 1rem;
+    border-top: 1px solid rgba(15, 23, 42, 0.1);
+    background: rgba(248, 250, 252, 0.9);
+}
+
+.active-alarms-pagination-button {
+    min-width: 40px;
+    min-height: 38px;
+    border: 1px solid rgba(15, 23, 42, 0.14);
+    border-radius: 0.5rem;
+    background: #ffffff;
+    color: var(--dark-color, #111827);
+}
+
+.active-alarms-pagination-button:disabled {
+    opacity: 0.45;
+}
+
+.active-alarms-pagination-text {
+    min-width: 120px;
+    color: rgba(23, 33, 58, 0.74);
+    font-weight: 800;
+    text-align: center;
+}
+
+.active-alarms-modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem;
+    border: 1px solid rgba(15, 23, 42, 0.12);
+    border-radius: 0.75rem;
+    background: #ffffff;
+}
+
+.active-alarms-legend,
+.active-alarms-footer-note {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    color: rgba(23, 33, 58, 0.78);
+    font-weight: 700;
+}
+
+.active-alarms-footer-note {
+    gap: 0.5rem;
+}
+
+.active-alarms-legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.active-alarms-legend-dot {
+    width: 0.65rem;
+    height: 0.65rem;
+    border-radius: 999px;
+}
+
+.active-alarms-legend-dot-impacto {
+    background: var(--red);
+}
+.active-alarms-legend-dot-impacto-inactiva {
+    background: rgba(164, 107, 107, 1)
+}
+
+.active-alarms-legend-dot-riesgo {
+    background: var(--yellow);
+}
+.active-alarms-legend-dot-riesgo-inactiva {
+    background: rgba(191, 182, 84, 1)
+}
+
+
+.active-alarms-open-button {
+    border: 1px solid rgba(15, 23, 42, 0.16);
+    border-radius: 0.5rem;
+    font-weight: 800;
+}
+
+.active-alarm-state-chip {
+    font-style: italic;
+    font-weight: 500;
+    color: rgba(23, 33, 58, 0.6);
+}
+
+
+@media only screen and (min-width: 350px) {
+    .active-alarm-severity {
+        font-size: 0.7rem;
+        width: auto;
+    }
+    .active-alarm-title {
+        font-size: 0.8rem;
+    }
+    .active-alarm-kind {
+        font-size: 0.7rem;
+    }
+    .active-alarm-state-chip {
+        font-size: .65rem;
+    }
+    .active-alarm-start {
+        font-size: 0.8rem;
+    }
+    .active-alarm-duration {
+        font-size: 0.7rem;
+    }
+
+    .active-alarms-table-header,
+    .active-alarm-row-summary {
+        display: grid;
+        grid-template-columns: 1fr;
+        align-items: center;
+        gap: .75rem
+    }
+
+    .active-alarms-table-header {
+        font-size: 0.75rem;
+    }
+    .active-alarm-row-filler {
+        display: none;
+    }
+    .active-alarms-panel-card {
+        height: auto;
+        min-height: auto;
+    }
+    .active-alarm-detail-title {
+        font-size: .85rem;
+    }
+    .active-alarm-detail-label {
+        font-size: 0.8rem;
+    }
+    .active-alarm-detail-value {
+        font-size: 0.84rem;
+    }
+    .active-alarm-detail-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.85rem 1rem;
+    }
+    .active-alarms-modal-title {
+        font-size: 1.2rem;
+    }
+    .active-alarms-modal-subtitle {
+        font-size: .9rem;
+    }
+    .active-alarms-modal-updated-wrapper {
+        font-size: 0.75rem;
+    }
+    .active-alarms-pagination-text {
+        font-size: 0.84rem;
+    }
+    .active-alarms-legend,
+    .active-alarms-footer-note {
+        font-size: 0.75rem;
+    }
+    .active-alarms-control-label {
+        font-size: 0.8rem;
+    }
+    .active-alarms-panel-icon {
+        font-size: 1.4rem;
+    }
+    .active-alarms-panel-title {
+        font-size: .9rem;
+    }
+    .active-alarms-panel-subtitle {
+        font-size: 0.75rem;
+    }
+    .active-alarms-panel-count {
+        font-size: 0.8rem;
+    }
+
+    .active-alarm-row-summary div {
+        text-align: center;
+        white-space: wrap;
+    }
+
+    .active-alarms-refresh-button {
+        font-size: .9rem;
+    }
+
+    .active-alarm-detail-hint {
+        font-size: 0.75rem;
+    }
+
+    .active-alarms-modal-content-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    .active-alarms-table-header .active-alarms-col-severity,
+    .active-alarms-table-header .active-alarms-col-time,
+    .active-alarms-table-header .active-alarms-col-action {
+        display: none;
+    }
+    .active-alarms-table-header .active-alarms-col-alarm {
+        text-align: center;
+    }
+    .active-alarms-table-header
+    .active-alarms-col-alarm::after {
+        content: 's';
+    }
+
+    .active-alarms-panel-header {
+        flex-direction: column;
+    }
+
+    .active-alarms-modal-toolbar {
+        margin-bottom: .75rem;
+        flex-direction: column;
+    }
+
+    .active-alarms-control:has(.active-alarms-modal-search) {
+        width: 100%;
+    }
+    .active-alarms-control:has(
+        .active-alarms-modal-sort,
+        .active-alarms-modal-filter
+    ) {
+        width: 100%;
+    }
+
+    .active-alarms-modal-header {
+        margin-bottom: .75rem;
+        flex-direction: column;
+    }
+
+    .active-alarms-modal-header-actions {
+        width: 100%;
+    }
+
+    .active-alarms-modal-footer {
+        flex-direction: column;
+        margin-top: .75rem;
+    }
+
+    .active-alarms-legend {
+        align-items: start;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .active-alarms-footer-note {
+        align-items: center;
+        flex-direction: row;
+        flex-wrap: nowrap;
+    }
+    
+    .active-alarms-empty-state {
+        padding: .5rem 0;
+        gap: .25rem;
+    }
+    .active-alarms-empty-state i {
+        font-size: 1.6rem;
+    }
+    .active-alarms-empty-state div {
+        font-size: .7rem;
+    }
+}
+
+@media only screen and (min-width: 480px) {
+}
+
+/*@media only screen and (min-width: 768px) {}*/
+
+/*@media only screen and (min-width: 1024px) {*/
+/*}*/
+
+@media only screen and (min-width: 1280px) {
+    .active-alarm-severity {
+        font-size: 0.7rem;
+        width: 95%;
+    }
+    .active-alarm-title {
+        font-size: 0.8rem;
+    }
+    .active-alarm-kind {
+        font-size: 0.7rem;
+    }
+    .active-alarm-state-chip {
+        font-size: .65rem;
+    }
+    .active-alarm-start {
+        font-size: 0.8rem;
+    }
+    .active-alarm-duration {
+        font-size: 0.7rem;
+    }
+
+    .active-alarms-table-header,
+    .active-alarm-row-summary {
+        display: grid;
+        grid-template-columns: 88px minmax(290px, 1fr) 130px 50px;
+        align-items: center;
+        gap: .75rem
+    }
+    .active-alarms-table-header {
+        font-size: 0.75rem;
+    }
+    .active-alarm-row-filler {
+        display: block;
+    }
+    .active-alarms-panel-card {
+        height: var(--active-content-height);
+        min-height: var(--active-content-height);
+        max-height: var(--active-content-height);
+    }
+    .active-alarm-detail-title {
+        font-size: .85rem;
+    }
+    .active-alarm-detail-label {
+        font-size: 0.8rem;
+    }
+    .active-alarm-detail-value {
+        font-size: 0.84rem;
+    }
+    .active-alarm-detail-grid {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+        gap: 0.85rem 1rem;
+    }
+    .active-alarms-modal-title {
+        font-size: 1.2rem;
+    }
+    .active-alarms-modal-subtitle {
+        font-size: .9rem;
+    }
+    .active-alarms-modal-updated-wrapper {
+        font-size: 0.75rem;
+    }
+    .active-alarms-pagination-text {
+        font-size: 0.84rem;
+    }
+    .active-alarms-legend,
+    .active-alarms-footer-note {
+        font-size: 0.75rem;
+    }
+    .active-alarms-control-label {
+        font-size: 0.8rem;
+    }
+    .active-alarms-panel-icon {
+        font-size: 1rem;
+    }
+    .active-alarms-panel-title {
+        font-size: .9rem;
+    }
+    .active-alarms-panel-subtitle {
+        font-size: 0.75rem;
+    }
+    .active-alarms-panel-count {
+        font-size: 0.8rem;
+    }
+
+    .active-alarm-row-summary div {
+        text-align: start;
+        white-space: nowrap;
+    }
+
+    .active-alarms-refresh-button {
+        font-size: .9rem;
+    }
+
+    .active-alarm-detail-hint {
+        font-size: 0.75rem;
+    }
+
+    .active-alarms-modal-content-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: .5rem;
+    }
+
+    .active-alarms-table-header .active-alarms-col-severity,
+    .active-alarms-table-header .active-alarms-col-time,
+    .active-alarms-table-header .active-alarms-col-action {
+        display: block;
+    }
+    .active-alarms-table-header .active-alarms-col-alarm {
+        text-align: start;
+    }
+    .active-alarms-table-header
+    .active-alarms-col-alarm::after {
+        content: '';
+    }
+
+    .active-alarms-panel-header {
+        flex-direction: row;
+    }
+
+    .active-alarms-modal-toolbar {
+        margin-bottom: .5rem;
+        flex-direction: row;
+    }
+
+    .active-alarms-control:has(.active-alarms-modal-search) {
+        width: 30%;
+    }
+    .active-alarms-control:has(
+        .active-alarms-modal-sort,
+        .active-alarms-modal-filter
+    ) {
+        width: 12.7%;
+    }
+
+    .active-alarms-modal-header {
+        margin-bottom: .5rem;
+        flex-direction: row;
+    }
+
+    .active-alarms-modal-header-actions {
+        width: auto;
+    }
+
+    .active-alarms-modal-footer {
+        flex-direction: row;
+        margin-top: .5rem;
+    }
+
+    .active-alarms-legend {
+        align-items: center;
+        flex-direction: row;
+        width: auto;
+    }
+
+    .active-alarms-footer-note {
+        align-items: center;
+        flex-direction: row;
+        width: auto;
+    }
+
+    .active-alarms-empty-state {
+        padding: 0;
+        gap: .75rem;
+    }
+    .active-alarms-empty-state i {
+        font-size: 1.6rem;
+    }
+    .active-alarms-empty-state div {
+        font-size: .9rem;
+    }
+}
+
+@media only screen and (min-width: 1366px) {
+    .active-alarm-severity {
+        font-size: 0.7rem;
+        width: 95%;
+    }
+    .active-alarm-title {
+        font-size: 0.75rem;
+    }
+    .active-alarm-kind {
+        font-size: 0.65rem;
+    }
+    .active-alarm-state-chip {
+        font-size: .6rem;
+    }
+    .active-alarm-start {
+        font-size: 0.75rem;
+    }
+    .active-alarm-duration {
+        font-size: 0.65rem;
+    }
+
+    .active-alarms-table-header,
+    .active-alarm-row-summary {
+        display: grid;
+        grid-template-columns: 88px minmax(300px, 1fr) 130px 60px;
+        align-items: center;
+        gap: .75rem
+    }
+    .active-alarms-table-header {
+        font-size: 0.75rem;
+    }
+    .active-alarm-row-filler {
+        display: block;
+    }
+    .active-alarms-panel-card {
+        height: var(--active-content-height);
+        min-height: var(--active-content-height);
+        max-height: var(--active-content-height);
+    }
+    .active-alarm-detail-title {
+        font-size: .8rem;
+    }
+    .active-alarm-detail-label {
+        font-size: 0.75rem;
+    }
+    .active-alarm-detail-value {
+        font-size: 0.79rem;
+    }
+    .active-alarm-detail-grid {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+        gap: 0.85rem 1rem;
+    }
+    .active-alarms-modal-title {
+        font-size: 1.2rem;
+    }
+    .active-alarms-modal-subtitle {
+        font-size: .9rem;
+    }
+    .active-alarms-modal-updated-wrapper {
+        font-size: 0.75rem;
+    }
+    .active-alarms-pagination-text {
+        font-size: 0.84rem;
+    }
+    .active-alarms-legend,
+    .active-alarms-footer-note {
+        font-size: 0.8rem;
+    }
+    .active-alarms-control-label {
+        font-size: 0.8rem;
+    }
+    .active-alarms-panel-icon {
+        font-size: 1.1rem;
+    }
+    .active-alarms-panel-title {
+        font-size: .85rem;
+    }
+    .active-alarms-panel-subtitle {
+        font-size: 0.65rem;
+    }
+    .active-alarms-panel-count {
+        font-size: 0.7rem;
+    }
+
+    .active-alarm-row-summary div {
+        text-align: start;
+        white-space: nowrap;
+    }
+
+    .active-alarms-refresh-button {
+        font-size: .9rem;
+    }
+
+    .active-alarm-detail-hint {
+        font-size: 0.7rem;
+    }
+
+    .active-alarms-modal-content-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: .5rem;
+    }
+
+    .active-alarms-table-header .active-alarms-col-severity,
+    .active-alarms-table-header .active-alarms-col-time,
+    .active-alarms-table-header .active-alarms-col-action {
+        display: block;
+    }
+    .active-alarms-table-header .active-alarms-col-alarm {
+        text-align: start;
+    }
+    .active-alarms-table-header
+    .active-alarms-col-alarm::after {
+        content: '';
+    }
+
+    .active-alarms-panel-header {
+        flex-direction: row;
+    }
+
+    .active-alarms-modal-toolbar {
+        margin-bottom: .5rem;
+        flex-direction: row;
+    }
+
+    .active-alarms-control:has(.active-alarms-modal-search) {
+        width: 30%;
+    }
+    .active-alarms-control:has(
+        .active-alarms-modal-sort,
+        .active-alarms-modal-filter
+    ) {
+        width: 12.7%;
+    }
+
+    .active-alarms-modal-header {
+        margin-bottom: .5rem;
+        flex-direction: row;
+    }
+
+    .active-alarms-modal-header-actions {
+        width: auto;
+    }
+
+    .active-alarms-modal-footer {
+        flex-direction: row;
+        margin-top: .5rem;
+    }
+
+    .active-alarms-legend {
+        align-items: center;
+        flex-direction: row;
+        width: auto;
+    }
+
+    .active-alarms-footer-note {
+        align-items: center;
+        flex-direction: row;
+        width: auto;
+    }
+
+    .active-alarms-empty-state {
+        padding: 0;
+        gap: .75rem;
+    }
+    .active-alarms-empty-state i {
+        font-size: 1.6rem;
+    }
+    .active-alarms-empty-state div {
+        font-size: .9rem;
+    }
+}
+
+@media only screen and (min-width: 1536px) {
+    .active-alarm-severity {
+        font-size: 0.76rem;
+        width: 95%;
+    }
+    .active-alarm-title {
+        font-size: 0.8rem;
+    }
+    .active-alarm-kind {
+        font-size: 0.7rem;
+    }
+    .active-alarm-state-chip {
+        font-size: .65rem;
+    }
+    .active-alarm-start {
+        font-size: 0.8rem;
+    }
+    .active-alarm-duration {
+        font-size: 0.7rem;
+    }
+
+    .active-alarms-table-header,
+    .active-alarm-row-summary {
+        display: grid;
+        grid-template-columns: 96px minmax(350px, 1fr) 170px 50px;
+        align-items: center;
+        gap: .75rem
+    }
+    .active-alarms-table-header {
+        font-size: 0.75rem;
+    }
+    .active-alarm-row-filler {
+        display: block;
+    }
+    .active-alarms-panel-card {
+        height: var(--active-content-height);
+        min-height: var(--active-content-height);
+        max-height: var(--active-content-height);
+    }
+    .active-alarm-detail-title {
+        font-size: .85rem;
+    }
+    .active-alarm-detail-label {
+        font-size: 0.8rem;
+    }
+
+    .active-alarm-detail-value {
+        font-size: 0.84rem;
+    }
+    .active-alarm-detail-grid {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+        gap: 0.85rem 1rem;
+    }
+    .active-alarms-modal-title {
+        font-size: 1.2rem;
+    }
+    .active-alarms-modal-subtitle {
+        font-size: .9rem;
+    }
+    .active-alarms-modal-updated-wrapper {
+        font-size: 0.75rem;
+    }
+    .active-alarms-pagination-text {
+        font-size: 0.84rem;
+    }
+    .active-alarms-legend,
+    .active-alarms-footer-note {
+        font-size: 0.86rem;
+    }
+    .active-alarms-control-label {
+        font-size: 0.8rem;
+    }
+    .active-alarms-panel-icon {
+        font-size: 1.2rem;
+    }
+    .active-alarms-panel-title {
+        font-size: .95rem;
+    }
+    .active-alarms-panel-subtitle {
+        font-size: 0.78rem;
+    }
+
+    .active-alarms-panel-count {
+        font-size: 0.82rem;
+    }
+
+    .active-alarm-row-summary div {
+        text-align: start;
+        white-space: nowrap;
+    }
+
+    .active-alarms-refresh-button {
+        font-size: .9rem;
+    }
+
+    .active-alarm-detail-hint {
+        font-size: 0.78rem;
+    }
+
+    .active-alarms-modal-content-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 1rem;
+    }
+
+    .active-alarms-table-header .active-alarms-col-severity,
+    .active-alarms-table-header .active-alarms-col-time,
+    .active-alarms-table-header .active-alarms-col-action {
+        display: block;
+    }
+    .active-alarms-table-header .active-alarms-col-alarm {
+        text-align: start;
+    }
+    .active-alarms-table-header
+    .active-alarms-col-alarm::after {
+        content: '';
+    }
+
+    .active-alarms-panel-header {
+        flex-direction: row;
+    }
+
+    .active-alarms-modal-toolbar {
+        margin-bottom: .75rem;
+        flex-direction: row;
+    }
+
+    .active-alarms-control:has(.active-alarms-modal-search) {
+        width: 30%;
+    }
+    .active-alarms-control:has(
+        .active-alarms-modal-sort,
+        .active-alarms-modal-filter
+    ) {
+        width: 12.7%;
+    }
+
+    .active-alarms-modal-header {
+        margin-bottom: .75rem;
+        flex-direction: row;
+    }
+
+    .active-alarms-modal-header-actions {
+        width: auto;
+    }
+
+    .active-alarms-modal-footer {
+        flex-direction: row;
+        margin-top: .75rem;
+    }
+
+    .active-alarms-legend {
+        align-items: center;
+        flex-direction: row;
+        width: auto;
+    }
+
+    .active-alarms-footer-note {
+        align-items: center;
+        flex-direction: row;
+        width: auto;
+    }
+
+    .active-alarms-empty-state {
+        padding: 0;
+        gap: .75rem;
+    }
+    .active-alarms-empty-state i {
+        font-size: 1.6rem;
+    }
+    .active-alarms-empty-state div {
+        font-size: .9rem;
+    }
+}
+
+@media only screen and (min-width: 1920px) {
+    .active-alarm-severity {
+        font-size: 0.78rem;
+        width: 95%;
+    }
+    .active-alarm-title {
+        font-size: 0.88rem;
+    }
+    .active-alarm-kind {
+        font-size: 0.8rem;
+    }
+    .active-alarm-state-chip {
+        font-size: .75rem;
+    }
+    .active-alarm-start {
+        font-size: 0.88rem;
+    }
+    .active-alarm-duration {
+        font-size: 0.8rem;
+    }
+
+    .active-alarms-table-header,
+    .active-alarm-row-summary {
+        display: grid;
+        grid-template-columns: 96px minmax(470px, 1fr) 220px 60px;
+        align-items: center;
+        gap: .75rem
+    }
+    .active-alarms-table-header {
+        font-size: 0.76rem;
+    }
+    .active-alarm-row-filler {
+        display: block;
+    }
+    .active-alarms-panel-card {
+        height: var(--active-content-height);
+        min-height: var(--active-content-height);
+        max-height: var(--active-content-height);
+    }
+    .active-alarm-detail-title {
+        font-size: .9rem;
+    }
+    .active-alarm-detail-label {
+        font-size: 0.82rem;
+    }
+
+    .active-alarm-detail-value {
+        font-size: 0.86rem;
+    }
+    .active-alarm-detail-grid {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+        gap: 0.85rem 1rem;
+    }
+    .active-alarms-modal-title {
+        font-size: 1.3rem;
+    }
+
+    .active-alarms-modal-subtitle {
+        font-size: 1rem;
+    }
+    .active-alarms-modal-updated-wrapper {
+        font-size: 0.9rem;
+    }
+    .active-alarms-pagination-text {
+        font-size: 0.84rem;
+    }
+    .active-alarms-legend,
+    .active-alarms-footer-note {
+        font-size: 0.9rem;
+    }
+    .active-alarms-control-label {
+        font-size: 0.78rem;
+    }
+    .active-alarms-panel-icon {
+        font-size: 1.3rem;
+    }
+    .active-alarms-panel-title {
+        font-size: 1rem;
+    }
+    .active-alarms-panel-subtitle {
+        font-size: 0.82rem;
+    }
+
+    .active-alarms-panel-count {
+        font-size: 0.82rem;
+    }
+
+    .active-alarm-row-summary div {
+        text-align: start;
+        white-space: nowrap;
+    }
+
+    .active-alarms-refresh-button {
+        font-size: 1rem;
+    }
+    .active-alarm-detail-hint {
+        font-size: 0.82rem;
+    }
+
+    .active-alarms-modal-content-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 1rem;
+    }
+
+    .active-alarms-table-header .active-alarms-col-severity,
+    .active-alarms-table-header .active-alarms-col-time,
+    .active-alarms-table-header .active-alarms-col-action {
+        display: block;
+    }
+    .active-alarms-table-header .active-alarms-col-alarm {
+        text-align: start;
+    }
+    .active-alarms-table-header
+    .active-alarms-col-alarm::after {
+        content: '';
+    }
+    .active-alarms-panel-header {
+        flex-direction: row;
+    }
+    .active-alarms-modal-toolbar {
+        margin-bottom: .75rem;
+        flex-direction: row;
+    }
+
+    .active-alarms-control:has(.active-alarms-modal-search) {
+        width: 30%;
+    }
+    .active-alarms-control:has(
+        .active-alarms-modal-sort,
+        .active-alarms-modal-filter
+    ) {
+        width: 12.7%;
+    }
+
+    .active-alarms-modal-header {
+        margin-bottom: .75rem;
+        flex-direction: row;
+    }
+
+    .active-alarms-modal-header-actions {
+        width: auto;
+    }
+
+    .active-alarms-modal-footer {
+        flex-direction: row;
+        margin-top: .75rem;
+    }
+
+    .active-alarms-legend {
+        align-items: center;
+        flex-direction: row;
+        width: auto;
+    }
+
+    .active-alarms-footer-note {
+        align-items: center;
+        flex-direction: row;
+        width: auto;
+    }
+
+    .active-alarms-empty-state {
+        padding: 0;
+        gap: .75rem;
+    }
+    .active-alarms-empty-state i {
+        font-size: 1.6rem;
+    }
+    .active-alarms-empty-state div {
+        font-size: 1.1rem;
+    }
+}

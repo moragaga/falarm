@@ -1,0 +1,46 @@
+@media only screen and (min-width: 350px) {
+    .chart.vertical-bar {
+        width: 2.2rem !important;
+        height: 2.2rem !important;
+    }
+}
+
+@media only screen and (min-width: 480px) {
+    .chart.vertical-bar {
+        width: 2.5rem !important;
+        height: 2.5rem !important;
+    }
+}
+
+/*@media only screen and (min-width: 768px) {}*/
+
+/*@media only screen and (min-width: 1024px) {*/
+/*}*/
+
+@media only screen and (min-width: 1280px) {
+    .chart.vertical-bar {
+        width: 1.6rem !important;
+        height: 1.6rem !important;
+    }
+}
+
+@media only screen and (min-width: 1366px) {
+    .chart.vertical-bar {
+        width: 1.7rem !important;
+        height: 1.7rem !important;
+    }
+}
+
+@media only screen and (min-width: 1536px) {
+    .chart.vertical-bar {
+        width: 2rem !important;
+        height: 2rem !important;
+    }
+}
+
+@media only screen and (min-width: 1920px) {
+    .chart.vertical-bar {
+        width: 2.5rem !important;
+        height: 2.5rem !important;
+    }
+}

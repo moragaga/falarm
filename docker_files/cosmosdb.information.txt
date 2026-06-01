@@ -1,0 +1,20 @@
+# EXPOSED PORTS
+# -----------------------------------
+# Cosmos DB endpoint
+http://localhost:8081/
+# -----------------------------------
+# Health probe
+http://localhost:8080/
+# -----------------------------------
+# Data Explorer
+http://localhost:1234/
+# -----------------------------------
+# INFORMATION
+# If more resources are needed for Cosmos, modify these lines.
+# CPU '1.0' -> '2.0'...
+# MEMORY '1430m' -> '1907m'...(Mebibytes)
+deploy:
+  resources:
+    limits:
+      cpus: '1.0'
+      memory: 1430m

@@ -1,0 +1,109 @@
+.app-header-analytics-shell {
+    background: linear-gradient(90deg, #00768A 0%, #004753 100%) !important;
+}
+
+.header-analytics-title {
+    color: var(--tertiary-background);
+    font-weight: 700;
+}
+.header-analytics-subtitle {
+    color: var(--tertiary-background);
+    font-weight: 500;
+}
+
+.header-analytics-title-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+@media only screen and (min-width: 350px) {
+    .header-analytics-title {
+        font-size: 1.1rem;
+    }
+    .header-analytics-subtitle {
+        font-size: 1.1rem;
+    }
+    .header-analytics-divider {
+        width: 100%;
+    }
+    .header-analytics-title-wrapper {
+        padding: .3rem 0;
+    }
+}
+
+@media only screen and (min-width: 480px) {
+    .header-analytics-title {
+        font-size: 1.3rem;
+    }
+    .header-analytics-subtitle {
+        font-size: 1.1rem;
+    }
+    .header-analytics-divider {
+        width: 100%;
+    }
+    .header-analytics-title-wrapper {
+        padding: .3rem 0;
+    }
+}
+
+@media only screen and (min-width: 1280px) {
+    .header-analytics-title {
+        font-size: 1rem;
+    }
+    .header-analytics-subtitle {
+        font-size: .8rem;
+    }
+    .header-analytics-divider {
+        width: 90%;
+    }
+    .header-analytics-title-wrapper {
+        padding: 0;
+    }
+}
+
+@media only screen and (min-width: 1366px) {
+    .header-analytics-title {
+        font-size: 1rem;
+    }
+    .header-analytics-subtitle {
+        font-size: .8rem;
+    }
+    .header-analytics-divider {
+        width: 90%;
+    }
+    .header-analytics-title-wrapper {
+        padding: 0;
+    }
+}
+
+@media only screen and (min-width: 1536px) {
+    .header-analytics-title {
+        font-size: 1.1rem;
+    }
+    .header-analytics-subtitle {
+        font-size: .9rem;
+    }
+    .header-analytics-divider {
+        width: 90%;
+    }
+    .header-analytics-title-wrapper {
+        padding: 0;
+    }
+}
+
+@media only screen and (min-width: 1920px) {
+    .header-analytics-title {
+        font-size: 1.3rem;
+    }
+    .header-analytics-subtitle {
+        font-size: 1.1rem;
+    }
+    .header-analytics-divider {
+        width: 90%;
+    }
+    .header-analytics-title-wrapper {
+        padding: 0;
+    }
+}

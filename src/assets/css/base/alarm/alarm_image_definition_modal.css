@@ -1,0 +1,129 @@
+.managed-alarm-runtime-image-full {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.alarm-definition-images-modal {
+    overflow: hidden;
+}
+
+@media only screen and (min-width: 350px) {
+    .alarm-image-runtime-images-gallery {
+        min-height: 12.563rem;
+        max-height: 12.563rem;
+        height: 12.563rem;
+    }
+
+    .alarm-image-definition-empty-icon {
+        font-size: 2rem;
+    }
+    .alarm-image-definition-text-empty {
+        font-size: .7rem;
+        font-weight: 500;
+    }
+    .font-alarm-image-definition-header {
+        font-size: .7rem;
+    }
+}
+
+@media only screen and (min-width: 480px) {
+    .alarm-image-runtime-images-gallery {
+        min-height: 17.125rem;
+        max-height: 17.125rem;
+        height: 17.125rem;
+    }
+
+    .alarm-image-definition-empty-icon {
+        font-size: 2.2rem;
+    }
+    .alarm-image-definition-text-empty {
+        font-size: .8rem;
+        font-weight: 500;
+    }
+    .font-alarm-image-definition-header {
+        font-size: .8rem;
+    }
+}
+
+/*@media only screen and (min-width: 768px) {}*/
+
+/*@media only screen and (min-width: 1024px) {*/
+/*}*/
+
+@media only screen and (min-width: 1280px) {
+    .alarm-image-runtime-images-gallery {
+        min-height: 33.215rem;
+        max-height: 33.215rem;
+        height: 33.215rem;
+    }
+
+    .alarm-image-definition-empty-icon {
+        font-size: 2.2rem;
+    }
+    .alarm-image-definition-text-empty {
+        font-size: .85rem;
+        font-weight: 500;
+    }
+    .font-alarm-image-definition-header {
+        font-size: .85rem;
+    }
+}
+
+@media only screen and (min-width: 1366px) {
+    .alarm-image-runtime-images-gallery {
+        min-height: 34.438rem;
+        max-height: 34.438rem;
+        height: 34.438rem;
+    }
+
+    .alarm-image-definition-empty-icon {
+        font-size: 2.2rem;
+    }
+    .alarm-image-definition-text-empty {
+        font-size: .85rem;
+        font-weight: 500;
+    }
+    .font-alarm-image-definition-header {
+        font-size: .85rem;
+    }
+}
+
+@media only screen and (min-width: 1536px) {
+    .alarm-image-runtime-images-gallery {
+        min-height: 38.625rem;
+        max-height: 48.625rem;
+        height: 38.625rem;
+    }
+
+    .alarm-image-definition-empty-icon {
+        font-size: 2.4rem;
+    }
+    .alarm-image-definition-text-empty {
+        font-size: .9rem;
+        font-weight: 500;
+    }
+    .font-alarm-image-definition-header {
+        font-size: .9rem;
+    }
+}
+
+@media only screen and (min-width: 1920px) {
+    .alarm-image-runtime-images-gallery {
+        min-height: 48.1rem;
+        max-height: 48.1rem;
+        height: 48.1rem;
+    }
+
+    .alarm-image-definition-empty-icon {
+        font-size: 2.6rem;
+    }
+    .alarm-image-definition-text-empty {
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    .font-alarm-image-definition-header {
+        font-size: 1rem;
+    }
+}

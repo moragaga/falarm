@@ -1,0 +1,23 @@
+# USE TO LINUX / MACOS
+# --------------------------------
+# STEPS
+sudo nano /etc/hosts
+# Add to host next line in the end:
+127.0.0.1 cosmosdb-local-runtime
+# --------------------------------
+# SAVE
+CTRL + O
+Enter
+# EXIT
+CTRL + X
+# --------------------------------
+# RESTART
+# MACOS
+sudo dscacheutil -flushcache
+sudo killall -HUP mDNSResponder
+# LINUX
+sudo systemctl restart systemd-resolved
+# --------------------------------
+# VERIFY
+curl http://cosmosdb-local-runtime:8080/ready
+# --------------------------------

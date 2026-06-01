@@ -1,0 +1,12 @@
+# USE TO WINDOWS
+# --------------------------------
+# STEPS
+# OPEN
+C:\Windows\System32\drivers\etc\hosts
+# Add to host next line in the end:
+127.0.0.1 cosmosdb-local-runtime
+# RESTART
+ipconfig /flushdns
+# --------------------------------
+# VERIFY
+curl http://cosmosdb-local-runtime:8080/ready
