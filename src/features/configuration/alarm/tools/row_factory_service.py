@@ -3,6 +3,11 @@ from __future__ import annotations
 from typing import Any
 from uuid import uuid4
 
+from src.features.configuration.alarm.options import (
+    AlarmToolTier,
+    AlarmVisualizationMode,
+)
+
 
 class AlarmToolRowFactoryService:
     @staticmethod
@@ -15,14 +20,17 @@ class AlarmToolRowFactoryService:
         return {
             'tool_key': f'alarm_tool_{uuid4().hex[:8]}',
             'tool_name': '',
-            'tool_level': '3',
-            'visualization_mode': 'generic',
+            'tool_tier': AlarmToolTier.PROCESS.value,
+            'visualization_mode': AlarmVisualizationMode.GENERIC.value,
             'display_order': AlarmToolRowFactoryService._resolve_next_order(rows=rows),
             'is_active': True,
         }
 
     @staticmethod
-    def _resolve_next_order(*, rows: list[dict[str, Any]]) -> int:
+    def _resolve_next_order(
+        *,
+        rows: list[dict[str, Any]],
+    ) -> int:
         orders: list[int] = []
 
         for row in rows:

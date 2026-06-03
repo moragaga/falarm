@@ -1,35 +1,54 @@
 from __future__ import annotations
 
+import json
 from typing import Any
-from uuid import uuid4
 
 from src.features.admin_framework.services import AdminDataService
-from src.features.configuration.alarm.components.definition import ALARM_COMPONENTS_ADMIN_DEFINITION
-from src.features.configuration.alarm.rules.definition import ALARM_RULES_ADMIN_DEFINITION
+from src.features.configuration.alarm.components.definition import (
+    ALARM_COMPONENTS_ADMIN_DEFINITION,
+)
+from src.features.configuration.alarm.family.definition import (
+    ALARM_FAMILY_ADMIN_DEFINITION,
+)
+from src.features.configuration.alarm.options import (
+    AlarmBusinessCategory,
+    AlarmColor,
+    AlarmCriticality,
+    AlarmKind,
+    AlarmToolTier,
+    AlarmVisibilityMode,
+)
+from src.features.configuration.alarm.rules.definition import (
+    ALARM_RULES_ADMIN_DEFINITION,
+)
 from src.features.configuration.alarm.rules.editor.escalation.definition import (
     ALARM_RULE_ESCALATION_TARGETS_ADMIN_DEFINITION,
 )
 from src.features.configuration.alarm.rules.editor.visualization.definition import (
     ALARM_RULE_VISUAL_TARGETS_ADMIN_DEFINITION,
 )
-from src.features.configuration.alarm.rules.row_factory_service import AlarmRuleRowFactoryService
-from src.features.configuration.alarm.subcomponents.definition import ALARM_SUBCOMPONENTS_ADMIN_DEFINITION
+from src.features.configuration.alarm.rules.row_factory_service import (
+    AlarmRuleRowFactoryService,
+)
 from src.features.configuration.alarm.services.admin_manifest_save_service import (
     AlarmAdminManifestSaveService,
 )
 from src.features.configuration.alarm.services.alarm_configuration_validation_service import (
     AlarmConfigurationValidationService,
 )
-from src.features.configuration.alarm.services.alarm_rule_summary_service import AlarmRuleSummaryService
-from src.features.configuration.alarm.tools.definition import ALARM_TOOLS_ADMIN_DEFINITION
+from src.features.configuration.alarm.services.alarm_identifier_normalization_service import (
+    AlarmIdentifierNormalizationService,
+)
+from src.features.configuration.alarm.services.alarm_rule_summary_service import (
+    AlarmRuleSummaryService,
+)
+from src.features.configuration.alarm.subcomponents.definition import (
+    ALARM_SUBCOMPONENTS_ADMIN_DEFINITION,
+)
+from src.features.configuration.alarm.tools.definition import (
+    ALARM_TOOLS_ADMIN_DEFINITION,
+)
 
-
-_INTERNAL_DRAFT_KEYS = {
-    'escalation_targets',
-    'visual_targets',
-    'diagnostics',
-    '_catalogs',
-}
 
 _RULE_ROW_KEYS = {
     'rule_key',
@@ -40,13 +59,14 @@ _RULE_ROW_KEYS = {
     'cause_template',
     'content_key',
     'kind',
-    'risk_level',
+    'criticality_code',
+    'business_category',
+    'visibility_mode',
     'scope_key',
     'priority_order',
     'origin_tool_key',
     'operator_bucket',
     'color',
-    'hide_all_tools_when_managed',
     'reappear_if_still_active_enabled',
     'reappear_after_management_minutes',
     'continue_escalation_clock_when_hidden',
@@ -56,11 +76,13 @@ _RULE_ROW_KEYS = {
     'is_active',
 }
 
-_ALLOWED_COLORS = {'red', 'yellow'}
-
 
 class AlarmRuleEditorService:
-    def __init__(self, *, data_service: AdminDataService) -> None:
+    def __init__(
+        self,
+        *,
+        data_service: AdminDataService,
+    ) -> None:
         self._data_service = data_service
 
     def load_draft(
@@ -70,54 +92,109 @@ class AlarmRuleEditorService:
         family_key: str | None,
     ) -> dict[str, Any]:
         rules = self._data_service.load(ALARM_RULES_ADMIN_DEFINITION)
-        escalation_targets = self._data_service.load(ALARM_RULE_ESCALATION_TARGETS_ADMIN_DEFINITION)
-        visual_targets = self._data_service.load(ALARM_RULE_VISUAL_TARGETS_ADMIN_DEFINITION)
+        escalation_targets = self._data_service.load(
+            ALARM_RULE_ESCALATION_TARGETS_ADMIN_DEFINITION,
+        )
+        visual_targets = self._data_service.load(
+            ALARM_RULE_VISUAL_TARGETS_ADMIN_DEFINITION,
+        )
 
-        rule = _find_row(rows=rules, key_field='rule_key', key_value=rule_key)
+        rule = _find_row(
+            rows=rules,
+            key_field='rule_key',
+            key_value=rule_key,
+        )
+
         if rule is None:
-            rule = AlarmRuleRowFactoryService.build_new_row(current_rows=rules)
+            rule = AlarmRuleRowFactoryService.build_new_row(
+                current_rows=rules,
+            )
+
             if family_key:
                 rule['family_key'] = family_key
 
         draft = dict(rule)
+
         draft['escalation_targets'] = [
             dict(target)
             for target in escalation_targets
             if str(target.get('rule_key') or '') == str(draft.get('rule_key') or '')
         ]
+
         draft['visual_targets'] = [
             dict(target)
             for target in visual_targets
             if str(target.get('rule_key') or '') == str(draft.get('rule_key') or '')
         ]
-        draft = self.normalize_runtime_draft(draft=draft)
+
+        draft = self.normalize_live_draft(
+            draft=draft,
+        )
+
         draft['_catalogs'] = self._build_catalogs()
-        draft['diagnostics'] = AlarmConfigurationValidationService.validate_rule_draft(draft=draft)
+
+        draft['diagnostics'] = (
+            AlarmConfigurationValidationService.validate_rule_draft(
+                draft=draft,
+            )
+        )
 
         return draft
 
-    def save_draft(self, *, draft: dict[str, Any]) -> tuple[bool, list[str], dict[str, Any]]:
-        normalized_draft = self.normalize_runtime_draft(draft=draft)
-        errors = AlarmConfigurationValidationService.validate_rule_draft(draft=normalized_draft)
+    def save_draft(
+        self,
+        *,
+        draft: dict[str, Any],
+    ) -> tuple[bool, list[str], dict[str, Any]]:
+        catalogs = self._build_catalogs()
+
+        normalized_draft = self.normalize_runtime_draft(
+            draft=draft,
+        )
+        normalized_draft['_catalogs'] = catalogs
+
+        normalized_draft = self._with_summaries(
+            draft=normalized_draft,
+            catalogs=catalogs,
+        )
+
+        errors = AlarmConfigurationValidationService.validate_rule_draft(
+            draft=normalized_draft,
+        )
+
         if errors:
             normalized_draft['diagnostics'] = errors
             return False, errors, normalized_draft
 
-        rule_rows = self._upsert_rule_row(draft=normalized_draft)
-        ok, save_errors, saved_rule_rows = self._data_service.save(
-            ALARM_RULES_ADMIN_DEFINITION,
-            rule_rows,
-        )
-        if not ok:
-            return False, save_errors, normalized_draft
-
-        AlarmAdminManifestSaveService.register_update(
+        previous_rule_rows = self._load_rows(
             definition=ALARM_RULES_ADMIN_DEFINITION,
-            normalized_rows=saved_rule_rows,
         )
 
-        escalation_rows = self._replace_child_rows(
-            definition_rows=self._data_service.load(ALARM_RULE_ESCALATION_TARGETS_ADMIN_DEFINITION),
+        next_rule_rows = self._upsert_rule_row(
+            current_rows=previous_rule_rows,
+            draft=normalized_draft,
+        )
+
+        if not _rows_equal(previous_rule_rows, next_rule_rows):
+            ok, save_errors, saved_rule_rows = self._data_service.save(
+                ALARM_RULES_ADMIN_DEFINITION,
+                next_rule_rows,
+            )
+
+            if not ok:
+                return False, save_errors, normalized_draft
+
+            AlarmAdminManifestSaveService.register_update(
+                definition=ALARM_RULES_ADMIN_DEFINITION,
+                normalized_rows=saved_rule_rows,
+            )
+
+        previous_escalation_rows = self._load_rows(
+            definition=ALARM_RULE_ESCALATION_TARGETS_ADMIN_DEFINITION,
+        )
+
+        next_escalation_rows = self._replace_child_rows(
+            definition_rows=previous_escalation_rows,
             rule_key=str(normalized_draft.get('rule_key') or ''),
             child_rows=normalized_draft.get('escalation_targets') or [],
             allowed_keys={
@@ -125,23 +202,30 @@ class AlarmRuleEditorService:
                 'target_tool_key',
                 'is_enabled',
                 'step_order',
-                'wait_minutes_from_previous_stage',
+                'wait_minutes_from_previous_step',
             },
         )
-        ok, save_errors, saved_escalation_rows = self._data_service.save(
-            ALARM_RULE_ESCALATION_TARGETS_ADMIN_DEFINITION,
-            escalation_rows,
-        )
-        if not ok:
-            return False, save_errors, normalized_draft
 
-        AlarmAdminManifestSaveService.register_update(
-            definition=ALARM_RULE_ESCALATION_TARGETS_ADMIN_DEFINITION,
-            normalized_rows=saved_escalation_rows,
+        if not _rows_equal(previous_escalation_rows, next_escalation_rows):
+            ok, save_errors, saved_escalation_rows = self._data_service.save(
+                ALARM_RULE_ESCALATION_TARGETS_ADMIN_DEFINITION,
+                next_escalation_rows,
+            )
+
+            if not ok:
+                return False, save_errors, normalized_draft
+
+            AlarmAdminManifestSaveService.register_update(
+                definition=ALARM_RULE_ESCALATION_TARGETS_ADMIN_DEFINITION,
+                normalized_rows=saved_escalation_rows,
+            )
+
+        previous_visual_rows = self._load_rows(
+            definition=ALARM_RULE_VISUAL_TARGETS_ADMIN_DEFINITION,
         )
 
-        visual_rows = self._replace_child_rows(
-            definition_rows=self._data_service.load(ALARM_RULE_VISUAL_TARGETS_ADMIN_DEFINITION),
+        next_visual_rows = self._replace_child_rows(
+            definition_rows=previous_visual_rows,
             rule_key=str(normalized_draft.get('rule_key') or ''),
             child_rows=normalized_draft.get('visual_targets') or [],
             allowed_keys={
@@ -152,47 +236,57 @@ class AlarmRuleEditorService:
                 'is_complete',
             },
         )
-        ok, save_errors, saved_visual_rows = self._data_service.save(
-            ALARM_RULE_VISUAL_TARGETS_ADMIN_DEFINITION,
-            visual_rows,
-        )
-        if not ok:
-            return False, save_errors, normalized_draft
 
-        AlarmAdminManifestSaveService.register_update(
-            definition=ALARM_RULE_VISUAL_TARGETS_ADMIN_DEFINITION,
-            normalized_rows=saved_visual_rows,
+        if not _rows_equal(previous_visual_rows, next_visual_rows):
+            ok, save_errors, saved_visual_rows = self._data_service.save(
+                ALARM_RULE_VISUAL_TARGETS_ADMIN_DEFINITION,
+                next_visual_rows,
+            )
+
+            if not ok:
+                return False, save_errors, normalized_draft
+
+            AlarmAdminManifestSaveService.register_update(
+                definition=ALARM_RULE_VISUAL_TARGETS_ADMIN_DEFINITION,
+                normalized_rows=saved_visual_rows,
+            )
+
+        return True, [], self._build_saved_draft_response(
+            draft=normalized_draft,
+            catalogs=catalogs,
         )
 
-        return True, [], self.load_draft(
-            rule_key=str(normalized_draft.get('rule_key') or ''),
-            family_key=str(normalized_draft.get('family_key') or ''),
-        )
+    def _load_rows(
+        self,
+        *,
+        definition,
+    ) -> list[dict[str, Any]]:
+        rows = self._data_service.load(definition)
 
-    def _upsert_rule_row(self, *, draft: dict[str, Any]) -> list[dict[str, Any]]:
-        rules = self._data_service.load(ALARM_RULES_ADMIN_DEFINITION)
+        return [
+            row
+            for row in rows or []
+            if isinstance(row, dict)
+        ]
+
+    def _upsert_rule_row(
+        self,
+        *,
+        current_rows: list[dict[str, Any]],
+        draft: dict[str, Any],
+    ) -> list[dict[str, Any]]:
         rule_key = str(draft.get('rule_key') or '').strip()
-        normalized_draft = self.normalize_runtime_draft(draft=draft)
+
         rule_row = {
-            key: normalized_draft.get(key)
+            key: draft.get(key)
             for key in _RULE_ROW_KEYS
-            if key in normalized_draft
+            if key in draft
         }
-        catalogs = self._build_catalogs()
-        rule_row['escalation_summary'] = AlarmRuleSummaryService.build_escalation_summary(
-            targets=normalized_draft.get('escalation_targets') or [],
-            tool_name_by_key=catalogs.get('tool_name_by_key') or {},
-        )
-        rule_row['visual_summary'] = AlarmRuleSummaryService.build_visual_summary(
-            targets=normalized_draft.get('visual_targets') or [],
-            component_name_by_key=catalogs.get('component_name_by_key') or {},
-            subcomponent_name_by_key=catalogs.get('subcomponent_name_by_key') or {},
-        )
 
         updated_rows: list[dict[str, Any]] = []
         replaced = False
 
-        for row in rules:
+        for row in current_rows:
             if str(row.get('rule_key') or '') == rule_key:
                 updated_rows.append(rule_row)
                 replaced = True
@@ -204,6 +298,235 @@ class AlarmRuleEditorService:
             updated_rows.append(rule_row)
 
         return updated_rows
+
+    @staticmethod
+    def normalize_live_draft(
+        *,
+        draft: dict[str, Any],
+    ) -> dict[str, Any]:
+        normalized = dict(draft)
+
+        normalized['rule_key'] = str(normalized.get('rule_key') or '').strip()
+
+        normalized['family_key'] = (
+            AlarmIdentifierNormalizationService.normalize_final_identifier(
+                normalized.get('family_key'),
+            )
+        )
+
+        normalized['rule_name'] = (
+            AlarmIdentifierNormalizationService.normalize_live_identifier(
+                normalized.get('rule_name'),
+            )
+        )
+
+        normalized['display_name'] = str(normalized.get('display_name') or '')
+        normalized['title_template'] = str(normalized.get('title_template') or '')
+        normalized['cause_template'] = str(normalized.get('cause_template') or '')
+
+        normalized['content_key'] = (
+            AlarmIdentifierNormalizationService.normalize_live_identifier(
+                normalized.get('content_key'),
+            )
+        )
+
+        normalized['kind'] = _enum_value_or_default(
+            value=normalized.get('kind'),
+            allowed_values={item.value for item in AlarmKind},
+            default_value=AlarmKind.RISK.value,
+        )
+
+        normalized['criticality_code'] = _enum_value_or_default(
+            value=normalized.get('criticality_code'),
+            allowed_values={item.value for item in AlarmCriticality},
+            default_value=AlarmCriticality.C3.value,
+        )
+
+        normalized['business_category'] = _enum_value_or_default(
+            value=normalized.get('business_category'),
+            allowed_values={item.value for item in AlarmBusinessCategory},
+            default_value=AlarmBusinessCategory.OPERATIONAL.value,
+        )
+
+        normalized['visibility_mode'] = _enum_value_or_default(
+            value=normalized.get('visibility_mode'),
+            allowed_values={item.value for item in AlarmVisibilityMode},
+            default_value=AlarmVisibilityMode.VISIBLE.value,
+        )
+
+        normalized['scope_key'] = (
+            AlarmIdentifierNormalizationService.normalize_live_identifier(
+                normalized.get('scope_key'),
+            )
+        )
+
+        normalized['origin_tool_key'] = str(
+            normalized.get('origin_tool_key') or '',
+        ).strip()
+
+        normalized['operator_bucket'] = (
+            AlarmIdentifierNormalizationService.normalize_live_identifier(
+                normalized.get('operator_bucket'),
+            )
+        )
+
+        normalized['color'] = _enum_value_or_default(
+            value=normalized.get('color'),
+            allowed_values={item.value for item in AlarmColor},
+            default_value=AlarmColor.YELLOW.value,
+        )
+
+        normalized['priority_order'] = _to_int(
+            normalized.get('priority_order'),
+            default_value=100,
+        )
+
+        normalized['reappear_if_still_active_enabled'] = bool(
+            normalized.get('reappear_if_still_active_enabled', True),
+        )
+
+        normalized['reappear_after_management_minutes'] = _to_optional_int(
+            normalized.get('reappear_after_management_minutes'),
+        )
+
+        normalized['continue_escalation_clock_when_hidden'] = bool(
+            normalized.get('continue_escalation_clock_when_hidden', True),
+        )
+
+        normalized['use_message_management_override'] = bool(
+            normalized.get('use_message_management_override', True),
+        )
+
+        normalized['is_active'] = bool(normalized.get('is_active', True))
+
+        normalized['escalation_targets'] = _normalize_escalation_targets(
+            targets=normalized.get('escalation_targets') or [],
+            criticality_code=str(normalized.get('criticality_code') or ''),
+            visibility_mode=str(normalized.get('visibility_mode') or ''),
+            origin_tool_key=str(normalized.get('origin_tool_key') or ''),
+        )
+
+        normalized['visual_targets'] = _normalize_visual_targets(
+            targets=normalized.get('visual_targets') or [],
+            visibility_mode=str(normalized.get('visibility_mode') or ''),
+        )
+
+        return normalized
+
+    @staticmethod
+    def normalize_runtime_draft(
+        *,
+        draft: dict[str, Any],
+    ) -> dict[str, Any]:
+        normalized = dict(draft)
+
+        normalized['rule_key'] = str(normalized.get('rule_key') or '').strip()
+
+        normalized['family_key'] = (
+            AlarmIdentifierNormalizationService.normalize_final_identifier(
+                normalized.get('family_key'),
+            )
+        )
+
+        normalized['rule_name'] = (
+            AlarmIdentifierNormalizationService.normalize_final_identifier(
+                normalized.get('rule_name'),
+            )
+        )
+
+        normalized['display_name'] = str(normalized.get('display_name') or '').strip()
+        normalized['title_template'] = str(normalized.get('title_template') or '').strip()
+        normalized['cause_template'] = str(normalized.get('cause_template') or '').strip()
+
+        normalized['content_key'] = (
+            AlarmIdentifierNormalizationService.normalize_final_identifier(
+                normalized.get('content_key'),
+            )
+        )
+
+        normalized['kind'] = _enum_value_or_default(
+            value=normalized.get('kind'),
+            allowed_values={item.value for item in AlarmKind},
+            default_value=AlarmKind.RISK.value,
+        )
+
+        normalized['criticality_code'] = _enum_value_or_default(
+            value=normalized.get('criticality_code'),
+            allowed_values={item.value for item in AlarmCriticality},
+            default_value=AlarmCriticality.C3.value,
+        )
+
+        normalized['business_category'] = _enum_value_or_default(
+            value=normalized.get('business_category'),
+            allowed_values={item.value for item in AlarmBusinessCategory},
+            default_value=AlarmBusinessCategory.OPERATIONAL.value,
+        )
+
+        normalized['visibility_mode'] = _enum_value_or_default(
+            value=normalized.get('visibility_mode'),
+            allowed_values={item.value for item in AlarmVisibilityMode},
+            default_value=AlarmVisibilityMode.VISIBLE.value,
+        )
+
+        normalized['scope_key'] = (
+            AlarmIdentifierNormalizationService.normalize_final_identifier(
+                normalized.get('scope_key'),
+            )
+        )
+
+        normalized['origin_tool_key'] = str(
+            normalized.get('origin_tool_key') or '',
+        ).strip()
+
+        normalized['operator_bucket'] = (
+            AlarmIdentifierNormalizationService.normalize_final_identifier_or_default(
+                normalized.get('operator_bucket'),
+                default_value='default',
+            )
+        )
+
+        normalized['color'] = _enum_value_or_default(
+            value=normalized.get('color'),
+            allowed_values={item.value for item in AlarmColor},
+            default_value=AlarmColor.YELLOW.value,
+        )
+
+        normalized['priority_order'] = _to_int(
+            normalized.get('priority_order'),
+            default_value=100,
+        )
+
+        normalized['reappear_if_still_active_enabled'] = bool(
+            normalized.get('reappear_if_still_active_enabled', True),
+        )
+
+        normalized['reappear_after_management_minutes'] = _to_optional_int(
+            normalized.get('reappear_after_management_minutes'),
+        )
+
+        normalized['continue_escalation_clock_when_hidden'] = bool(
+            normalized.get('continue_escalation_clock_when_hidden', True),
+        )
+
+        normalized['use_message_management_override'] = bool(
+            normalized.get('use_message_management_override', True),
+        )
+
+        normalized['is_active'] = bool(normalized.get('is_active', True))
+
+        normalized['escalation_targets'] = _normalize_escalation_targets(
+            targets=normalized.get('escalation_targets') or [],
+            criticality_code=str(normalized.get('criticality_code') or ''),
+            visibility_mode=str(normalized.get('visibility_mode') or ''),
+            origin_tool_key=str(normalized.get('origin_tool_key') or ''),
+        )
+
+        normalized['visual_targets'] = _normalize_visual_targets(
+            targets=normalized.get('visual_targets') or [],
+            visibility_mode=str(normalized.get('visibility_mode') or ''),
+        )
+
+        return normalized
 
     @staticmethod
     def _replace_child_rows(
@@ -219,7 +542,8 @@ class AlarmRuleEditorService:
             if str(row.get('rule_key') or '') != rule_key
         ]
 
-        prepared_children = []
+        prepared_children: list[dict[str, Any]] = []
+
         for child in child_rows:
             if not isinstance(child, dict):
                 continue
@@ -234,30 +558,56 @@ class AlarmRuleEditorService:
 
         return [*retained_rows, *prepared_children]
 
-    def _build_catalogs(self) -> dict[str, Any]:
+    def _build_catalogs(
+        self,
+    ) -> dict[str, Any]:
+        families = [
+            row
+            for row in self._data_service.load(ALARM_FAMILY_ADMIN_DEFINITION)
+            if isinstance(row, dict)
+        ]
+
         tools = [
             row
             for row in self._data_service.load(ALARM_TOOLS_ADMIN_DEFINITION)
-            if bool(row.get('is_active', True))
+            if isinstance(row, dict) and bool(row.get('is_active', True))
         ]
+
         components = [
             row
             for row in self._data_service.load(ALARM_COMPONENTS_ADMIN_DEFINITION)
-            if bool(row.get('is_active', True))
+            if isinstance(row, dict) and bool(row.get('is_active', True))
         ]
+
         subcomponents = [
             row
             for row in self._data_service.load(ALARM_SUBCOMPONENTS_ADMIN_DEFINITION)
-            if bool(row.get('is_active', True))
+            if isinstance(row, dict) and bool(row.get('is_active', True))
         ]
-        level_one_tool_key = _resolve_single_tool_key_by_level(tools=tools, tool_level='1')
 
         return {
+            'families': families,
+            'family_by_key': {
+                str(row.get('family_key') or ''): row
+                for row in families
+                if row.get('family_key')
+            },
             'tools': tools,
             'tool_options': _build_tool_options(tools=tools),
-            'tool_name_by_key': _build_name_map(rows=tools, key_field='tool_key', name_field='tool_name'),
-            'tool_level_by_key': _build_tool_level_map(tools=tools),
-            'level_one_tool_key': level_one_tool_key,
+            'tool_name_by_key': _build_name_map(
+                rows=tools,
+                key_field='tool_key',
+                name_field='tool_name',
+            ),
+            'tool_tier_by_key': _build_tool_tier_map(tools=tools),
+            'integrated_operations_tool_keys': _tool_keys_by_tier(
+                tools=tools,
+                tool_tier=AlarmToolTier.INTEGRATED_OPERATIONS.value,
+            ),
+            'strategic_tool_keys': _tool_keys_by_tier(
+                tools=tools,
+                tool_tier=AlarmToolTier.STRATEGIC.value,
+            ),
             'components': components,
             'subcomponents': subcomponents,
             'component_options': _build_component_options(components=components),
@@ -275,160 +625,172 @@ class AlarmRuleEditorService:
                 key_field='subcomponent_key',
                 name_field='subcomponent_name',
             ),
+            'subcomponent_parent_by_key': {
+                str(row.get('subcomponent_key') or ''): str(
+                    row.get('parent_component_key') or '',
+                )
+                for row in subcomponents
+                if row.get('subcomponent_key')
+            },
         }
 
     @staticmethod
-    def normalize_runtime_draft(*, draft: dict[str, Any]) -> dict[str, Any]:
-        normalized = dict(draft or {})
-        normalized['risk_level'] = str(normalized.get('risk_level') or '3')
-        normalized['kind'] = str(normalized.get('kind') or 'risk')
-        normalized['content_key'] = _ensure_content_key(value=normalized.get('content_key'))
-        normalized['scope_key'] = _resolve_scope_key(draft=normalized)
-        # El runtime debe manejar relojes por ocurrencia/scope/gestión;
-        # este flag queda forzado para compatibilidad con filas antiguas.
-        normalized['continue_escalation_clock_when_hidden'] = True
+    def _with_summaries(
+        *,
+        draft: dict[str, Any],
+        catalogs: dict[str, Any],
+    ) -> dict[str, Any]:
+        prepared = dict(draft)
 
-        color = str(normalized.get('color') or '').strip().lower()
-        normalized['color'] = color if color in _ALLOWED_COLORS else 'yellow'
-
-        # Clean deprecated fields from the editor draft. Existing files may still have them,
-        # but the new model keeps a single operational scope.
-        normalized.pop('priority_scope_key', None)
-        normalized.pop('management_scope_key', None)
-        normalized.pop('reappear_tool_policy', None)
-        normalized.pop('reappear_tool_key', None)
-        normalized.pop('reappear_if_unmanaged_enabled', None)
-        normalized.pop('reappear_after_unmanaged_minutes', None)
-
-        escalation_targets = [
-            dict(target)
-            for target in normalized.get('escalation_targets') or []
-            if isinstance(target, dict)
-        ]
-
-        risk_level = str(normalized.get('risk_level') or '3')
-        if risk_level == '1':
-            level_one_tool_key = _resolve_level_one_tool_key(draft=normalized)
-            escalation_targets = _ensure_level_one_immediate_target(
-                targets=escalation_targets,
-                level_one_tool_key=level_one_tool_key,
+        prepared['escalation_summary'] = (
+            AlarmRuleSummaryService.build_escalation_summary(
+                criticality_code=str(prepared.get('criticality_code') or ''),
+                visibility_mode=str(prepared.get('visibility_mode') or ''),
+                targets=prepared.get('escalation_targets') or [],
+                tool_name_by_key=catalogs.get('tool_name_by_key') or {},
             )
-        elif risk_level == '3':
-            escalation_targets = []
-
-        normalized['escalation_targets'] = _deduplicate_targets(targets=escalation_targets)
-
-        visual_targets = [
-            _normalize_visual_target(target=target)
-            for target in normalized.get('visual_targets') or []
-            if isinstance(target, dict)
-        ]
-        normalized['visual_targets'] = _resolve_single_n0_visual_target(
-            draft=normalized,
-            targets=visual_targets,
         )
 
-        return normalized
+        prepared['visual_summary'] = AlarmRuleSummaryService.build_visual_summary(
+            visibility_mode=str(prepared.get('visibility_mode') or ''),
+            targets=prepared.get('visual_targets') or [],
+            component_name_by_key=catalogs.get('component_name_by_key') or {},
+            subcomponent_name_by_key=catalogs.get('subcomponent_name_by_key') or {},
+        )
+
+        return prepared
+
+    @staticmethod
+    def _build_saved_draft_response(
+        *,
+        draft: dict[str, Any],
+        catalogs: dict[str, Any],
+    ) -> dict[str, Any]:
+        prepared = dict(draft)
+        prepared['_catalogs'] = catalogs
+        prepared['diagnostics'] = (
+            AlarmConfigurationValidationService.validate_rule_draft(
+                draft=prepared,
+            )
+        )
+
+        return prepared
 
 
-def _find_row(
+def _normalize_escalation_targets(
     *,
-    rows: list[dict],
-    key_field: str,
-    key_value: str | None,
-) -> dict | None:
-    normalized_key = str(key_value or '').strip()
-    if not normalized_key or normalized_key == 'new':
-        return None
+    targets: list[Any],
+    criticality_code: str,
+    visibility_mode: str,
+    origin_tool_key: str,
+) -> list[dict[str, Any]]:
+    if visibility_mode == AlarmVisibilityMode.TRACE_ONLY.value:
+        return []
 
-    for row in rows:
-        if str(row.get(key_field) or '').strip() == normalized_key:
-            return dict(row)
+    if criticality_code != AlarmCriticality.C2.value:
+        return []
 
-    return None
+    if not origin_tool_key:
+        return []
 
+    prepared_targets: list[dict[str, Any]] = []
 
-def _build_options(*, rows: list[dict[str, Any]], label_field: str, value_field: str) -> list[dict[str, str]]:
-    options: list[dict[str, str]] = []
-
-    for row in sorted(rows, key=lambda item: int(item.get('display_order') or 0)):
-        label = str(row.get(label_field) or '').strip()
-        value = str(row.get(value_field) or '').strip()
-        if not label or not value:
+    for target in targets:
+        if not isinstance(target, dict):
             continue
 
-        options.append({'label': label, 'value': value})
+        target_tool_key = str(target.get('target_tool_key') or '').strip()
 
-    return options
-
-
-
-def _build_tool_options(*, tools: list[dict[str, Any]]) -> list[dict[str, str]]:
-    options: list[dict[str, str]] = []
-
-    for row in sorted(tools, key=lambda item: int(item.get('display_order') or 0)):
-        tool_name = str(row.get('tool_name') or '').strip()
-        tool_key = str(row.get('tool_key') or '').strip()
-        if not tool_name or not tool_key:
+        if not target_tool_key:
             continue
 
-        tool_level = _normalize_tool_level_value(value=row.get('tool_level'))
-        label = tool_name
-        if tool_level:
-            label = f'{tool_name} · Nivel {tool_level}'
+        prepared_targets.append(
+            {
+                'step_order': _to_int(
+                    target.get('step_order'),
+                    default_value=len(prepared_targets) + 1,
+                ),
+                'target_tool_key': target_tool_key,
+                'is_enabled': bool(target.get('is_enabled', True)),
+                'wait_minutes_from_previous_step': _to_optional_int(
+                    target.get('wait_minutes_from_previous_step'),
+                ),
+            }
+        )
 
-        options.append({'label': label, 'value': tool_key})
-
-    return options
-
-
-def _build_tool_level_map(*, tools: list[dict[str, Any]]) -> dict[str, str]:
-    return {
-        str(row.get('tool_key') or '').strip(): _normalize_tool_level_value(value=row.get('tool_level'))
-        for row in tools
-        if str(row.get('tool_key') or '').strip()
-    }
-
-
-def _normalize_tool_level_value(*, value: Any) -> str:
-    normalized = str(value or '').strip().lower()
-    aliases = {
-        '1': '1',
-        'n0': '1',
-        'nivel_0': '1',
-        'nivel 0': '1',
-        'sala': '1',
-        '2': '2',
-        'executive': '2',
-        'ejecutiva': '2',
-        'ejecutivo': '2',
-        '3': '3',
-        'n1': '3',
-        'ada_n1': '3',
-    }
-    return aliases.get(normalized, normalized if normalized in {'1', '2', '3'} else '')
+    return sorted(
+        prepared_targets,
+        key=lambda item: int(item.get('step_order') or 0),
+    )
 
 
-def _build_component_options(*, components: list[dict[str, Any]]) -> list[dict[str, str]]:
-    options: list[dict[str, str]] = []
+def _normalize_visual_targets(
+    *,
+    targets: list[Any],
+    visibility_mode: str,
+) -> list[dict[str, Any]]:
+    if visibility_mode == AlarmVisibilityMode.TRACE_ONLY.value:
+        return []
 
-    for row in sorted(components, key=lambda item: int(item.get('display_order') or 0)):
-        component_name = str(row.get('component_name') or '').strip()
-        component_code = str(row.get('component_code') or '').strip()
-        component_key = str(row.get('component_key') or '').strip()
-        if not component_name or not component_key:
+    prepared_targets: list[dict[str, Any]] = []
+
+    for target in targets:
+        if not isinstance(target, dict):
             continue
 
-        position = row.get('position_index')
-        label_parts = [component_name]
-        if component_code:
-            label_parts.append(component_code)
-        if position not in (None, ''):
-            label_parts.append(f'posición {position}')
+        tool_key = str(target.get('tool_key') or '').strip()
 
-        options.append({'label': ' · '.join(label_parts), 'value': component_key})
+        if not tool_key:
+            continue
 
-    return options
+        prepared_targets.append(
+            {
+                'tool_key': tool_key,
+                'affected_component_keys': _ensure_list(
+                    target.get('affected_component_keys'),
+                ),
+                'affected_subcomponent_keys': _ensure_list(
+                    target.get('affected_subcomponent_keys'),
+                ),
+                'is_complete': bool(target.get('is_complete')),
+            }
+        )
+
+    return prepared_targets[:1]
+
+
+def _build_tool_options(
+    *,
+    tools: list[dict[str, Any]],
+) -> list[dict[str, str]]:
+    return [
+        {
+            'label': str(row.get('tool_name') or row.get('tool_key') or ''),
+            'value': str(row.get('tool_key') or ''),
+        }
+        for row in sorted(
+            tools,
+            key=lambda item: int(item.get('display_order') or 0),
+        )
+        if row.get('tool_key')
+    ]
+
+
+def _build_component_options(
+    *,
+    components: list[dict[str, Any]],
+) -> list[dict[str, str]]:
+    return [
+        {
+            'label': str(row.get('component_name') or row.get('component_key') or ''),
+            'value': str(row.get('component_key') or ''),
+        }
+        for row in sorted(
+            components,
+            key=lambda item: int(item.get('display_order') or 0),
+        )
+        if row.get('component_key')
+    ]
 
 
 def _build_subcomponent_options(
@@ -436,233 +798,167 @@ def _build_subcomponent_options(
     components: list[dict[str, Any]],
     subcomponents: list[dict[str, Any]],
 ) -> list[dict[str, str]]:
-    component_names = _build_name_map(
+    component_name_by_key = _build_name_map(
         rows=components,
         key_field='component_key',
         name_field='component_name',
     )
+
     options: list[dict[str, str]] = []
 
-    for row in sorted(subcomponents, key=lambda item: int(item.get('display_order') or 0)):
-        subcomponent_name = str(row.get('subcomponent_name') or '').strip()
-        subcomponent_code = str(row.get('subcomponent_code') or '').strip()
-        subcomponent_key = str(row.get('subcomponent_key') or '').strip()
-        parent_name = component_names.get(str(row.get('parent_component_key') or '').strip())
-        if not subcomponent_name or not subcomponent_key:
+    for row in sorted(
+        subcomponents,
+        key=lambda item: int(item.get('display_order') or 0),
+    ):
+        subcomponent_key = str(row.get('subcomponent_key') or '')
+
+        if not subcomponent_key:
             continue
 
-        label_parts = []
-        if parent_name:
-            label_parts.append(parent_name)
-        label_parts.append(subcomponent_name)
-        if subcomponent_code:
-            label_parts.append(subcomponent_code)
+        parent_component_key = str(row.get('parent_component_key') or '')
+        parent_name = component_name_by_key.get(parent_component_key, parent_component_key)
+        subcomponent_name = str(row.get('subcomponent_name') or subcomponent_key)
 
-        options.append({'label': ' · '.join(label_parts), 'value': subcomponent_key})
+        options.append(
+            {
+                'label': f'{parent_name} · {subcomponent_name}',
+                'value': subcomponent_key,
+            }
+        )
 
     return options
 
 
-def _build_name_map(*, rows: list[dict[str, Any]], key_field: str, name_field: str) -> dict[str, str]:
+def _build_name_map(
+    *,
+    rows: list[dict[str, Any]],
+    key_field: str,
+    name_field: str,
+) -> dict[str, str]:
     return {
-        str(row.get(key_field) or '').strip(): str(row.get(name_field) or '').strip()
+        str(row.get(key_field) or ''): str(row.get(name_field) or row.get(key_field) or '')
         for row in rows
-        if str(row.get(key_field) or '').strip() and str(row.get(name_field) or '').strip()
+        if row.get(key_field)
     }
 
 
-def _ensure_content_key(*, value: Any) -> str:
-    normalized = str(value or '').strip()
-    if normalized:
-        return normalized
+def _build_tool_tier_map(
+    *,
+    tools: list[dict[str, Any]],
+) -> dict[str, str]:
+    return {
+        str(row.get('tool_key') or ''): str(row.get('tool_tier') or '')
+        for row in tools
+        if row.get('tool_key')
+    }
 
-    return f'alarm_content_{uuid4().hex}'
 
-
-def _resolve_scope_key(*, draft: dict[str, Any]) -> str:
-    candidates = (
-        draft.get('scope_key'),
-        draft.get('management_scope_key'),
-        draft.get('priority_scope_key'),
+def _tool_keys_by_tier(
+    *,
+    tools: list[dict[str, Any]],
+    tool_tier: str,
+) -> tuple[str, ...]:
+    return tuple(
+        str(row.get('tool_key') or '')
+        for row in sorted(
+            tools,
+            key=lambda item: int(item.get('display_order') or 0),
+        )
+        if str(row.get('tool_tier') or '') == tool_tier and row.get('tool_key')
     )
 
-    for candidate in candidates:
-        normalized = str(candidate or '').strip()
-        if normalized:
-            return normalized
 
-    return ''
-
-
-
-def _ensure_level_one_immediate_target(
+def _find_row(
     *,
-    targets: list[dict[str, Any]],
-    level_one_tool_key: str,
-) -> list[dict[str, Any]]:
-    target_tool_key = level_one_tool_key or 'nivel_0'
-    updated: list[dict[str, Any]] = []
-    found_target = False
+    rows: list[dict[str, Any]],
+    key_field: str,
+    key_value: str | None,
+) -> dict[str, Any] | None:
+    normalized_key = str(key_value or '').strip()
 
-    for target in targets:
-        normalized_target = dict(target)
-        if str(normalized_target.get('target_tool_key') or '') == target_tool_key:
-            normalized_target['is_enabled'] = True
-            normalized_target['step_order'] = 1
-            normalized_target['wait_minutes_from_previous_stage'] = 0
-            found_target = True
+    if not normalized_key or normalized_key == 'new':
+        return None
 
-        updated.append(normalized_target)
+    for row in rows:
+        if str(row.get(key_field) or '').strip() == normalized_key:
+            return row
 
-    if not found_target:
-        updated.append(
-            {
-                'target_tool_key': target_tool_key,
-                'is_enabled': True,
-                'step_order': 1,
-                'wait_minutes_from_previous_stage': 0,
-            }
-        )
-
-    return updated
+    return None
 
 
-def _deduplicate_targets(*, targets: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    by_tool: dict[str, dict[str, Any]] = {}
-
-    for target in targets:
-        tool_key = str(target.get('target_tool_key') or '').strip()
-        if not tool_key:
-            continue
-
-        prepared = dict(target)
-        prepared['target_tool_key'] = tool_key
-        prepared['is_enabled'] = bool(prepared.get('is_enabled', True))
-        prepared['step_order'] = _to_int_or_none(prepared.get('step_order'))
-        if prepared['step_order'] is None:
-            prepared['step_order'] = len(by_tool) + 1
-
-        prepared['wait_minutes_from_previous_stage'] = _to_int_or_none(
-            prepared.get('wait_minutes_from_previous_stage')
-            if prepared.get('wait_minutes_from_previous_stage') not in (None, '')
-            else prepared.get('show_after_active_minutes')
-        )
-        prepared.pop('show_after_active_minutes', None)
-        by_tool[tool_key] = prepared
-
-    return sorted(by_tool.values(), key=lambda item: int(item.get('step_order') or 0))
-
-
-
-def _normalize_visual_target(*, target: dict[str, Any]) -> dict[str, Any]:
-    prepared = dict(target)
-    affected_component_keys = _ensure_list(prepared.get('affected_component_keys'))
-    if not affected_component_keys and prepared.get('main_component_key'):
-        affected_component_keys = _ensure_list(prepared.get('main_component_key'))
-
-    affected_subcomponent_keys = _ensure_list(prepared.get('affected_subcomponent_keys'))
-    if not affected_subcomponent_keys and prepared.get('highlight_target_key'):
-        affected_subcomponent_keys = _ensure_list(prepared.get('highlight_target_key'))
-
-    return {
-        'tool_key': str(prepared.get('tool_key') or '').strip(),
-        'affected_component_keys': affected_component_keys,
-        'affected_subcomponent_keys': affected_subcomponent_keys,
-        'is_complete': bool(prepared.get('is_complete', False)),
-    }
-
-
-def _resolve_single_n0_visual_target(
+def _enum_value_or_default(
     *,
-    draft: dict[str, Any],
-    targets: list[dict[str, Any]],
-) -> list[dict[str, Any]]:
-    if not _requires_n0_visual(draft=draft):
-        return []
+    value: Any,
+    allowed_values: set[str],
+    default_value: str,
+) -> str:
+    normalized = str(value or '').strip()
 
-    level_one_tool_key = _resolve_level_one_tool_key(draft=draft)
-    for target in targets:
-        if str(target.get('tool_key') or '') == level_one_tool_key:
-            prepared = dict(target)
-            prepared['tool_key'] = level_one_tool_key
-            return [prepared]
+    if normalized in allowed_values:
+        return normalized
 
-    if targets:
-        prepared = dict(targets[0])
-        prepared['tool_key'] = level_one_tool_key
-        return [prepared]
-
-    return []
+    return default_value
 
 
-
-def _requires_n0_visual(*, draft: dict[str, Any]) -> bool:
-    if str(draft.get('risk_level') or '') == '1':
-        return True
-
-    for target in draft.get('escalation_targets') or []:
-        if not isinstance(target, dict):
-            continue
-
-        if not bool(target.get('is_enabled', True)):
-            continue
-
-        if _is_level_one_tool(draft=draft, tool_key=str(target.get('target_tool_key') or '')):
-            return True
-
-    return False
+def _to_int(
+    value: Any,
+    *,
+    default_value: int,
+) -> int:
+    try:
+        return int(value)
+    except Exception:
+        return default_value
 
 
-def _resolve_single_tool_key_by_level(*, tools: list[dict[str, Any]], tool_level: str) -> str:
-    normalized_level = _normalize_tool_level_value(value=tool_level)
-    matches = [
-        row
-        for row in tools
-        if _normalize_tool_level_value(value=row.get('tool_level')) == normalized_level
-    ]
-    if not matches:
-        return ''
+def _to_optional_int(
+    value: Any,
+) -> int | None:
+    if value is None:
+        return None
 
-    matches = sorted(matches, key=lambda item: int(item.get('display_order') or 0))
-    return str(matches[0].get('tool_key') or '').strip()
-
-
-def _resolve_level_one_tool_key(*, draft: dict[str, Any]) -> str:
-    catalogs = draft.get('_catalogs') or {}
-    configured = str(catalogs.get('level_one_tool_key') or draft.get('level_one_tool_key') or '').strip()
-    if configured:
-        return configured
-
-    tools = catalogs.get('tools') or []
-    if tools:
-        resolved = _resolve_single_tool_key_by_level(tools=tools, tool_level='1')
-        if resolved:
-            return resolved
-
-    return 'nivel_0'
-
-
-def _is_level_one_tool(*, draft: dict[str, Any], tool_key: str) -> bool:
-    catalogs = draft.get('_catalogs') or {}
-    tool_level_by_key = catalogs.get('tool_level_by_key') or {}
-    return _normalize_tool_level_value(value=tool_level_by_key.get(tool_key)) == '1' or tool_key == _resolve_level_one_tool_key(draft=draft)
-
-
-def _ensure_list(value: Any) -> list[str]:
-    if isinstance(value, list):
-        return [str(item) for item in value if str(item or '').strip()]
-
-    if isinstance(value, str):
-        return [item.strip() for item in value.split(';') if item.strip()]
-
-    return []
-
-
-def _to_int_or_none(value: Any) -> int | None:
-    if value in (None, ''):
+    if value == '':
         return None
 
     try:
         return int(value)
     except Exception:
         return None
+
+
+def _ensure_list(
+    value: Any,
+) -> list[str]:
+    if isinstance(value, list):
+        return [
+            str(item).strip()
+            for item in value
+            if str(item or '').strip()
+        ]
+
+    if isinstance(value, str):
+        return [
+            item.strip()
+            for item in value.split(';')
+            if item.strip()
+        ]
+
+    return []
+
+
+def _rows_equal(
+    left: list[dict[str, Any]],
+    right: list[dict[str, Any]],
+) -> bool:
+    return _stable_json(left) == _stable_json(right)
+
+
+def _stable_json(
+    value: Any,
+) -> str:
+    return json.dumps(
+        value,
+        ensure_ascii=False,
+        sort_keys=True,
+        default=str,
+    )

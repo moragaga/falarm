@@ -13,7 +13,6 @@ from src.features.configuration.alarm.rules.editor.visualization.definition impo
 from src.features.configuration.alarm.subcomponents.definition import ALARM_SUBCOMPONENTS_ADMIN_DEFINITION
 from src.features.configuration.alarm.tools.definition import ALARM_TOOLS_ADMIN_DEFINITION
 
-
 class AlarmConfigurationQueryService:
     def __init__(self, *, data_service: AdminDataService) -> None:
         self._data_service = data_service

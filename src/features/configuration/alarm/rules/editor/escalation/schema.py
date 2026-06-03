@@ -33,7 +33,7 @@ ALARM_RULE_ESCALATION_TARGETS_SCHEMA = AdminSchema(
             default_value=True,
         ),
         FieldDefinition(
-            name='wait_minutes_from_previous_stage',
+            name='wait_minutes_from_previous_step',
             label='Minutos desde etapa anterior',
             field_type='number',
             required=False,

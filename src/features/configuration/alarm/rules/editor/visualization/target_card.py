@@ -11,14 +11,18 @@ from .ids import AlarmRuleVisualizationIds
 def build_visual_target_card(
     *,
     target: dict[str, Any],
-    index: str = 'nivel_0',
+    index: str = 'integrated_operations',
     component_options: list[dict[str, str]] | None = None,
     subcomponent_options: list[dict[str, str]] | None = None,
 ):
+    selected_component_keys = _ensure_list(
+        value=target.get('affected_component_keys'),
+    )
+
     return dbc.Card(
         className='mb-3',
         children=[
-            dbc.CardHeader('Nivel 0'),
+            dbc.CardHeader('ADA Operaciones Integradas'),
             dbc.CardBody(
                 children=[
                     dbc.Row(
@@ -27,19 +31,25 @@ def build_visual_target_card(
                             dbc.Col(
                                 md=6,
                                 children=[
-                                    dbc.Label('Componentes Nivel 0 afectados'),
+                                    dbc.Label('Componentes afectados'),
                                     dcc.Dropdown(
                                         id={
-                                            'type': AlarmRuleVisualizationIds.AFFECTED_COMPONENTS_TYPE,
+                                            'type': (
+                                                AlarmRuleVisualizationIds
+                                                .AFFECTED_COMPONENTS_TYPE
+                                            ),
                                             'index': index,
                                         },
-                                        value=target.get('affected_component_keys') or [],
+                                        value=selected_component_keys,
                                         options=component_options or [],
                                         multi=True,
                                         placeholder='Selecciona componentes padre',
                                     ),
                                     html.Div(
-                                        'La posición principal y posiciones adicionales se toman desde la configuración del componente padre.',
+                                        (
+                                            'Los componentes padre definen agrupación, '
+                                            'posición principal y filtran los subcomponentes disponibles.'
+                                        ),
                                         className='text-muted small mt-1',
                                     ),
                                 ],
@@ -47,19 +57,30 @@ def build_visual_target_card(
                             dbc.Col(
                                 md=6,
                                 children=[
-                                    dbc.Label('Subcomponentes Nivel 0 afectados / resaltados'),
+                                    dbc.Label('Subcomponentes afectados / resaltados'),
                                     dcc.Dropdown(
                                         id={
-                                            'type': AlarmRuleVisualizationIds.AFFECTED_SUBCOMPONENTS_TYPE,
+                                            'type': (
+                                                AlarmRuleVisualizationIds
+                                                .AFFECTED_SUBCOMPONENTS_TYPE
+                                            ),
                                             'index': index,
                                         },
-                                        value=target.get('affected_subcomponent_keys') or [],
+                                        value=_ensure_list(
+                                            value=target.get('affected_subcomponent_keys'),
+                                        ),
                                         options=subcomponent_options or [],
                                         multi=True,
-                                        placeholder='Selecciona subcomponentes',
+                                        placeholder=(
+                                            'Selecciona primero uno o más componentes padre'
+                                        ),
+                                        disabled=not bool(selected_component_keys),
                                     ),
                                     html.Div(
-                                        'Los subcomponentes seleccionados serán los elementos resaltados por el front.',
+                                        (
+                                            'Solo se muestran subcomponentes pertenecientes '
+                                            'a los componentes padre seleccionados.'
+                                        ),
                                         className='text-muted small mt-1',
                                     ),
                                 ],
@@ -70,3 +91,24 @@ def build_visual_target_card(
             ),
         ],
     )
+
+
+def _ensure_list(
+    *,
+    value: Any,
+) -> list[str]:
+    if isinstance(value, list):
+        return [
+            str(item).strip()
+            for item in value
+            if str(item or '').strip()
+        ]
+
+    if isinstance(value, str):
+        return [
+            item.strip()
+            for item in value.split(';')
+            if item.strip()
+        ]
+
+    return []

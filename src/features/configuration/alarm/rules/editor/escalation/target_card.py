@@ -14,11 +14,10 @@ def build_escalation_target_card(
     target: dict[str, Any],
     index: str | None = None,
     tool_options: list[dict[str, str]] | None = None,
-    read_only: bool = False,
 ):
     item_key = index or str(target.get('target_tool_key') or uuid4().hex[:8])
     is_enabled = bool(target.get('is_enabled', True))
-    disabled = read_only or not is_enabled
+    disabled = not is_enabled
 
     return dbc.Card(
         className='mb-3',
@@ -70,7 +69,7 @@ def build_escalation_target_card(
                                             'type': AlarmRuleEscalationIds.TARGET_MINUTES_TYPE,
                                             'index': item_key,
                                         },
-                                        value=target.get('wait_minutes_from_previous_stage'),
+                                        value=target.get('wait_minutes_from_previous_step'),
                                         type='number',
                                         min=0,
                                         disabled=disabled,
@@ -87,7 +86,6 @@ def build_escalation_target_card(
                                         },
                                         label='Destino activo',
                                         value=is_enabled,
-                                        disabled=read_only,
                                     ),
                                     html.Div(
                                         '0 minutos significa inmediato. Desactivado significa que no escala a ese destino.',
@@ -98,9 +96,7 @@ def build_escalation_target_card(
                             dbc.Col(
                                 md=1,
                                 className='text-end',
-                                children=[]
-                                if read_only
-                                else [
+                                children=[
                                     dbc.Button(
                                         'Quitar',
                                         id={

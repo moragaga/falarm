@@ -9,4 +9,4 @@ class AlarmRuleEscalationTargetConfig:
     step_order: int
     target_tool_key: str
     is_enabled: bool
-    wait_minutes_from_previous_stage: int | None
+    wait_minutes_from_previous_step: int | None

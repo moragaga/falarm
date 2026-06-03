@@ -3,6 +3,8 @@ from __future__ import annotations
 from typing import Any
 from uuid import uuid4
 
+from src.features.configuration.alarm.options import AlarmComponentAppliesToToolTier
+
 
 class AlarmComponentRowFactoryService:
     @staticmethod
@@ -19,13 +21,18 @@ class AlarmComponentRowFactoryService:
             'component_code': '',
             'component_name': '',
             'position_index': next_order,
-            'applies_to_tool_level': '1',
+            'applies_to_tool_tier': (
+                AlarmComponentAppliesToToolTier.INTEGRATED_OPERATIONS.value
+            ),
             'display_order': next_order,
             'is_active': True,
         }
 
     @staticmethod
-    def _resolve_next_order(*, rows: list[dict[str, Any]]) -> int:
+    def _resolve_next_order(
+        *,
+        rows: list[dict[str, Any]],
+    ) -> int:
         orders: list[int] = []
 
         for row in rows:

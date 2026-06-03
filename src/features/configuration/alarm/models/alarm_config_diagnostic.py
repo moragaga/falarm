@@ -15,3 +15,8 @@ class AlarmConfigDiagnostic:
     source_section: str
     blocking: bool
     status: str
+
+    escalation_summary: str
+    visual_summary: str
+
+    is_active: bool

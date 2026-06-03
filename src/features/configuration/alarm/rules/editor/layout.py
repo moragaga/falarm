@@ -12,7 +12,11 @@ def build_alarm_rule_editor_layout(
     rule_key: str | None,
     active_tab: str | None,
 ):
-    selected_tab = active_tab if active_tab in AlarmRuleEditorTabs.ALL else AlarmRuleEditorTabs.IDENTITY
+    selected_tab = (
+        active_tab
+        if active_tab in AlarmRuleEditorTabs.ALL
+        else AlarmRuleEditorTabs.IDENTITY
+    )
 
     return html.Div(
         className='p-3',
@@ -57,11 +61,26 @@ def build_alarm_rule_editor_layout(
                                 id=AlarmRuleEditorIds.TABS,
                                 active_tab=selected_tab,
                                 children=[
-                                    dbc.Tab(label='Identidad', tab_id=AlarmRuleEditorTabs.IDENTITY),
-                                    dbc.Tab(label='Gestión y reaparición', tab_id=AlarmRuleEditorTabs.MANAGEMENT),
-                                    dbc.Tab(label='Escalamiento', tab_id=AlarmRuleEditorTabs.ESCALATION),
-                                    dbc.Tab(label='Visualización', tab_id=AlarmRuleEditorTabs.VISUALIZATION),
-                                    dbc.Tab(label='Resumen', tab_id=AlarmRuleEditorTabs.SUMMARY),
+                                    dbc.Tab(
+                                        label='Identidad',
+                                        tab_id=AlarmRuleEditorTabs.IDENTITY,
+                                    ),
+                                    dbc.Tab(
+                                        label='Gestión y reaparición',
+                                        tab_id=AlarmRuleEditorTabs.MANAGEMENT,
+                                    ),
+                                    dbc.Tab(
+                                        label='Escalamiento',
+                                        tab_id=AlarmRuleEditorTabs.ESCALATION,
+                                    ),
+                                    dbc.Tab(
+                                        label='Visualización',
+                                        tab_id=AlarmRuleEditorTabs.VISUALIZATION,
+                                    ),
+                                    dbc.Tab(
+                                        label='Resumen',
+                                        tab_id=AlarmRuleEditorTabs.SUMMARY,
+                                    ),
                                 ],
                             ),
                             html.Div(

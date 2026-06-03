@@ -1,6 +1,18 @@
 from __future__ import annotations
 
-from src.features.configuration.models import AdminSchema, FieldDefinition, FieldOption
+from src.features.configuration.alarm.options import (
+    ALARM_BUSINESS_CATEGORY_OPTIONS,
+    ALARM_COLOR_OPTIONS,
+    ALARM_CRITICALITY_OPTIONS,
+    ALARM_KIND_OPTIONS,
+    ALARM_VISIBILITY_MODE_OPTIONS,
+    AlarmBusinessCategory,
+    AlarmColor,
+    AlarmCriticality,
+    AlarmKind,
+    AlarmVisibilityMode,
+)
+from src.features.configuration.models import AdminSchema, FieldDefinition
 
 ALARM_RULES_ADMIN_SCHEMA = AdminSchema(
     key='alarm_rules',
@@ -18,14 +30,13 @@ ALARM_RULES_ADMIN_SCHEMA = AdminSchema(
             label='Familia',
             field_type='text',
             required=True,
-            help_text='ID familia. Se usará como filtro principal de reglas.',
+            help_text='ID familia. La familia aporta área operacional y categoría base.',
         ),
         FieldDefinition(
             name='rule_name',
             label='Regla',
             field_type='text',
             required=True,
-            help_text='Nombre enfocable/operacional de la regla.',
         ),
         FieldDefinition(
             name='display_name',
@@ -50,38 +61,49 @@ ALARM_RULES_ADMIN_SCHEMA = AdminSchema(
             label='ID contenido',
             field_type='text',
             required=True,
-            editable=False,
-            help_text='ID automático para conectar esta regla con mensajes e imágenes.',
+            editable=True,
+            help_text='ID reusable para mensajes, imágenes y contenido. Varias reglas pueden compartirlo.',
         ),
         FieldDefinition(
             name='kind',
             label='Tipo',
             field_type='select',
             required=True,
-            options=(
-                FieldOption(label='Riesgo', value='risk'),
-                FieldOption(label='Impacto', value='impact'),
-            ),
-            default_value='risk',
+            options=ALARM_KIND_OPTIONS,
+            default_value=AlarmKind.RISK.value,
         ),
         FieldDefinition(
-            name='risk_level',
-            label='Nivel riesgo',
+            name='criticality_code',
+            label='Criticidad',
             field_type='select',
             required=True,
-            options=(
-                FieldOption(label='1 - Crítico / Nivel 0 inmediato', value='1'),
-                FieldOption(label='2 - Escalamiento por tiempo', value='2'),
-                FieldOption(label='3 - Sin escalamiento', value='3'),
-            ),
-            default_value='3',
+            options=ALARM_CRITICALITY_OPTIONS,
+            default_value=AlarmCriticality.C3.value,
+        ),
+        FieldDefinition(
+            name='business_category',
+            label='Categoría negocio',
+            field_type='select',
+            required=True,
+            options=ALARM_BUSINESS_CATEGORY_OPTIONS,
+            default_value=AlarmBusinessCategory.OPERATIONAL.value,
+            help_text='Categoría final explícita de la regla.',
+        ),
+        FieldDefinition(
+            name='visibility_mode',
+            label='Visibilidad',
+            field_type='select',
+            required=True,
+            options=ALARM_VISIBILITY_MODE_OPTIONS,
+            default_value=AlarmVisibilityMode.VISIBLE.value,
+            help_text='Solo trazabilidad procesa la regla, pero no la proyecta a colas ni vistas.',
         ),
         FieldDefinition(
             name='scope_key',
-            label='Grupo prioridad/gestión',
+            label='Scope prioridad/gestión',
             field_type='text',
             required=True,
-            help_text='Grupo donde esta regla compite por prioridad y donde aplica gestión/desactivación.',
+            help_text='Scope donde la regla compite por prioridad y donde aplica gestión/desactivación.',
         ),
         FieldDefinition(
             name='priority_order',
@@ -89,7 +111,7 @@ ALARM_RULES_ADMIN_SCHEMA = AdminSchema(
             field_type='number',
             required=True,
             default_value=100,
-            help_text='Menor número = mayor prioridad dentro del scope operativo.',
+            help_text='Menor número = mayor prioridad dentro del scope.',
         ),
         FieldDefinition(
             name='origin_tool_key',
@@ -109,18 +131,8 @@ ALARM_RULES_ADMIN_SCHEMA = AdminSchema(
             label='Color',
             field_type='select',
             required=True,
-            options=(
-                FieldOption(label='Rojo', value='red'),
-                FieldOption(label='Amarillo', value='yellow'),
-            ),
-            default_value='yellow',
-        ),
-        FieldDefinition(
-            name='hide_all_tools_when_managed',
-            label='Ocultar al gestionar',
-            field_type='boolean',
-            required=True,
-            default_value=True,
+            options=ALARM_COLOR_OPTIONS,
+            default_value=AlarmColor.YELLOW.value,
         ),
         FieldDefinition(
             name='reappear_if_still_active_enabled',
@@ -170,6 +182,7 @@ ALARM_RULES_ADMIN_SCHEMA = AdminSchema(
             field_type='boolean',
             required=True,
             default_value=True,
+            help_text='Si está inactiva, la regla no se evalúa.',
         ),
     ),
 )

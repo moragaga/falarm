@@ -1,6 +1,12 @@
 from __future__ import annotations
 
-from src.features.configuration.models import AdminSchema, FieldDefinition, FieldOption
+from src.features.configuration.alarm.options import (
+    ALARM_TOOL_TIER_OPTIONS,
+    ALARM_VISUALIZATION_MODE_OPTIONS,
+    AlarmToolTier,
+    AlarmVisualizationMode,
+)
+from src.features.configuration.models import AdminSchema, FieldDefinition
 
 ALARM_TOOLS_ADMIN_SCHEMA = AdminSchema(
     key='alarm_tools',
@@ -20,29 +26,21 @@ ALARM_TOOLS_ADMIN_SCHEMA = AdminSchema(
             required=True,
         ),
         FieldDefinition(
-            name='tool_level',
-            label='Nivel herramienta',
+            name='tool_tier',
+            label='Tipo herramienta',
             field_type='select',
             required=True,
-            options=(
-                FieldOption(label='Nivel 1 · Nivel 0 / Sala', value='1'),
-                FieldOption(label='Nivel 2 · Ejecutiva', value='2'),
-                FieldOption(label='Nivel 3 · ADA N1', value='3'),
-            ),
-            default_value='3',
-            help_text='Define la jerarquía de escalamiento. Nivel 1 es el destino crítico final; debe existir una sola herramienta activa nivel 1.',
+            options=ALARM_TOOL_TIER_OPTIONS,
+            default_value=AlarmToolTier.PROCESS.value,
+            help_text='Jerarquía funcional: ADA Proceso → ADA Operaciones Integradas → ADA Estratégico.',
         ),
         FieldDefinition(
             name='visualization_mode',
-            label='Visualización base',
+            label='Modo de proyección',
             field_type='select',
             required=True,
-            options=(
-                FieldOption(label='Genérica', value='generic'),
-                FieldOption(label='Distribuida', value='distributed'),
-                FieldOption(label='Cola / posicionamiento', value='queue_for_queue'),
-            ),
-            default_value='generic',
+            options=ALARM_VISUALIZATION_MODE_OPTIONS,
+            default_value=AlarmVisualizationMode.GENERIC.value,
         ),
         FieldDefinition(
             name='display_order',

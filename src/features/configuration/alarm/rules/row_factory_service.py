@@ -3,6 +3,14 @@ from __future__ import annotations
 from typing import Any
 from uuid import uuid4
 
+from src.features.configuration.alarm.options import (
+    AlarmBusinessCategory,
+    AlarmColor,
+    AlarmCriticality,
+    AlarmKind,
+    AlarmVisibilityMode,
+)
+
 
 class AlarmRuleRowFactoryService:
     @staticmethod
@@ -11,23 +19,25 @@ class AlarmRuleRowFactoryService:
         current_rows: list[dict[str, Any]] | None,
     ) -> dict[str, Any]:
         rows = [row for row in current_rows or [] if isinstance(row, dict)]
+        rule_suffix = uuid4().hex[:8]
 
         return {
-            'rule_key': f'alarm_rule_{uuid4().hex[:8]}',
+            'rule_key': f'alarm_rule_{rule_suffix}',
             'family_key': '',
             'rule_name': '',
             'display_name': '',
             'title_template': '',
             'cause_template': '',
-            'content_key': f'alarm_content_{uuid4().hex}',
-            'kind': 'risk',
-            'risk_level': '3',
+            'content_key': f'alarm_content_{rule_suffix}',
+            'kind': AlarmKind.RISK.value,
+            'criticality_code': AlarmCriticality.C3.value,
+            'business_category': AlarmBusinessCategory.OPERATIONAL.value,
+            'visibility_mode': AlarmVisibilityMode.VISIBLE.value,
             'scope_key': '',
             'priority_order': AlarmRuleRowFactoryService._resolve_next_priority(rows=rows),
             'origin_tool_key': '',
             'operator_bucket': 'default',
-            'color': 'yellow',
-            'hide_all_tools_when_managed': True,
+            'color': AlarmColor.YELLOW.value,
             'reappear_if_still_active_enabled': True,
             'reappear_after_management_minutes': 60,
             'continue_escalation_clock_when_hidden': True,
@@ -38,7 +48,10 @@ class AlarmRuleRowFactoryService:
         }
 
     @staticmethod
-    def _resolve_next_priority(*, rows: list[dict[str, Any]]) -> int:
+    def _resolve_next_priority(
+        *,
+        rows: list[dict[str, Any]],
+    ) -> int:
         priorities: list[int] = []
 
         for row in rows:

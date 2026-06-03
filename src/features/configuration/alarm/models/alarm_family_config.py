@@ -8,5 +8,8 @@ class AlarmFamilyConfig:
     family_key: str
     family_name: str
     description: str
+
+    operational_area: str
+
     display_order: int
-    is_available: bool
+    is_active: bool

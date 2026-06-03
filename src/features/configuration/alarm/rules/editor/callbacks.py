@@ -25,7 +25,6 @@ def register_alarm_rule_editor_callbacks() -> None:
     app = get_dash_app()
 
     @app.callback(
-        Output(component_id=AlarmRuleEditorIds.HEADER, component_property='children'),
         Output(component_id=AlarmRuleEditorIds.ORIGINAL_STORE, component_property='data'),
         Output(component_id=AlarmRuleEditorIds.DRAFT_STORE, component_property='data'),
         Output(component_id=AlarmRuleEditorIds.VALIDATION_STORE, component_property='data'),
@@ -43,7 +42,6 @@ def register_alarm_rule_editor_callbacks() -> None:
         diagnostics = draft.get('diagnostics') or []
 
         return (
-            _build_header(draft=draft, diagnostics=diagnostics),
             draft,
             draft,
             {'diagnostics': diagnostics},
@@ -131,25 +129,3 @@ def _build_editor_service() -> AlarmRuleEditorService:
         )
     )
 
-
-def _build_header(*, draft: dict, diagnostics: list[str]):
-    import dash_bootstrap_components as dbc
-    from dash import html
-
-    title = draft.get('display_name') or draft.get('rule_name') or 'Nueva regla'
-    subtitle = f"{draft.get('family_key') or 'Sin familia'} · {draft.get('rule_key') or 'new'}"
-    badge_color = 'warning' if diagnostics else 'success'
-    badge_label = 'Con diagnóstico' if diagnostics else 'Configurable'
-
-    return html.Div(
-        className='d-flex justify-content-between align-items-start gap-3 flex-wrap',
-        children=[
-            html.Div(
-                children=[
-                    html.H5(title, className='mb-1'),
-                    html.Div(subtitle, className='text-muted small'),
-                ],
-            ),
-            dbc.Badge(badge_label, color=badge_color, className='px-3 py-2'),
-        ],
-    )

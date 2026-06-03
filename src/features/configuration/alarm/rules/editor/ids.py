@@ -12,7 +12,6 @@ class AlarmRuleEditorIds:
     SAVE_BUTTON = 'alarm-rule-editor-save-button'
     CANCEL_BUTTON = 'alarm-rule-editor-cancel-button'
 
-
 class AlarmRuleEditorTabs:
     IDENTITY = 'identity'
     MANAGEMENT = 'management'

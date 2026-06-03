@@ -3,6 +3,8 @@ from __future__ import annotations
 from typing import Any
 from uuid import uuid4
 
+from src.features.configuration.alarm.options import AlarmOperationalArea
+
 
 class AlarmFamilyRowFactoryService:
     @staticmethod
@@ -11,17 +13,22 @@ class AlarmFamilyRowFactoryService:
         current_rows: list[dict[str, Any]] | None,
     ) -> dict[str, Any]:
         rows = [row for row in current_rows or [] if isinstance(row, dict)]
+        family_suffix = uuid4().hex[:8]
 
         return {
-            'family_key': f'alarm_family_{uuid4().hex[:8]}',
-            'family_name': '',
+            'family_key': f'alarm_family_{family_suffix}',
+            'family_name': f'alarm_family_{family_suffix}',
             'description': '',
+            'operational_area': AlarmOperationalArea.PLANTA.value,
             'display_order': AlarmFamilyRowFactoryService._resolve_next_order(rows=rows),
-            'is_available': True,
+            'is_active': True,
         }
 
     @staticmethod
-    def _resolve_next_order(*, rows: list[dict[str, Any]]) -> int:
+    def _resolve_next_order(
+        *,
+        rows: list[dict[str, Any]],
+    ) -> int:
         orders: list[int] = []
 
         for row in rows:

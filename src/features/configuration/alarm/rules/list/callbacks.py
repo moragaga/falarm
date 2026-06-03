@@ -33,8 +33,8 @@ def register_alarm_rules_list_callbacks() -> None:
         family_key: str | None,
     ):
         service = _build_query_service()
+
         family_rows = service.load_families()
-        rule_rows = service.load_rules()
 
         options = [
             {
@@ -45,10 +45,30 @@ def register_alarm_rules_list_callbacks() -> None:
             if row.get('family_key')
         ]
 
-        safe_family = family_key if _option_exists(options=options, value=family_key) else None
-        filtered_rows = filter_rule_rows(rows=rule_rows, family_key=safe_family)
+        safe_family = (
+            family_key
+            if _option_exists(options=options, value=family_key)
+            else None
+        )
 
-        return options, safe_family, build_alarm_rules_grid_rows(rows=filtered_rows)
+        if not safe_family:
+            return options, None, []
+
+        tool_rows = service.load_tools()
+        rule_rows = service.load_rules()
+
+        filtered_rows = filter_rule_rows(
+            rows=rule_rows,
+            family_key=safe_family,
+        )
+
+        grid_rows = build_alarm_rules_grid_rows(
+            rows=filtered_rows,
+            families=family_rows,
+            tools=tool_rows,
+        )
+
+        return options, safe_family, grid_rows
 
     @app.callback(
         Output(
@@ -74,6 +94,7 @@ def register_alarm_rules_list_callbacks() -> None:
         selected_rows,
     ):
         triggered = ctx.triggered_id
+
         if triggered is None:
             raise PreventUpdate
 
@@ -85,20 +106,43 @@ def register_alarm_rules_list_callbacks() -> None:
 
         if triggered == AlarmRulesListIds.NEW_BUTTON:
             if not family_key:
-                return no_update, AdminFeedbackService.build_warning('Selecciona una familia antes de crear una regla.')
+                return (
+                    no_update,
+                    AdminFeedbackService.build_warning(
+                        'Selecciona una familia antes de crear una regla.',
+                    ),
+                )
 
-            return _build_edit_state(family_key=family_key, rule_key='new', tab='identity'), None
+            return (
+                _build_edit_state(
+                    family_key=family_key,
+                    rule_key='new',
+                    tab='identity',
+                ),
+                None,
+            )
 
         if triggered == AlarmRulesListIds.EDIT_BUTTON:
-            selected_rule = _get_selected_rule(selected_rows=selected_rows)
-            if not selected_rule:
-                return no_update, AdminFeedbackService.build_warning('Selecciona una regla para editar.')
+            selected_rule = _get_selected_rule(
+                selected_rows=selected_rows,
+            )
 
-            return _build_edit_state(
-                family_key=selected_rule.get('family_key') or family_key,
-                rule_key=selected_rule.get('rule_key'),
-                tab='identity',
-            ), None
+            if not selected_rule:
+                return (
+                    no_update,
+                    AdminFeedbackService.build_warning(
+                        'Selecciona una regla para editar.',
+                    ),
+                )
+
+            return (
+                _build_edit_state(
+                    family_key=selected_rule.get('family_key') or family_key,
+                    rule_key=selected_rule.get('rule_key'),
+                    tab='identity',
+                ),
+                None,
+            )
 
         raise PreventUpdate
 
@@ -112,18 +156,26 @@ def _build_query_service() -> AlarmConfigurationQueryService:
     )
 
 
-def _option_exists(*, options: list[dict], value: str | None) -> bool:
+def _option_exists(
+    *,
+    options: list[dict],
+    value: str | None,
+) -> bool:
     if not value:
         return False
 
     return any(option.get('value') == value for option in options)
 
 
-def _get_selected_rule(*, selected_rows) -> dict | None:
+def _get_selected_rule(
+    *,
+    selected_rows,
+) -> dict | None:
     if not selected_rows:
         return None
 
     selected = selected_rows[0]
+
     if isinstance(selected, dict):
         return selected
 
